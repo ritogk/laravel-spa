@@ -16,8 +16,8 @@ const mix = require('laravel-mix');
  |　生のjsファイルをバンドルする場合は「mix.babel()」を使う。ESS5記法に変換される。
  |
  */
-mix.js('resources/js/admin/admin.js', 'public/js')
-    .js("resources/js/admin/router.js", "public/js")
+mix.ts('resources/ts/admin/admin.ts', 'public/js')
+    .ts("resources/ts/admin/router.ts", "public/js")
     .js("resources/js/content.js", "public/js")
     .js('resources/js/content/agree.js', 'public/js')
     .sass('resources/sass/admin.scss', 'public/css')
@@ -27,7 +27,7 @@ mix.js('resources/js/admin/admin.js', 'public/js')
 mix.webpackConfig({
     resolve: {
         alias: {
-            '@admin': path.resolve(__dirname, 'resources/js/admin/')
+            '@admin': path.resolve(__dirname, 'resources/ts/admin/')
         }
     }
 });
