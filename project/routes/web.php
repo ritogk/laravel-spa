@@ -13,12 +13,8 @@ use App\Http\Controllers;
 
 Auth::routes();
 
-Route::get('/', function () {
-    return view('front');
-});
-
 // 同意画面
-Route::get('/agree', [Controllers\Front\AgreeController::class, 'index'])->name('agree');
+Route::get('/', [Controllers\Front\FrontController::class, 'index']);
 
 // 共通
 Route::prefix('/utility')->group(function () {
