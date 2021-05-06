@@ -176,9 +176,11 @@ return [
         App\Providers\RouteServiceProvider::class,
         App\Providers\DuskServiceProvider::class,
         App\Providers\RepositoryServiceProvider::class,
-        
+
         Maatwebsite\Excel\ExcelServiceProvider::class,
         Laravel\Dusk\DuskServiceProvider::class,
+
+        Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
 
     ],
 

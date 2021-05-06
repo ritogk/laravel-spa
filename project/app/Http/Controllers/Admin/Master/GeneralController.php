@@ -4,103 +4,103 @@ namespace App\Http\Controllers\Admin\Master;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\General;
 use App\Http\Requests\Admin\Master\GeneralListRequest;
 use App\Http\Requests\Admin\Master\GeneralRequest;
-use App\Services\Admin\Master\GeneralService;
+
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
+
+// usecase
+use App\UseCases\Admin\Master\ListAction;
+use App\UseCases\Admin\Master\CreateAction;
+use App\UseCases\Admin\Master\UpdateAction;
+use App\UseCases\Admin\Master\DeleteAction;
+use App\UseCases\Admin\Master\ExportAction;
+use App\UseCases\Admin\Master\SetCondAction;
+use App\UseCases\Admin\Master\GetCondAction;
+
 
 class GeneralController extends Controller
 {
-    private $service;
-    public function __construct(GeneralService $service)
-    {
-        $this->service = $service;
-    }
-
     /**
-     * Display a listing of the resource.
+     * 一覧取得
      *
      * @param  GeneralListRequest $request
-     * @return \Illuminate\Http\Response
+     * @param  ListAction $action
+     * @return array
      */
-    public function index(GeneralListRequest $request)
+    public function list(GeneralListRequest $request, ListAction $action): array
     {
-        return $this->service->getList($request->filters());
+        return $action($request->filters());
     }
 
     /**
-     * Store a newly created resource in storage.
+     * 登録
      *
      * @param GeneralRequest $request
+     * @param CreateAction $action
      * @return void
      */
-    public function store(GeneralRequest $request)
+    public function create(GeneralRequest $request, CreateAction $action)
     {
-        $this->service->create($request->all());
+        $action($request->all());
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param string $id
-     * @return General
-     */
-    public function show($id)
-    {
-        return $this->service->find($id);
-    }
-
-    /**
-     * Update the specified resource in storage.
+     * 更新
      *
      * @param  GeneralRequest $request
      * @param  string $id
+     * @param  UpdateAction $action
      * @return void
      */
-    public function update(GeneralRequest $request, $id)
+    public function update(GeneralRequest $request, $id, UpdateAction $action): void
     {
-        $this->service->update($request->all(), $id);
+        $action($request->all(), $id);
     }
 
     /**
-     * Remove the specified resource from storage.
+     * 削除
      *
-     * @param  string $id
+     * @param string $id
+     * @param DeleteAction $action
      * @return void
      */
-    public function destroy($id)
+    public function destroy(string $id, DeleteAction $action)
     {
-        $this->service->delete($id);
+        $action($id);
+    }
+
+    /**
+     * excel出力
+     *
+     * @param ExportAction $action
+     * @return BinaryFileResponse
+     */
+    public function exportExcel(ExportAction $action): BinaryFileResponse{
+        return $action();
     }
 
     /**
      * 入力条件取得
      *
      * @param  Request $request
+     * @param  GetCondAction $action
      * @return array
      */
-    public function getConds(Request $request) : array
+    public function getConds(Request $request, GetCondAction $action) : array
     {
-        return $this->service->getCondSession($request->all());
+        return $action($request->isInit);
     }
 
     /**
      * 入力条件セット
      *
      * @param  GeneralListRequest $request
+     * @param  SetCondAction $action
      * @return void
      */
-    public function setConds(GeneralListRequest $request) : void
+    public function setConds(GeneralListRequest $request, SetCondAction $action) : void
     {
-        $this->service->setCondSession($request);
-    }
-
-    /**
-     * excel出力
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function exportExcel() {
-        return $this->service->exportExcel();
+        $action($request->all());
     }
 }

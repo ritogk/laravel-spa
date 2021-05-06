@@ -32,7 +32,7 @@
         },
         methods: {
           create(input_item){
-            axios.post("/admin/general/store", input_item)
+            axios.post("/admin/general/create", input_item)
             .then(response => {
               this.message = "";
               this.$router.push({ name: "general_index" });

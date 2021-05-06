@@ -219,7 +219,7 @@ __webpack_require__.r(__webpack_exports__);
     create: function create(input_item) {
       var _this = this;
 
-      axios.post("/admin/general/store", input_item).then(function (response) {
+      axios.post("/admin/general/create", input_item).then(function (response) {
         _this.message = "";
 
         _this.$router.push({
@@ -552,7 +552,7 @@ __webpack_require__.r(__webpack_exports__);
         isInit: this.isInit
       })["catch"](); // 一覧読込
 
-      axios.post("/admin/general/index", {
+      axios.post("/admin/general/list", {
         kbn: this.conds.kbn,
         value: this.conds.value,
         isInit: this.isInit
@@ -851,7 +851,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       this.isBusy = true;
-      axios.post("/admin/general/index", {
+      axios.post("/admin/general/list", {
         isInit: this.isInit
       }).then(function (response) {
         _this.items = response.data;

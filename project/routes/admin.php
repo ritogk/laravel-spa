@@ -32,8 +32,8 @@ Route::group(['middleware' => ['admin']], function () {
 
     // 汎用マスタ
     Route::group(['prefix' => 'general', 'middleware' => 'auth'], function () {
-        Route::post('/index', [Controllers\Admin\Master\GeneralController::class, 'index']);
-        Route::post('/store', [Controllers\Admin\Master\GeneralController::class, 'store']);
+        Route::post('/list', [Controllers\Admin\Master\GeneralController::class, 'list']);
+        Route::post('/create', [Controllers\Admin\Master\GeneralController::class, 'create']);
         Route::delete('/{id}', [Controllers\Admin\Master\GeneralController::class, 'destroy']);
         Route::put('/{id}', [Controllers\Admin\Master\GeneralController::class, 'update']);
         Route::post('/set_conds', [Controllers\Admin\Master\GeneralController::class, 'setConds']);

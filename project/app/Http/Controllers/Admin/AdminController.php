@@ -1,16 +1,18 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
+
 use App\Http\Controllers\Controller;
+use \Illuminate\Contracts\View\View as View;
 
 class AdminController extends Controller
 {
     /**
-     * Show the application dashboard.
+     * 画面表示
      *
-     * @return \Illuminate\Contracts\Support\Renderable
+     * @return View
      */
-    public function index()
+    public function index(): View
     {
         return view('admin');
     }

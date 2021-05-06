@@ -138,7 +138,7 @@
     methods: {
       getItem() {
         this.isBusy = true;
-        axios.post("/admin/general/index", {
+        axios.post("/admin/general/list", {
           isInit: this.isInit
         })
         .then(response => {

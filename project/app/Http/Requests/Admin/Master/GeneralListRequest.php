@@ -3,9 +3,6 @@
 namespace App\Http\Requests\Admin\Master;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
-use App\Constant\Session;
 
 class GeneralListRequest extends FormRequest
 {
@@ -41,7 +38,7 @@ class GeneralListRequest extends FormRequest
             'value' => '値',
         ];
     }
-    
+
     /**
      * 抽出条件
      *
@@ -55,33 +52,6 @@ class GeneralListRequest extends FormRequest
         if(isset($this->value)) {
             $filters[] = ['value', 'LIKE', '%'. $this->value. '%'];
         }
-        return $filters;  
-    }
-    
-    /**
-     * 条件記憶用セッションセット
-     *
-     * @param  GeneralListRequest $request
-     * @return void
-     */
-    public static function setRequestSession(GeneralListRequest $request){
-        $request->session()->put(Session::MASTER_GENERAL_LIST_CONDS, $request->all());
-    }
-    
-    /**
-     * 条件記憶用セッション取得
-     *
-     * @param  array $conds
-     * @return array
-     */
-    public static function getRequestSession(array $conds) : array{
-        $rtn = [];
-        if(!empty($conds['isInit']) && $conds['isInit']){
-            session()->forget(Session::MASTER_GENERAL_LIST_CONDS);
-        }else{
-            $session_val = session(Session::MASTER_GENERAL_LIST_CONDS);
-            $rtn = $session_val ?? [];
-        }
-        return $rtn;
+        return $filters;
     }
 }

@@ -189,7 +189,7 @@
         }).catch();
 
         // 一覧読込
-        axios.post("/admin/general/index", {
+        axios.post("/admin/general/list", {
           kbn: this.conds.kbn,
           value: this.conds.value,
           isInit: this.isInit

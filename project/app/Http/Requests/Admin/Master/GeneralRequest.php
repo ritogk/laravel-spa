@@ -46,7 +46,7 @@ class GeneralRequest extends FormRequest
             'updated_at' => '更新日時',
         ];
     }
-    
+
     /**
      * 特殊なバリデーションを行う場合はここに処理を記述する
      *
@@ -55,14 +55,13 @@ class GeneralRequest extends FormRequest
     public function withValidator($validator) {
         /* ここにバリデーションを書く */
         $validator->after(function ($validator) {
-            Log::debug(1);
             if(!empty($this->input('id'))
                     && General::find($this->input('id'))->updated_at > $this->input('updated_at')){
                 $validator->errors()->add('updated_at', 'すでに変更されたデータの可能性があります。最新の状態で再度実行してください。');
             }
         });
     }
-    
+
     /**
      * バリデーションエラー後の処理を変える場合はここに処理を記述する
      * デフォルトはリダイレクト
