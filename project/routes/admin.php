@@ -13,14 +13,15 @@ use App\Http\Controllers;
 
 Route::get('/', [Controllers\Admin\AdminController::class, 'index'])->name('admin');
 
-// 認証ユーザー情報取得
-Route::middleware('auth:web')->get('auth/user', function () {
-    return Auth::user();
-});
-
-// ログアウト
-Route::middleware('auth:web')->get('api/logout', function () {
-    return Auth::logout();
+Route::group(['prefix' => 'auth'], function () {
+    // ユーザー情報取得
+    Route::middleware('auth:web')->get('/user', function () {
+        return Auth::user();
+    });
+    // ログアウト
+    Route::middleware('auth:web')->get('/logout', function () {
+        return Auth::logout();
+    });
 });
 
 // 管理画面spa用

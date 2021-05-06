@@ -31,7 +31,7 @@
         props: ['user'],
         methods: {
             logout() {
-                axios.get("/admin/api/logout").then(response => {
+                axios.get("/admin/auth/logout").then(response => {
                     console.log(response)
                     localStorage.removeItem("auth")
                     window.location.href = '/'
