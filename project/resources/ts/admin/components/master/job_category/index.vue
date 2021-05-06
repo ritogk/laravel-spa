@@ -79,7 +79,7 @@
           </template>
 
           <template #cell(actions)="row">
-            <b-button @click="edit(row.item, row.index, $event.target)" class="mr-1 btn-success">
+            <b-button @click="edit(row.item, row.index)" class="mr-1 btn-success">
               編集
             </b-button>
             <b-button @click="showDelConirm(row.item)" class="mr-1 btn-danger">
@@ -106,127 +106,262 @@
   </b-container>
 </template>
 
-<script>
-  import BtnDl from '@admin/components/utility/button_donwload'
-  import MsgDanger from '@admin/components/utility/msg_danger';
-  export default {
-    components: {
-        BtnDl,
-        MsgDanger
-    },
-    props: {
-      isInit: Boolean,
-    },
-    data() {
-      return {
-        items: [],
-        conds: {name: null},
-        fields: [
-          { key: 'name', label: '名称', sortable: true, sortDirection: 'desc' },
-          { key: 'sort_no', label: '並び順', sortable: true, class: 'text-left' },
-          { key: 'actions', label: 'Actions' }
-        ],
-        isBusy: false,
-        totalRows: 1,
-        currentPage: 1,
-        perPage: 25,
-        pageOptions: [15, 25, 50, { value: 100, text: "Show a lot" }],
-        sortBy: '',
-        sortDesc: false,
-        sortDirection: 'asc',
-        filter: null,
-        filterOn: [],
-        message: "",
-        emptyItem: null,
-        dlMasterUrl: '/admin/job_category/export_excel',
-      }
-    },
-    computed: {
-      sortOptions() {
-        // Create an options list from our fields
-        return this.fields
-          .filter(f => f.sortable)
-          .map(f => {
-            return { text: f.label, value: f.key }
-          })
-      }
-    },
-    mounted() {
-       this.isBusy = true;
-       axios.post("/admin/job_category/get_conds", {isInit: this.isInit})
-        .then(response => {
-          if(!this.isEmptyObject(response.data)){
-            this.conds.name = response.data.name;
-          }
-          this.getItem();
-        })
-       this.getEmptyData();
-    },
-    methods: {
-      getItem() {
-        // 条件をセッションに保存
-        axios.post("/admin/job_category/set_conds", {
-          name: this.conds.name,
-          isInit: this.isInit
-        }).catch();
+<script lang="ts">
+    import { Vue, Component, Prop } from 'vue-property-decorator';
+    // コンポーネント
+    import BtnDl from '@admin/components/utility/button_donwload.vue'
+    import MsgDanger from '@admin/components/utility/msg_danger.vue';
 
-        // 一覧読込
-        axios.post("/admin/job_category/list", {
-          name: this.conds.name,
-          isInit: this.isInit
-        })
-        .then(response => {
-          this.items = response.data;
-          this.totalRows = this.items.length
-          this.isBusy = false;
-          this.message = "";
-        })
-        .catch(erorr => {
-          this.isBusy = false;
-          this.message = erorr;
-        });
-      },
-      getEmptyData() {
-        axios.post("/utility/empty_table_columns", {table_nm: 'job_categories', num: 1}).then(response => {
-          this.emptyItem = response.data;
-          this.emptyItem.changeable = 1;
-        })
-      },
-      edit(item, index, button) {
-        this.$router.push({ name: "job_category_edit" , params: {item : item, initialErrors : this.emptyItem}}).catch(() => {});
-      },
-      create() {
-        let errors = $.extend(true, {}, this.emptyItem);
-        this.$router.push({ name: "job_category_create" , params: {item : this.emptyItem, initialErrors : errors}}).catch(() => {});
-      },
-      delete(item) {
-        axios.delete("/admin/job_category/" + item.id).then(response => {
-          this.getItem();
-          this.message = "";
-        })
-        .catch(error => {
-          this.message = error;
-        });
-      },
-      onFiltered(filteredItems) {
-        // フィルタリング時のページネーション更新
-        this.totalRows = filteredItems.length
-        this.currentPage = 1
-      },
-      tableInfo() {
-        let page_st = (this.currentPage - 1) * this.perPage + 1;
-        let page_ed = (this.currentPage * this.perPage) > this.items.length ? this.items.length : (this.currentPage * this.perPage)
-        return format.sprintf('%1$s 件中 %2$s から %3$s まで表示', this.items.length, page_st, page_ed);
-      },
-      showDelConirm(item) {
-        this.$bvModal.msgBoxConfirm(format.sprintf('%1$s を削除します。よろしいですか?', item.name))
-          .then(result => {
-            if(result) this.delete(item)
-          })
-          .catch(error => {
-            this.message = error;
-          })
-      },
+    @Component({
+        components: {
+            'btn-dl': BtnDl,
+            'msg-danger': MsgDanger,
+        }
+    })
+    export default class BaseFrom extends Vue{
+        @Prop({ type: Boolean, required: true })
+        isInit!: boolean;
+
+        @Prop({ type: Object, required: true })
+        errors: any;
+
+        @Prop({ type: String, required: true })
+        title!: string;
+
+        @Prop({ type: Boolean, required: true })
+        isCreate: any;
+
+        // data
+        items: any = []
+        conds: any = {name: null}
+        fields: any = [
+                        { key: 'name', label: '名称', sortable: true, sortDirection: 'desc' },
+                        { key: 'sort_no', label: '並び順', sortable: true, class: 'text-left' },
+                        { key: 'actions', label: 'Actions' }
+                    ]
+        isBusy: boolean = false
+        totalRows: number = 1
+        currentPage: number = 1
+        perPage: number = 25
+        pageOptions: any = [15, 25, 50, { value: 100, text: "Show a lot" }]
+        sortBy: string = ''
+        sortDesc: boolean = false
+        sortDirection: string = 'asc'
+        filter: any = null
+        filterOn: any = []
+        message: string = ""
+        emptyItem: any = null
+        dlMasterUrl: string = '/admin/job_category/export_excel'
+
+        // 初期化
+        mounted(){
+            this.isBusy = true;
+            window.axios.post("/admin/job_category/get_conds", {isInit: this.isInit})
+            .then(response => {
+                if(!(this as any).isEmptyObject(response.data)){
+                    this.conds.name = response.data.name;
+                }
+                this.getItem();
+            })
+            this.getEmptyData();
+        }
+
+        // 算出プロパティ
+        get sortOptions(): any{
+            return this.fields.filter((f: any) => f.sortable)
+                                .map((f: any) => {
+                                    return { text: f.label, value: f.key }
+                                })
+        }
+
+        getItem(): void{
+            // 条件をセッションに保存
+            window.axios.post("/admin/job_category/set_conds", {
+                name: this.conds.name,
+                isInit: this.isInit
+            }).catch();
+
+            // 一覧読込
+            window.axios.post("/admin/job_category/list", {
+                name: this.conds.name,
+                isInit: this.isInit
+            }).then(response => {
+                this.items = response.data;
+                this.totalRows = this.items.length
+                this.isBusy = false;
+                this.message = "";
+            }).catch(erorr => {
+                this.isBusy = false;
+                this.message = erorr;
+            });
+        }
+
+        edit(item: any, index: number): void{
+            this.$router.push({ name: "job_category_edit" , params: {initialItem : item, initialErrors : this.emptyItem}});
+        }
+
+        create(): void {
+            let errors = Object.create(this.emptyItem)
+            this.$router.push({ name: "job_category_create" , params: {initialItem : this.emptyItem, initialErrors : errors}});
+        }
+
+        delete(item: any): void {
+            window.axios.delete("/admin/job_category/" + item.id).then(response => {
+                this.getItem();
+                this.message = "";
+            })
+            .catch(error => {
+                this.message = error;
+            });
+        }
+
+        getEmptyData(): void{
+            window.axios.post("/utility/empty_table_columns", {table_nm: 'job_categories', num: 1}).then(response => {
+                this.emptyItem = response.data;
+                this.emptyItem.changeable = 1;
+            })
+        }
+
+        onFiltered(filteredItems: any): void {
+            // フィルタリング時のページネーション更新
+            this.totalRows = filteredItems.length
+            this.currentPage = 1
+        }
+
+        tableInfo(): string {
+            let page_st = (this.currentPage - 1) * this.perPage + 1;
+            let page_ed = (this.currentPage * this.perPage) > this.items.length ? this.items.length : (this.currentPage * this.perPage)
+            return window.format.sprintf('%1$s 件中 %2$s から %3$s まで表示', this.items.length, page_st, page_ed);
+        }
+
+        showDelConirm(item: any): void {
+            this.$bvModal.msgBoxConfirm(window.format.sprintf('%1$s を削除します。よろしいですか?', item.name)).then(result => {
+                if(result) this.delete(item)
+            }).catch(error => {
+                this.message = error;
+            })
+        }
+
+
     }
-  }
+    // import BtnDl from '@admin/components/utility/button_donwload'
+    // import MsgDanger from '@admin/components/utility/msg_danger';
+    // export default {
+    // components: {
+    //     BtnDl,
+    //     MsgDanger
+    // },
+    // props: {
+    //     isInit: Boolean,
+    // },
+    // data() {
+    //     return {
+    //         items: [],
+    //         conds: {name: null},
+    //         fields: [
+    //             { key: 'name', label: '名称', sortable: true, sortDirection: 'desc' },
+    //             { key: 'sort_no', label: '並び順', sortable: true, class: 'text-left' },
+    //             { key: 'actions', label: 'Actions' }
+    //         ],
+    //         isBusy: false,
+    //         totalRows: 1,
+    //         currentPage: 1,
+    //         perPage: 25,
+    //         pageOptions: [15, 25, 50, { value: 100, text: "Show a lot" }],
+    //         sortBy: '',
+    //         sortDesc: false,
+    //         sortDirection: 'asc',
+    //         filter: null,
+    //         filterOn: [],
+    //         message: "",
+    //         emptyItem: null,
+    //         dlMasterUrl: '/admin/job_category/export_excel',
+    //     }
+    // },
+    // computed: {
+    //     sortOptions() {
+    //     // Create an options list from our fields
+    //     return this.fields
+    //         .filter(f => f.sortable)
+    //         .map(f => {
+    //         return { text: f.label, value: f.key }
+    //         })
+    //     }
+    // },
+    // mounted() {
+    //     this.isBusy = true;
+    //     axios.post("/admin/job_category/get_conds", {isInit: this.isInit})
+    //     .then(response => {
+    //         if(!this.isEmptyObject(response.data)){
+    //         this.conds.name = response.data.name;
+    //         }
+    //         this.getItem();
+    //     })
+    //     this.getEmptyData();
+    // },
+    // methods: {
+    //     getItem() {
+    //         // 条件をセッションに保存
+    //         axios.post("/admin/job_category/set_conds", {
+    //             name: this.conds.name,
+    //             isInit: this.isInit
+    //     }).catch();
+
+    //     // 一覧読込
+    //     axios.post("/admin/job_category/list", {
+    //         name: this.conds.name,
+    //         isInit: this.isInit
+    //     })
+    //     .then(response => {
+    //         this.items = response.data;
+    //         this.totalRows = this.items.length
+    //         this.isBusy = false;
+    //         this.message = "";
+    //     })
+    //     .catch(erorr => {
+    //         this.isBusy = false;
+    //         this.message = erorr;
+    //     });
+    //     },
+    //     getEmptyData() {
+    //         axios.post("/utility/empty_table_columns", {table_nm: 'job_categories', num: 1}).then(response => {
+    //             this.emptyItem = response.data;
+    //             this.emptyItem.changeable = 1;
+    //         })
+    //     },
+    //     edit(item, index, button) {
+    //         this.$router.push({ name: "job_category_edit" , params: {item : item, initialErrors : this.emptyItem}}).catch(() => {});
+    //     },
+    //     create() {
+    //         let errors = Object.create(this.emptyItem)
+    //         this.$router.push({ name: "job_category_create" , params: {item : this.emptyItem, initialErrors : errors}}).catch(() => {});
+    //     },
+    //     delete(item) {
+    //         axios.delete("/admin/job_category/" + item.id).then(response => {
+    //             this.getItem();
+    //             this.message = "";
+    //         })
+    //         .catch(error => {
+    //             this.message = error;
+    //         });
+    //     },
+    //     onFiltered(filteredItems) {
+    //         // フィルタリング時のページネーション更新
+    //         this.totalRows = filteredItems.length
+    //         this.currentPage = 1
+    //     },
+    //     tableInfo() {
+    //         let page_st = (this.currentPage - 1) * this.perPage + 1;
+    //         let page_ed = (this.currentPage * this.perPage) > this.items.length ? this.items.length : (this.currentPage * this.perPage)
+    //         return format.sprintf('%1$s 件中 %2$s から %3$s まで表示', this.items.length, page_st, page_ed);
+    //     },
+    //     showDelConirm(item) {
+    //         this.$bvModal.msgBoxConfirm(format.sprintf('%1$s を削除します。よろしいですか?', item.name)).then(result => {
+    //             if(result) this.delete(item)
+    //         }).catch(error => {
+    //             this.message = error;
+    //         })
+    //     },
+    // }
+    // }
 </script>

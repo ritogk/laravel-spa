@@ -45,18 +45,36 @@
   </b-container>
 </template>
 
-<script>
-  export default {
-      props: {
-          initialItem: Object,
-          errors: Object,
-          title: String,
-          isCreate: Boolean,
-      },
-      data() {
-        return {
-          item: this.initialItem,
+<script lang="ts">
+    import { Vue, Component, Prop } from 'vue-property-decorator';
+    // コンポーネント
+    import BaseForm from './base_from.vue';
+    import MsgDanger from '@admin/components/utility/msg_danger.vue';
+
+    @Component({
+        components: {
+            'base-form': BaseForm,
+            'msg-danger': MsgDanger,
         }
-      },
+    })
+    export default class BaseFrom extends Vue{
+        @Prop({ type: Object, required: true })
+        initialItem: any;
+
+        @Prop({ type: Object, required: true })
+        errors: any;
+
+        @Prop({ type: String, required: true })
+        title!: string;
+
+        @Prop({ type: Boolean, required: true })
+        isCreate: any;
+
+        // data
+        item: any = []
+
+        mounted(){
+            this.item = this.initialItem
+        }
   }
 </script>
