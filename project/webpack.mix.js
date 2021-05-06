@@ -22,7 +22,6 @@ mix.js('resources/js/admin/admin.js', 'public/js')
     .js('resources/js/content/agree.js', 'public/js')
     .sass('resources/sass/admin.scss', 'public/css')
     .sass('resources/sass/content.scss', 'public/css')
-    .styles(['resources/css/reception.css'], 'public/css/reception.css')
     .version();
 
 mix.webpackConfig({

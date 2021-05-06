@@ -30,8 +30,19 @@ Route::group(['middleware' => ['admin']], function () {
         return view('admin');
     })->where('any', '.*');
 
+    // 仕事カテゴリ マスタ
+    Route::group(['prefix' => 'job_category'], function () {
+        Route::post('/list', [Controllers\Admin\Master\JobCategoryController::class, 'list']);
+        Route::post('/create', [Controllers\Admin\Master\JobCategoryController::class, 'create']);
+        Route::delete('/{id}', [Controllers\Admin\Master\JobCategoryController::class, 'destroy']);
+        Route::put('/{id}', [Controllers\Admin\Master\JobCategoryController::class, 'update']);
+        Route::post('/set_conds', [Controllers\Admin\Master\JobCategoryController::class, 'setConds']);
+        Route::post('/get_conds', [Controllers\Admin\Master\JobCategoryController::class, 'getConds']);
+        Route::post('/export_excel', [Controllers\Admin\Master\JobCategoryController::class, 'exportExcel']);
+    });
+
     // 汎用マスタ
-    Route::group(['prefix' => 'general', 'middleware' => 'auth'], function () {
+    Route::group(['prefix' => 'general'], function () {
         Route::post('/list', [Controllers\Admin\Master\GeneralController::class, 'list']);
         Route::post('/create', [Controllers\Admin\Master\GeneralController::class, 'create']);
         Route::delete('/{id}', [Controllers\Admin\Master\GeneralController::class, 'destroy']);

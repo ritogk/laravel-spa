@@ -22,11 +22,18 @@
               <p>マスタ</p>
             </a>
             <ul class="nav nav-treeview">
+              <!-- 仕事カテゴリマスタ -->
+              <li class="nav-item">
+                <router-link :to="{ name: 'job_category_index', params: { isInit: true }}" class="nav-link">
+                  <i class="nav-icon fas fa-th"></i>
+                  <p>仕事カテゴリ</p>
+                </router-link>
+              </li>
               <!-- 汎用マスタ -->
               <li class="nav-item">
                 <router-link :to="{ name: 'general_index', params: { isInit: true }}" class="nav-link">
                   <i class="nav-icon fas fa-th"></i>
-                  <p>汎用マスタ</p>
+                  <p>汎用</p>
                 </router-link>
               </li>
             </ul>

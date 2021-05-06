@@ -6,7 +6,7 @@
             },
             "previewLimit": 50,
             "server": "localhost",
-            "port": 33060,
+            "port": 53306,
             "driver": "MySQL",
             "name": "portfolio_db",
             "database": "laravel",

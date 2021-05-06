@@ -10,13 +10,13 @@ use App\Http\Requests\Admin\Master\GeneralRequest;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 // usecase
-use App\UseCases\Admin\Master\ListAction;
-use App\UseCases\Admin\Master\CreateAction;
-use App\UseCases\Admin\Master\UpdateAction;
-use App\UseCases\Admin\Master\DeleteAction;
-use App\UseCases\Admin\Master\ExportAction;
-use App\UseCases\Admin\Master\SetCondAction;
-use App\UseCases\Admin\Master\GetCondAction;
+use App\UseCases\Admin\Master\General\ListAction;
+use App\UseCases\Admin\Master\General\CreateAction;
+use App\UseCases\Admin\Master\General\UpdateAction;
+use App\UseCases\Admin\Master\General\DeleteAction;
+use App\UseCases\Admin\Master\General\ExportAction;
+use App\UseCases\Admin\Master\General\SetCondAction;
+use App\UseCases\Admin\Master\General\GetCondAction;
 
 
 class GeneralController extends Controller
