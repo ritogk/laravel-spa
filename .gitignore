@@ -14,6 +14,8 @@ project/public/hot
 # Laravel 5 & Lumen specific with changed public path
 project/public_html/storage
 project/public_html/hot
+project/public/css
+project/public/js
 
 storage/*.key
 project/.env

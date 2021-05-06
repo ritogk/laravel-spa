@@ -1,15 +1,15 @@
 <template>
-  <div>
+    <div>
     <msg-danger :message="message"></msg-danger>
-    <base-form
-      title="仕事カテゴリマスタ(登録)"
-      :errors="errors"
-      :initialItem="initialItem"
-      :isCreate="true"
-      v-on:submit="create"
-      v-on:back="back"
-    ></base-form>
-  </div>
+        <base-form
+            title="仕事カテゴリマスタ(登録)"
+            :errors="errors"
+            :item="item"
+            :isCreate="true"
+            v-on:submit="create"
+            v-on:back="back"
+        ></base-form>
+    </div>
 </template>
 
 <script lang="ts">
@@ -28,15 +28,18 @@
         @Prop({ type: Object, required: true })
         initialItem: any
 
-        @Prop({ type: Object, required: true })
-        initialErrors: any
-
         // data
+        item: any = {}
         message: string = ''
-        errors: any = []
+        errors: Object = {}
 
-        create(input_item: any): void{
-            window.axios.post("/admin/job_category/create", input_item).then(response => {
+        // 初期化
+        mounted(): void{
+            this.item = this.initialItem;
+        }
+
+        create(): void{
+            window.axios.post("/admin/job_category/create", this.item).then(response => {
                 this.message = ""
                 this.$router.push({ name: "job_category_index" })
             }).catch(error => {
@@ -51,7 +54,7 @@
         }
 
         back(): void{
-            this.$router.push({ name: "job_category_index" , params: {isInit : 'false'}})
+            this.$router.push({ name: "job_category_index" , params: {isInit : (false as any)}})
         }
     }
 </script>

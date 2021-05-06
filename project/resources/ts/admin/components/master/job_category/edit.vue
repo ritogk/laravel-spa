@@ -1,15 +1,15 @@
 <template>
-  <div>
-    <msg-danger :message="message"></msg-danger>
-    <base-form
-      title="仕事カテゴリマスタ(編集)"
-      :errors="errors"
-      :initialItem="initialItem"
-      :isCreate="false"
-      v-on:submit="edit"
-      v-on:back="back"
-    ></base-form>
-  </div>
+    <div>
+        <msg-danger :message="message"></msg-danger>
+        <base-form
+            title="仕事カテゴリマスタ(編集)"
+            :errors="errors"
+            :item="item"
+            :isCreate="false"
+            v-on:submit="edit"
+            v-on:back="back"
+        ></base-form>
+    </div>
 </template>
 
 <script lang="ts">
@@ -28,15 +28,18 @@
         @Prop({ type: Object, required: true })
         initialItem: any
 
-        @Prop({ type: Object, required: true })
-        initialErrors: any
-
         // data
+        item: any = {}
         message: string = ''
         errors: any = { name: '', sort_no: ''}
 
-        edit(input_item: any): void{
-        window.axios.put(window.format.sprintf('/admin/job_category/%1$s', input_item.id), input_item)
+        // 初期化
+        mounted(): void{
+            this.item = this.initialItem;
+        }
+
+        edit(): void{
+            window.axios.put(window.format.sprintf('/admin/job_category/%1$s', this.item.id), this.item)
             .then(response => {
                 this.message = ""
                 this.$router.push({ name: "job_category_index" })
@@ -53,7 +56,7 @@
         }
 
         back(): void{
-            this.$router.push({ name: "job_category_index" , params: {isInit : 'false'}})
+            this.$router.push({ name: "job_category_index" , params: {isInit : (false as any)}})
         }
     }
 </script>
