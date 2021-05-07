@@ -14,26 +14,30 @@
     </div>
 </template>
 
-<script>
-import AppHeader from './Header'
-import AppAside from './Aside'
-    export default {
-        name: 'app',
+<script lang="ts">
+    import { Vue, Component, Watch } from 'vue-property-decorator';
+    // モデル
+    import User from '@root/models/User';
+    // コンポーネント
+    import Header from './Header.vue';
+    import Aside from './Aside.vue';
+
+    @Component({
         components: {
-          AppHeader,
-          AppAside
-        },
-        data () {
-            return {
-                isError: false,
-                user: {}
-            }
-        },
+            'app-header': Header,
+            'app-aside': Aside,
+        }
+    })
+    export default class App extends Vue {
+        // data
+        isError: boolean = false
+        user: User = {id: '', name: '', email: '', email_verified_at: '', password: ''}
+
         created() {
-            axios.get('/admin/auth/user').then(res => {
-                this.user = res.data;
+            window.axios.get('/admin/auth/user').then(response => {
+                this.user = response.data
             }).catch(error => {
-                this.isError = true;
+                this.isError = true
             });
         }
     }

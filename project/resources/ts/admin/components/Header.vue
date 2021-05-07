@@ -26,20 +26,24 @@
     <!-- /.navbar -->
 </template>
 
-<script>
-    export default {
-        props: ['user'],
-        methods: {
-            logout() {
-                axios.get("/admin/auth/logout").then(response => {
-                    console.log(response)
-                    localStorage.removeItem("auth")
-                    window.location.href = '/'
-                })
-                .catch(error => {
-                    console.log(error)
-                });
-            },
-        },
+<script lang="ts">
+    import { Vue, Component, Prop } from 'vue-property-decorator';
+    // モデル
+    import User from '@root/models/User';
+
+    @Component
+    export default class App extends Vue {
+        @Prop()
+        user!: User
+
+        logout() {
+            window.axios.get("/admin/auth/logout").then(response => {
+                localStorage.removeItem("auth")
+                window.location.href = '/'
+            })
+            .catch(error => {
+                console.log(error)
+            });
+        }
     }
 </script>
