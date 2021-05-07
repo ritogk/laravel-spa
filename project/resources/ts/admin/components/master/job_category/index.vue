@@ -11,7 +11,7 @@
                 <b-col lg="6" class="my-1">
                     <b-form-group label="名称" label-for="cond_name">
                     <b-input-group>
-                        <b-form-input v-model="conds.name" type="search" id="cond_name"></b-form-input>
+                        <b-form-input v-model="cond.name" type="search" id="cond_name"></b-form-input>
                     </b-input-group>
                     </b-form-group>
                 </b-col>
@@ -57,7 +57,6 @@
                 :current-page="currentPage"
                 :per-page="perPage"
                 :filter="filter"
-                :filter-included-fields="filterOn"
                 :sort-by.sync="sortBy"
                 :sort-desc.sync="sortDesc"
                 :sort-direction="sortDirection"
@@ -109,8 +108,13 @@
 <script lang="ts">
     import { Vue, Component, Prop } from 'vue-property-decorator';
     // コンポーネント
-    import BtnDl from '@admin/components/utility/button_donwload.vue'
-    import MsgDanger from '@admin/components/utility/msg_danger.vue';
+    import BtnDl from '@root/admin/components/utility/button_donwload.vue';
+    import MsgDanger from '@root/admin/components/utility/msg_danger.vue';
+    // モデル
+    import Item from './models/Item';
+    import Cond from './models/Cond';
+    import DataTableFileds from '@root/models/data_table/Fileds';
+    import DataTablePageOptions from '@root/models/data_table/PageOptions';
 
     @Component({
         components: {
@@ -119,13 +123,16 @@
         }
     })
     export default class BaseFrom extends Vue{
-        @Prop({ type: Boolean, required: false })
+        @Prop({required: false })
         isInit!: boolean;
 
         // data
-        items: any = []
-        conds: any = {name: null}
-        fields: any = [
+        items: Array<Item> = []
+        cond: Cond = {name: ''}
+        message: string = ""
+        dlMasterUrl: string = '/admin/job_category/export_excel'
+        // 以降はデータテーブルで使用する値
+        fields: Array<DataTableFileds> = [
                         { key: 'name', label: '名称', sortable: true, sortDirection: 'desc' },
                         { key: 'sort_no', label: '並び順', sortable: true, class: 'text-left' },
                         { key: 'actions', label: 'Actions' }
@@ -134,15 +141,15 @@
         totalRows: number = 1
         currentPage: number = 1
         perPage: number = 25
-        pageOptions: any = [15, 25, 50, { value: 100, text: "Show a lot" }]
+        pageOptions: Array<DataTablePageOptions> = [
+                            {value: 15, text: '15'},
+                            {value: 25, text: '25'},
+                            {value: 50, text: '50'},
+                            {value: 100, text: "Show a lot" }]
         sortBy: string = ''
         sortDesc: boolean = false
         sortDirection: string = 'asc'
-        filter: any = null
-        filterOn: any = []
-        message: string = ""
-        emptyItem: any = null
-        dlMasterUrl: string = '/admin/job_category/export_excel'
+        filter: string = ''
 
         // 初期化
         mounted(){
@@ -150,31 +157,22 @@
             window.axios.post("/admin/job_category/get_conds", {isInit: this.isInit})
             .then(response => {
                 if(!(this as any).isEmptyObject(response.data)){
-                    this.conds.name = response.data.name;
+                    this.cond.name = response.data.name;
                 }
                 this.getItem();
             })
-            this.getEmptyData();
         }
 
-        // 算出プロパティ
-        get sortOptions(): any{
-            return this.fields.filter((f: any) => f.sortable)
-                                .map((f: any) => {
-                                    return { text: f.label, value: f.key }
-                                })
-        }
-
+        // 一覧取得
         getItem(): void{
             // 条件をセッションに保存
             window.axios.post("/admin/job_category/set_conds", {
-                name: this.conds.name,
-                isInit: this.isInit
+                name: this.cond.name
             }).catch();
 
             // 一覧読込
             window.axios.post("/admin/job_category/list", {
-                name: this.conds.name,
+                name: this.cond.name,
                 isInit: this.isInit
             }).then(response => {
                 this.items = response.data;
@@ -187,33 +185,33 @@
             });
         }
 
-        edit(item: any, index: number): void{
-            this.$router.push({ name: "job_category_edit" , params: {initialItem : item}});
+        // 編集
+        edit(item: Item, index: number): void{
+            this.$router.push({ name: "job_category_edit" , params: {initialItem : JSON.stringify(item)}});
         }
 
+        // 新規
         create(): void {
-            let errors = Object.create(this.emptyItem)
-            this.$router.push({ name: "job_category_create" , params: {initialItem : this.emptyItem}});
-        }
-
-        delete(item: any): void {
-            window.axios.delete("/admin/job_category/" + item.id).then(response => {
-                this.getItem();
-                this.message = "";
-            })
-            .catch(error => {
-                this.message = error;
-            });
-        }
-
-        getEmptyData(): void{
             window.axios.post("/utility/empty_table_columns", {table_nm: 'job_categories', num: 1}).then(response => {
-                this.emptyItem = response.data;
-                this.emptyItem.changeable = 1;
+                this.$router.push({ name: "job_category_create", params: {initialItem : JSON.stringify(response.data)}});
             })
         }
 
-        onFiltered(filteredItems: any): void {
+        // 削除
+        delete(item: Item): void {
+            this.$bvModal.msgBoxConfirm(window.format.sprintf('%1$s を削除します。よろしいですか?', item.name)).then(result => {
+                if(result){
+                    window.axios.delete("/admin/job_category/" + item.id).then(response => {
+                        this.getItem();
+                        this.message = "";
+                    }).catch(error => {
+                        this.message = error;
+                    });
+                }
+            })
+        }
+
+        onFiltered(filteredItems: Array<Item>): void {
             // フィルタリング時のページネーション更新
             this.totalRows = filteredItems.length
             this.currentPage = 1
@@ -224,15 +222,5 @@
             let page_ed = (this.currentPage * this.perPage) > this.items.length ? this.items.length : (this.currentPage * this.perPage)
             return window.format.sprintf('%1$s 件中 %2$s から %3$s まで表示', this.items.length, page_st, page_ed);
         }
-
-        showDelConirm(item: any): void {
-            this.$bvModal.msgBoxConfirm(window.format.sprintf('%1$s を削除します。よろしいですか?', item.name)).then(result => {
-                if(result) this.delete(item)
-            }).catch(error => {
-                this.message = error;
-            })
-        }
-
-
     }
 </script>

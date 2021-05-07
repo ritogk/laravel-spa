@@ -14,7 +14,7 @@
 
 <script>
     import BaseForm from './base_from';
-    import MsgDanger from '@admin/components/utility/msg_danger';
+    import MsgDanger from '@root/admin/components/utility/msg_danger';
     export default {
         components: {
           BaseForm,

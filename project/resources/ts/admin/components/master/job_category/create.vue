@@ -16,7 +16,10 @@
     import { Vue, Component, Prop } from 'vue-property-decorator';
     // コンポーネント
     import BaseForm from './base_from.vue';
-    import MsgDanger from '@admin/components/utility/msg_danger.vue';
+    import MsgDanger from '@root/admin/components/utility/msg_danger.vue';
+    // モデル
+    import Item from './models/Item';
+    import BaseFormError from './models/BaseFormError';
 
     @Component({
         components: {
@@ -25,17 +28,17 @@
         }
     })
     export default class Create extends Vue{
-        @Prop({ type: Object, required: true })
-        initialItem: any
+        @Prop({required: true })
+        initialItem!: string
 
         // data
-        item: any = {}
+        item: Item = {id: '', name: '', sort_no: 1, updated_at: ''}
         message: string = ''
-        errors: Object = {}
+        errors: BaseFormError = { name: '', sort_no: ''}
 
         // 初期化
         mounted(): void{
-            this.item = this.initialItem;
+            this.item = JSON.parse(this.initialItem)
         }
 
         create(): void{

@@ -9,7 +9,7 @@
 
     @Component
     export default class Edit extends Vue{
-        @Prop({ type: String, required: true })
+        @Prop({required: true })
         dlUrl!: string;
 
         download(): void{

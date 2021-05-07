@@ -27,15 +27,7 @@ mix.ts('resources/ts/admin/admin.ts', 'public/js')
 mix.webpackConfig({
     resolve: {
         alias: {
-            '@admin': path.resolve(__dirname, 'resources/ts/admin/')
-        }
-    }
-});
-
-mix.webpackConfig({
-    resolve: {
-        alias: {
-            '@content': path.resolve(__dirname, 'resources/js/content')
+            '@root': path.resolve(__dirname, 'resources/ts/')
         }
     },
     node: {

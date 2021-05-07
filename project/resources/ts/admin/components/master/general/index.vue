@@ -120,9 +120,9 @@
 </template>
 
 <script>
-  import BtnDl from '@admin/components/utility/button_donwload'
-  import BtnModalGeneral from '@admin/components/utility/modal_general'
-  import MsgDanger from '@admin/components/utility/msg_danger';
+  import BtnDl from '@root/admin/components/utility/button_donwload'
+  import BtnModalGeneral from '@root/admin/components/utility/modal_general'
+  import MsgDanger from '@root/admin/components/utility/msg_danger';
   export default {
     components: {
         BtnDl,

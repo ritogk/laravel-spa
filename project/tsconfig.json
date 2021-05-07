@@ -17,8 +17,8 @@
       ],
       "baseUrl": "./",
       "paths": {
-        "@admin/*": [
-            "resources/ts/admin/*"
+        "@root/*": [
+            "resources/ts/*"
         ],
       }
     },

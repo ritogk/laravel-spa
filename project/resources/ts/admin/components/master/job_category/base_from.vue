@@ -50,7 +50,10 @@
     import { Vue, Component, Model, Prop } from 'vue-property-decorator';
     // コンポーネント
     import BaseForm from './base_from.vue';
-    import MsgDanger from '@admin/components/utility/msg_danger.vue';
+    import MsgDanger from '@root/admin/components/utility/msg_danger.vue';
+    // モデル
+    import Item from './models/Item';
+    import BaseFormError from './models/BaseFormError';
 
     @Component({
         components: {
@@ -59,15 +62,15 @@
         }
     })
     export default class BaseFrom extends Vue{
-        @Model('input', { type: Object, required: true }) readonly item!: any
+        @Model('input') readonly item!: Item
 
-        @Prop({ type: Object, required: true })
-        errors!: object;
+        @Prop({required: true })
+        errors!: BaseFormError;
 
-        @Prop({ type: String, required: true })
+        @Prop({required: true })
         title!: string;
 
-        @Prop({ type: Boolean, required: true })
+        @Prop({required: true })
         isCreate!: boolean;
   }
 </script>

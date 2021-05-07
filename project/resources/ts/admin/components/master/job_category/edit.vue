@@ -13,10 +13,13 @@
 </template>
 
 <script lang="ts">
-    import { Vue, Component, Model, Prop } from 'vue-property-decorator'
+    import { Vue, Component, Prop } from 'vue-property-decorator'
     // コンポーネント
     import BaseForm from './base_from.vue'
-    import MsgDanger from '@admin/components/utility/msg_danger.vue'
+    import MsgDanger from '@root/admin/components/utility/msg_danger.vue'
+    // モデル
+    import Item from './models/Item';
+    import BaseFormError from './models/BaseFormError';
 
     @Component({
         components: {
@@ -25,26 +28,24 @@
         }
     })
     export default class Edit extends Vue{
-        @Prop({ type: Object, required: true })
-        initialItem: any
+        @Prop({required: true })
+        initialItem!: string
 
         // data
-        item: any = {}
+        item: Item = {id: '', name: '', sort_no: 1, updated_at: ''}
         message: string = ''
-        errors: any = { name: '', sort_no: ''}
+        errors: BaseFormError = { name: '', sort_no: ''}
 
         // 初期化
         mounted(): void{
-            this.item = this.initialItem;
+            this.item = JSON.parse(this.initialItem)
         }
 
         edit(): void{
-            window.axios.put(window.format.sprintf('/admin/job_category/%1$s', this.item.id), this.item)
-            .then(response => {
+            window.axios.put(window.format.sprintf('/admin/job_category/%1$s', this.item.id), this.item).then(response => {
                 this.message = ""
                 this.$router.push({ name: "job_category_index" })
-            })
-            .catch(error => {
+            }).catch(error => {
                 if (error.response.status == 400) {
                     let request_errors = error.response.data.errors
                     this.errors = (this as any).apply_request_errors(this.errors, request_errors)
