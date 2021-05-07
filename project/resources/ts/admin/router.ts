@@ -3,6 +3,10 @@ import VueRouter from "vue-router";
 
 Vue.use(VueRouter);
 
+// 仕事マスタ
+import job_index from "./components/master/job/index.vue";
+import job_edit from "./components/master/job/edit.vue";
+import job_create from "./components/master/job/create.vue";
 // 仕事カテゴリマスタ
 import job_category_index from "./components/master/job_category/index.vue";
 import job_category_edit from "./components/master/job_category/edit.vue";
@@ -18,6 +22,39 @@ import page_not_found from "./components/utility/page_not_found.vue";
 const router = new VueRouter({
     mode: "hash",
     routes: [
+        // 仕事マスタ
+        {
+            path: "/job_index",
+            name: "job_index",
+            component: job_index,
+            props: true
+        },
+        {
+            path: "/job_edit",
+            name: "job_edit",
+            component: job_edit,
+            props: true,
+            beforeEnter: function (to, from, next) {
+                if (from.path !== "/job_index") {
+                    next('/job_index')
+                } else {
+                    next()
+                }
+            }
+        },
+        {
+            path: "/job_create",
+            name: "job_create",
+            component: job_create,
+            props: true,
+            beforeEnter: function (to, from, next) {
+                if (from.path !== "/job_index") {
+                    next('/job_index')
+                } else {
+                    next()
+                }
+            }
+        },
         // 仕事カテゴリマスタ
         {
             path: "/job_category_index",
