@@ -108,7 +108,7 @@
 <script lang="ts">
     import { Vue, Component, Prop } from 'vue-property-decorator';
     // コンポーネント
-    import BtnDl from '@root/admin/components/utility/button_donwload.vue';
+    import BtnDl from '@root/admin/components/utility/btn_donwload.vue';
     import MsgDanger from '@root/admin/components/utility/msg_danger.vue';
     // モデル
     import Item from './models/Item';

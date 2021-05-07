@@ -13,7 +13,7 @@
     import { Vue, Component, Model, Prop } from 'vue-property-decorator';
 
     @Component
-    export default class Edit extends Vue{
+    export default class MsgDanger extends Vue{
         @Prop({required: true })
         message!: string;
 

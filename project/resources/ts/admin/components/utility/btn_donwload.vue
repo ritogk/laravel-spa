@@ -1,14 +1,14 @@
 <template>
-  <b-button variant="primary" @click="download()">
-    <slot name="name">ダウンロード</slot>
-  </b-button>
+    <b-button variant="primary" @click="download()">
+        <slot name="name">ダウンロード</slot>
+    </b-button>
 </template>
 
 <script lang="ts">
     import { Vue, Component, Prop } from 'vue-property-decorator';
 
     @Component
-    export default class Edit extends Vue{
+    export default class BtnDownload extends Vue{
         @Prop({required: true })
         dlUrl!: string;
 
@@ -28,7 +28,8 @@
             });
         }
 
-        getFileNameFromContentDisposition(disposition: any ) : string{
+        getFileNameFromContentDisposition(disposition: string) : string{
+            debugger;
             const filenameRegex = /filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/; // 正規表現でfilenameを抜き出す
             const matches = filenameRegex.exec(disposition);
             if (matches != null && matches[1]) {

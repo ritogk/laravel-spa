@@ -120,7 +120,7 @@
 </template>
 
 <script>
-  import BtnDl from '@root/admin/components/utility/button_donwload'
+  import BtnDl from '@root/admin/components/utility/btn_donwload'
   import BtnModalGeneral from '@root/admin/components/utility/modal_general'
   import MsgDanger from '@root/admin/components/utility/msg_danger';
   export default {
