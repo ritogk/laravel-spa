@@ -1,4 +1,5 @@
 export default interface BaseFormError {
+    [key: string]: string
     content:string
     title:string
     attention:string

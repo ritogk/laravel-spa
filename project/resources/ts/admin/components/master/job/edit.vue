@@ -53,12 +53,13 @@
             }).catch(error => {
                 if (error.response.status == 400) {
                     // エラー初期化
-                    this.errors = Object.entries(this.errors).reduce((obj, item: any) => ({...obj, [item[0]]: ''}), {})
-                    // ラーセット
+                    this.errors = {title: '', content: '', attention: '', job_category_id: '', price: '', image: '', sort_no: ''}
+                    // エラーセット
                     const request_errors = error.response.data.errors
-                    // anyを消したい・・・
-                    let item_errors = Object.entries(request_errors).reduce((obj, item: any) => ({...obj, [item[0].replace("item.", "")]: item[1][0]}), {})
-                    this.errors =  { ...this.errors, ...item_errors}
+                    for (var key in request_errors) {
+                        const error_key = key.replace("item.", "")
+                        this.errors[error_key] = request_errors[key][0]
+                    }
                     if(request_errors.image){
                         this.errors.image = request_errors.image;
                     }
