@@ -1,6 +1,11 @@
 export default interface Item {
     id:string
-    name:string
-    sort_no:number|null
+    title:string
+    content:string
+    attention:boolean
+    job_category_id:string
+    price:number|null
+    image:string
+    sort_no:number
     updated_at:string
 }

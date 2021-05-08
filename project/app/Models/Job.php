@@ -11,4 +11,10 @@ class Job extends Model
     use SoftDeletes, HasFactory;
 
     protected $guarded = ['id', 'updated_at', 'created_at', 'deleted_at']; // ブラックリスト
+
+    // リレーション
+    public function jobCategories()
+    {
+        return $this->belongsTo('App\Models\JobCategory');
+    }
 }

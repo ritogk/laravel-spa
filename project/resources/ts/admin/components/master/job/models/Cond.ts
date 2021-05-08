@@ -1,3 +1,4 @@
 export default interface Cond {
-    name:string
+    title:string
+    job_category: string
 }

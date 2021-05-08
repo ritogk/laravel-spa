@@ -16,7 +16,7 @@ class CreateJobs extends Migration
         Schema::create('jobs', function (Blueprint $table) {
             $table->id();
             $table->string('title', 50);
-            $table->text('Content');
+            $table->text('content');
             $table->boolean('attention');
             $table->integer('job_category_id');
             $table->bigInteger('price');

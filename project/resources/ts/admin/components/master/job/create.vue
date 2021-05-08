@@ -28,28 +28,30 @@
         }
     })
     export default class Create extends Vue{
-        @Prop({required: true })
-        initialItem!: string
-
         // data
-        item: Item = {id: '', name: '', sort_no: 1, updated_at: ''}
+        item: Item = {id: '', title: '', content: '', attention: false, job_category_id: '', price: null, image: '', sort_no: 1, updated_at: ''}
         message: string = ''
-        errors: BaseFormError = { name: '', sort_no: ''}
+        errors: BaseFormError = {title: '', content: '', attention: '', job_category_id: '', price: '', image: '', sort_no: ''}
 
-        // 初期化
-        mounted(): void{
-            this.item = JSON.parse(this.initialItem)
-        }
-
-        create(): void{
-            window.axios.post("/admin/job_category/create", this.item).then(response => {
+        create(image_file: any): void{
+            const formData = new FormData()
+            formData.append('file',image_file)
+            formData.append('item', JSON.stringify(this.item))
+            window.axios.post("/admin/job/create", formData).then(response => {
                 this.message = ""
-                this.$router.push({ name: "job_category_index" })
+                this.$router.push({ name: "job_index" })
             }).catch(error => {
                 if (error.response.status == 400) {
-                    let request_errors = error.response.data.errors
-                    this.errors = (this as any).apply_request_errors(this.errors, request_errors)
-                    this.message = (this as any).msg_exclusive(request_errors)
+                    // エラー初期化
+                    this.errors = Object.entries(this.errors).reduce((obj, item: any) => ({...obj, [item[0]]: ''}), {})
+                    // エラーセット
+                    const request_errors = error.response.data.errors
+                    // anyを消したい・・・
+                    let item_errors = Object.entries(request_errors).reduce((obj, item: any) => ({...obj, [item[0].replace("item.", "")]: item[1][0]}), {})
+                    this.errors =  { ...this.errors, ...item_errors}
+                    if(request_errors.image){
+                        this.errors.image = request_errors.image;
+                    }
                 }else{
                     this.message = error
                 }
@@ -57,7 +59,7 @@
         }
 
         back(): void{
-            this.$router.push({ name: "job_category_index" , params: {isInit : (false as any)}})
+            this.$router.push({ name: "job_index" , params: {isInit : (false as any)}})
         }
     }
 </script>

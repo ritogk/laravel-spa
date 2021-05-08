@@ -19,7 +19,7 @@ declare global {
 // axios 初期設定
 window.axios = axios;
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
-let token = document.head.querySelector('meta[name="csrf-token"]');
+const token = document.head.querySelector('meta[name="csrf-token"]');
 if (token) {
     window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
 } else {
@@ -79,7 +79,7 @@ Vue.mixin(gv);
 Vue.mixin(gv2);
 
 import component from './components/App.vue';
-const app = new Vue({
+new Vue({
     el: '#app',
     router: router,
     render: h => h(component),

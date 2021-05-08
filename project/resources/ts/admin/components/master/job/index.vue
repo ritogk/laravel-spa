@@ -1,7 +1,7 @@
 <template>
     <b-container fluid class="py-4">
-    <h2>仕事マスタ</h2>
-    <msg-danger :message="message"></msg-danger>
+        <h2>仕事マスタ</h2>
+        <msg-danger :message="message"></msg-danger>
 
         <!-- 抽出条件 -->
         <b-card
@@ -9,10 +9,16 @@
             header-tag="header">
             <b-row>
                 <b-col lg="6" class="my-1">
-                    <b-form-group label="名称" label-for="cond_name">
-                    <b-input-group>
-                        <b-form-input v-model="cond.name" type="search" id="cond_name"></b-form-input>
-                    </b-input-group>
+                    <b-form-group label="タイトル" label-for="cond_title">
+                        <b-input-group>
+                            <b-form-input v-model="cond.title" type="search" id="cond_title"></b-form-input>
+                        </b-input-group>
+                    </b-form-group>
+                </b-col>
+
+                <b-col lg="6" class="my-1">
+                    <b-form-group label="カテゴリ" label-for="cond_job_category">
+                        <btn-model-job-category v-model="cond.job_category"></btn-model-job-category>
                     </b-form-group>
                 </b-col>
             </b-row>
@@ -69,12 +75,20 @@
                     </div>
                 </template>
 
-                <template #cell(name))="row">
-                    {{ row.item.name }}
+                <template #cell(title))="row">
+                    {{ row.item.title }}
                 </template>
 
-                <template #cell(sort_no)="row">
-                    {{ row.item.sort_no }}
+                <template #cell(content)="row">
+                    {{ row.item.content }}
+                </template>
+
+                <template #cell(job_category_nm)="row">
+                    {{ row.item.job_category_nm }}
+                </template>
+
+                <template #cell(price)="row">
+                    {{ row.item.price }}
                 </template>
 
                 <template #cell(actions)="row">
@@ -110,8 +124,10 @@
     // コンポーネント
     import BtnDl from '@root/admin/components/utility/btn_donwload.vue';
     import MsgDanger from '@root/admin/components/utility/msg_danger.vue';
+    import BtnModalJobCategory from '@root/admin/components/utility/modal_job_category.vue'
     // モデル
     import Item from './models/Item';
+    import JobCategory from '@root/admin/components/master/job_category/models/Item'
     import Cond from './models/Cond';
     import DataTableFileds from '@root/models/data_table/Fileds';
     import DataTablePageOptions from '@root/models/data_table/PageOptions';
@@ -119,22 +135,26 @@
     @Component({
         components: {
             'btn-dl': BtnDl,
+            'btn-model-job-category': BtnModalJobCategory,
             'msg-danger': MsgDanger,
         }
     })
-    export default class BaseFrom extends Vue{
+    export default class Index extends Vue{
         @Prop({required: false })
         isInit!: boolean;
 
         // data
         items: Array<Item> = []
-        cond: Cond = {name: ''}
+        jobCategoryNms: {[key: string]: string} = {}
+        cond: Cond = {title: '', job_category: ''}
         message: string = ""
-        dlMasterUrl: string = '/admin/job_category/export_excel'
+        dlMasterUrl: string = '/admin/job/export_excel'
         // 以降はデータテーブルで使用する値
         fields: Array<DataTableFileds> = [
-                        { key: 'name', label: '名称', sortable: true, sortDirection: 'desc' },
-                        { key: 'sort_no', label: '並び順', sortable: true, class: 'text-left' },
+                        { key: 'title', label: 'タイトル', sortable: true, sortDirection: 'desc' },
+                        { key: 'content', label: '内容'},
+                        { key: 'job_category_nm', label: 'カテゴリ'},
+                        { key: 'price', label: '金額'},
                         { key: 'actions', label: 'Actions' }
                     ]
         isBusy: boolean = false
@@ -154,25 +174,37 @@
         // 初期化
         mounted(){
             this.isBusy = true;
-            window.axios.post("/admin/job_category/get_conds", {isInit: this.isInit})
-            .then(response => {
+            // 一覧取得
+            window.axios.post("/admin/job/get_conds", {isInit: this.isInit}).then(response => {
                 if(!(this as any).isEmptyObject(response.data)){
-                    this.cond.name = response.data.name;
+                    this.cond.title = response.data.title;
                 }
                 this.getItem();
             })
+            // 仕事カテゴリ名称取得
+            window.axios.post("/admin/job_category/list", {isInit: true}).then(response => {
+                let keyValues: {[key: string]: string;} = {}
+                response.data.map((x: JobCategory) => keyValues[x.id] = x.name)
+                this.jobCategoryNms = keyValues
+            })
+        }
+
+        get getCondJobCategoryNm(){
+            return this.jobCategoryNms[this.cond.job_category];
         }
 
         // 一覧取得
         getItem(): void{
             // 条件をセッションに保存
-            window.axios.post("/admin/job_category/set_conds", {
-                name: this.cond.name
+            window.axios.post("/admin/job/set_conds", {
+                title: this.cond.title,
+                job_category_id: this.cond.job_category
             }).catch();
 
             // 一覧読込
-            window.axios.post("/admin/job_category/list", {
-                name: this.cond.name,
+            window.axios.post("/admin/job/list", {
+                title: this.cond.title,
+                job_category_id: this.cond.job_category,
                 isInit: this.isInit
             }).then(response => {
                 this.items = response.data;
@@ -187,21 +219,19 @@
 
         // 編集
         edit(item: Item, index: number): void{
-            this.$router.push({ name: "job_category_edit" , params: {initialItem : JSON.stringify(item)}});
+            this.$router.push({ name: "job_edit" , params: {id : item.id.toString()}});
         }
 
         // 新規
         create(): void {
-            window.axios.post("/utility/empty_table_columns", {table_nm: 'job_categories', num: 1}).then(response => {
-                this.$router.push({ name: "job_category_create", params: {initialItem : JSON.stringify(response.data)}});
-            })
+            this.$router.push({ name: "job_create"});
         }
 
         // 削除
         delete(item: Item): void {
-            this.$bvModal.msgBoxConfirm(window.format.sprintf('%1$s を削除します。よろしいですか?', item.name)).then(result => {
+            this.$bvModal.msgBoxConfirm(window.format.sprintf('%1$s を削除します。よろしいですか?', item.title)).then(result => {
                 if(result){
-                    window.axios.delete("/admin/job_category/" + item.id).then(response => {
+                    window.axios.delete("/admin/job/" + item.id).then(response => {
                         this.getItem();
                         this.message = "";
                     }).catch(error => {
@@ -209,6 +239,10 @@
                     });
                 }
             })
+        }
+
+        setCondJobCategory(item: JobCategory){
+            this.cond.job_category = item.id;
         }
 
         onFiltered(filteredItems: Array<Item>): void {

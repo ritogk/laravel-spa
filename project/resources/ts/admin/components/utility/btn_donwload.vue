@@ -29,7 +29,6 @@
         }
 
         getFileNameFromContentDisposition(disposition: string) : string{
-            debugger;
             const filenameRegex = /filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/; // 正規表現でfilenameを抜き出す
             const matches = filenameRegex.exec(disposition);
             if (matches != null && matches[1]) {

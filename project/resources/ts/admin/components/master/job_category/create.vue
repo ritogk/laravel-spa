@@ -1,6 +1,6 @@
 <template>
     <div>
-    <msg-danger :message="message"></msg-danger>
+        <msg-danger :message="message"></msg-danger>
         <base-form
             title="仕事カテゴリマスタ(登録)"
             :errors="errors"

@@ -13,6 +13,12 @@ class JobCategory extends Model
 
     protected $guarded = ['id', 'updated_at', 'created_at', 'deleted_at']; // ブラックリスト
 
+    // リレーション
+    public function job()
+    {
+        return $this->hasMany('App\Models\Job');
+    }
+
     /**
     * 日時を日本時間に変換する
     * laravel7からtoArray, toJson内の日時がUTC固定になったので
