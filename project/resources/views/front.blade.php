@@ -1,4 +1,4 @@
-@extends('layouts.content')
+@extends('layouts.front')
 
 @section('content-header')
     <h3>下記の注意事項をご確認ください。</h3>
@@ -8,9 +8,10 @@
     <front></front>
 @endsection
 
-@section('js')
-    <script src="{{ mix('js/front.js') }}" defer></script>
+@section('css')
+    <link href="{{ mix('css/front.css') }}" rel="stylesheet">
 @endsection
 
-@section('css')
+@section('js')
+    <script src="{{ mix('js/front.js') }}" defer></script>
 @endsection

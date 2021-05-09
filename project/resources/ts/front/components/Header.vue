@@ -1,6 +1,14 @@
 <template>
     <div>
-        <p>ヘッダー</p>
+        <b-navbar toggleable="lg" type="dark" variant="info">
+            <b-navbar-brand href="#">求人検索</b-navbar-brand>
+            <!-- Right aligned nav items -->
+            <b-navbar-nav class="ml-auto">
+                <b-navbar-nav>
+                    <b-nav-item href="/admin">管理画面</b-nav-item>
+                </b-navbar-nav>
+            </b-navbar-nav>
+        </b-navbar>
     </div>
 </template>
 

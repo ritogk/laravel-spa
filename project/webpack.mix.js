@@ -22,6 +22,7 @@ mix.ts('resources/ts/front/front.ts', 'public/js')
     .js("resources/js/content.js", "public/js")
     .js('resources/js/content/agree.js', 'public/js')
     .sass('resources/sass/admin.scss', 'public/css')
+    .sass('resources/sass/front.scss', 'public/css')
     .sass('resources/sass/content.scss', 'public/css')
     .version();
 

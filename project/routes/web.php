@@ -17,7 +17,7 @@ Auth::routes();
 Route::get('/', [Controllers\Front\FrontController::class, 'index']);
 
 // フロント画面spa用
-Route::get('/{any}', function () {
+Route::get('/front/{any}', function () {
     return view('front');
 })->where('any', '.*');
 
