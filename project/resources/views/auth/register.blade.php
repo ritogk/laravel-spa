@@ -1,4 +1,4 @@
-@extends('layouts.content')
+@extends('layouts.front')
 
 @section('content')
 <div class="container">
@@ -77,7 +77,9 @@
 @endsection
 
 @section('css')
+    <link href="{{ mix('css/content.css') }}" rel="stylesheet">
 @stop
 
 @section('js')
+    <script src="{{ mix('js/content.js') }}" defer></script>
 @stop
