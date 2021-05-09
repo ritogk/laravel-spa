@@ -13,8 +13,8 @@
 <script lang="ts">
     import { Vue, Component, Watch } from 'vue-property-decorator';
     // コンポーネント
-    import Header from './Header.vue';
-    import Footer from './Footer.vue';
+    import Header from './utility/Header.vue';
+    import Footer from './utility/Footer.vue';
 
     @Component({
         components: {
