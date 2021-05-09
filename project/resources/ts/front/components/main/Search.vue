@@ -2,40 +2,54 @@
     <div class="col-3" id="sticky-sidebar">
         <div class="sticky-top">
             <div class="nav flex-column">
-                <div class="card">
-                    <div class="card-header">
-                    Featured
-                    </div>
-                    <div class="card-body">
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">検索1</label>
-                        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-                        <small id="emailHelp" class="form-text text-muted">ちゃんと検索してね!</small>
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">検索2</label>
-                        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-                        <small id="emailHelp" class="form-text text-muted">ちゃんと検索してね!</small>
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleFormControlSelect1">Example select</label>
-                        <select class="form-control" id="exampleFormControlSelect1">
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
-                        </select>
+                <b-card-group deck>
+                    <b-card header="検索" header-tag="header">
+                        <div class="py-2">
+                            <label for="exampleInputEmail1">カテゴリ</label>
+                            <b-form-select :options="[1, 2, 3, 4, 5]"></b-form-select>
+                            <small id="emailHelp" class="form-text text-muted">ちゃんと検索してね!</small>
                         </div>
-                    </div>
-                </div>
+
+                        <div class="py-2">
+                            <label for="exampleInputEmail1">キワード</label>
+                            <b-form-input placeholder="Enter your name"></b-form-input>
+                            <small id="emailHelp" class="form-text text-muted">ちゃんと検索してね!</small>
+                        </div>
+
+                        <div class="py-2">
+                            <b-form-checkbox
+                            id="checkbox-1"
+                            v-model="status"
+                            name="checkbox-1"
+                            value="accepted"
+                            unchecked-value="not_accepted">
+                            お気に入り
+                            </b-form-checkbox>
+                        </div>
+
+                        <div class="py-2">
+                            <b-form-checkbox
+                            id="checkbox-2"
+                            v-model="status"
+                            name="checkbox-2"
+                            value="accepted"
+                            unchecked-value="not_accepted">
+                            申込済
+                            </b-form-checkbox>
+                        </div>
+
+                        <div class="py-2">
+                            <b-button variant="primary">検索</b-button>
+                        </div>
+                    </b-card>
+                </b-card-group>
             </div>
         </div>
     </div>
 </template>
 
 <script lang="ts">
-    import { Vue, Component, Watch } from 'vue-property-decorator';
+    import { Vue, Component } from 'vue-property-decorator';
 
     @Component
     export default class Search extends Vue {
