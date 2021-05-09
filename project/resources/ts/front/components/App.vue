@@ -2,13 +2,6 @@
     <div class="wrapper">
         <app-header></app-header>
 
-        <router-link :to="{ name: 'top'}">
-            <p>【トップ表示】</p>
-        </router-link>
-        <router-link :to="{ name: 'main'}">
-            <p>【メイン表示】</p>
-        </router-link>
-
         <transition>
             <router-view/>
         </transition>
