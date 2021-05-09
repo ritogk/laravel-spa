@@ -13,8 +13,13 @@ use App\Http\Controllers;
 
 Auth::routes();
 
-// 同意画面
+// フロント画面
 Route::get('/', [Controllers\Front\FrontController::class, 'index']);
+
+// フロント画面spa用
+Route::get('/{any}', function () {
+    return view('front');
+})->where('any', '.*');
 
 // 共通
 Route::prefix('/utility')->group(function () {

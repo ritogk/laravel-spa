@@ -16,7 +16,8 @@ const mix = require('laravel-mix');
  |　生のjsファイルをバンドルする場合は「mix.babel()」を使う。ESS5記法に変換される。
  |
  */
-mix.ts('resources/ts/admin/admin.ts', 'public/js')
+mix.ts('resources/ts/front/front.ts', 'public/js')
+    .ts('resources/ts/admin/admin.ts', 'public/js')
     .ts("resources/ts/admin/router.ts", "public/js")
     .js("resources/js/content.js", "public/js")
     .js('resources/js/content/agree.js', 'public/js')
