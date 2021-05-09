@@ -1,11 +1,12 @@
 <template>
-    <div class="wrapper">
-        <app-seach></app-seach>
-        <app-list></app-list>
+    <div>
+        <b-container>
+            <b-row class="py-3">
+                <app-seach></app-seach>
+                <app-list></app-list>
+            </b-row>
+        </b-container>
         <app-detail></app-detail>
-        <transition>
-            <router-view/>
-        </transition>
     </div>
 </template>
 
