@@ -36,7 +36,7 @@
                     申し込む
                 </b-button>
             </template>
-        </b-modal>>
+        </b-modal>
     </div>
 </template>
 

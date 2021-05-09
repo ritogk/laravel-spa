@@ -19,7 +19,6 @@
                         <div class="py-2">
                             <b-form-checkbox
                             id="checkbox-1"
-                            v-model="status"
                             name="checkbox-1"
                             value="accepted"
                             unchecked-value="not_accepted">
@@ -30,7 +29,6 @@
                         <div class="py-2">
                             <b-form-checkbox
                             id="checkbox-2"
-                            v-model="status"
                             name="checkbox-2"
                             value="accepted"
                             unchecked-value="not_accepted">
