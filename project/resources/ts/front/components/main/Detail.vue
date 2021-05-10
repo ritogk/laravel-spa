@@ -2,6 +2,7 @@
     <div>
         <b-modal
         v-model="isShow"
+        @close="close_modal()"
         size="lg"
         :title="selectJob.title"
         :header-bg-variant="headerBgVariant"
@@ -61,6 +62,10 @@
         }
         get selectJob(): any{
             return state.getJobDetail
+        }
+
+        close_modal(): void{
+            state.closeDetail()
         }
     }
 </script>

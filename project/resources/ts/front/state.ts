@@ -10,12 +10,16 @@ export interface IJob {
     image: string
     sort_no: string
 }
+
 // state's interface
 export interface IState {
     jobs: Array<IJob>
     jobDetail: IJob
     isShowDetail: boolean
 }
+
+// 仕事詳細 初期値
+const dafaultJobDetail: IJob = {title: '', content: '', attention: false, job_category_id: '', image: '', sort_no: ''}
 
 Vue.use(Vuex);
 const store=new Vuex.Store({})
@@ -24,7 +28,7 @@ const store=new Vuex.Store({})
 class State extends VuexModule implements IState {
     // state
     jobs: Array<IJob> = [];
-    jobDetail: IJob = {title: '', content: '', attention: false, job_category_id: '', image: '', sort_no: ''};
+    jobDetail: IJob = dafaultJobDetail;
     isShowDetail: boolean = false;
 
     // getter
@@ -54,9 +58,15 @@ class State extends VuexModule implements IState {
 
     // action
     @Action
-    public openJob(job: IJob) {
+    public openDetail(job: IJob) {
         this.setJobDetail(job)
         this.setIsShowDetail(true)
+    }
+
+    @Action
+    public closeDetail() {
+        this.setJobDetail(dafaultJobDetail)
+        this.setIsShowDetail(false)
     }
 }
 export const state = getModule(State);

@@ -29,7 +29,7 @@
     export default class List extends Vue {
         openJob(): void {
             const job = {title: '1', content: '2', attention: false, job_category_id: '3', image: 'https://picsum.photos/600/300/?image=25', sort_no: '5'}
-            state.openJob(job)
+            state.openDetail(job)
         }
     }
 </script>
