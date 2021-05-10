@@ -3,26 +3,26 @@
         <b-modal
         v-model="isShow"
         size="lg"
-        :title="job.title"
+        :title="selectJob.title"
         :header-bg-variant="headerBgVariant"
         :header-text-variant="headerTextVariant"
         >
             <b-card-group deck>
                 <b-card
-                :img-src="job.image"
+                :img-src="selectJob.image"
                 img-alt="Card image"
                 img-top>
                     <b-card-text>
                         <div>
-                            <h1 v-text='job.title'></h1>
+                            <h1 v-text='selectJob.title'></h1>
                         </div>
                         <div class="py-3">
                             <h3>仕事内容</h3>
-                            <span v-text='job.content'></span>
+                            <span v-text='selectJob.content'></span>
                         </div>
                         <div class="py-3">
                             <h3>給料</h3>
-                            <span v-text='job.price'></span>
+                            <span v-text='selectJob.price'></span>
                         </div>
                     </b-card-text>
                 </b-card>
@@ -43,13 +43,24 @@
 <script lang="ts">
     import { Vue, Component, Prop } from 'vue-property-decorator';
 
+    // 状態管理
+    import { state } from "@root/front/state";
+
     @Component
     export default class Detail extends Vue {
         // ヘッダスタイル
         headerBgVariant: string = 'primary '
         headerTextVariant: string = 'light'
-
-        isShow: boolean = false
         job: any = {title: '公務員募集中!!', content: '高待遇、高給料、安定♪', price: 1000000, image: 'https://reon777.com/images/%E3%83%A0%E3%83%BC%E3%83%9F%E3%83%B31.jpg'};
+
+        private get isShow(): boolean{
+            return state.getIsShowDetail
+        }
+        private set isShow(value: boolean) {
+            state.setIsShowDetail(value)
+        }
+        get selectJob(): any{
+            return state.getJobDetail
+        }
     }
 </script>
