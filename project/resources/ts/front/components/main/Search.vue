@@ -5,32 +5,27 @@
                 <b-card-group deck>
                     <b-card header="検索" header-tag="header">
                         <div class="py-2">
-                            <label for="exampleInputEmail1">カテゴリ</label>
+                            <label for="exampleInputEmail1">職種</label>
                             <b-form-select :options="[1, 2, 3, 4, 5]" v-model="category"></b-form-select>
-                            <small id="emailHelp" class="form-text text-muted">ちゃんと検索してね!</small>
+
                         </div>
 
                         <div class="py-2">
-                            <label for="exampleInputEmail1">キワード</label>
-                            <b-form-input placeholder="Enter your name" v-model="keyword"></b-form-input>
-                            <small id="emailHelp" class="form-text text-muted">ちゃんと検索してね!</small>
+                            <label for="exampleInputEmail1">仕事内容</label>
+                            <b-form-input placeholder="どんな求人をお探しですか?" v-model="content"></b-form-input>
+                        </div>
+
+                        <div class="py-2">
+                            <label for="exampleInputEmail1">金額</label>
+                            <b-form-input type="number" placeholder="最低金額を入力して下さい。" v-model="price"></b-form-input>
                         </div>
 
                         <div class="py-2">
                             <b-form-checkbox
-                            v-model="favorite"
+                            v-model="attention"
                             id="checkbox-1"
                             name="checkbox-1">
-                            お気に入り
-                            </b-form-checkbox>
-                        </div>
-
-                        <div class="py-2">
-                            <b-form-checkbox
-                            v-model="entry"
-                            id="checkbox-2"
-                            name="checkbox-2">
-                            申込済
+                            注目求人
                             </b-form-checkbox>
                         </div>
 
@@ -46,22 +41,24 @@
 
 <script lang="ts">
     import { Vue, Component } from 'vue-property-decorator';
-
+    // モデル
+    import ICond from "@root/front/models/ICond";
     // 状態管理
     import { state } from "@root/front/state";
 
     @Component
     export default class Search extends Vue {
         category: string = state.getCond.category
-        keyword: string = state.getCond.keyword
-        favorite: boolean = state.getCond.favorite
-        entry: boolean = state.getCond.entry
+        content: string = state.getCond.content
+        price: number|null = state.getCond.price
+        attention: boolean = state.getCond.attention
 
         search(): void{
-            state.searchJob({category: this.category
-                            , keyword: this.keyword
-                            , favorite: this.favorite
-                            , entry: this.entry})
+            const cond: ICond = {category: this.category
+                                , content: this.content
+                                , price: this.price
+                                , attention: this.attention}
+            state.searchJob(cond)
         }
     }
 </script>

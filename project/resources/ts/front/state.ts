@@ -3,13 +3,7 @@ import Vuex from 'vuex';
 import Vue from 'vue';
 
 import IJob from "@root/front/models/IJob";
-
-export interface ICond {
-    category: string
-    keyword: string
-    favorite: boolean
-    entry: boolean
-}
+import ICond from "@root/front/models/ICond";
 
 // state's interface
 export interface IState {
@@ -19,7 +13,7 @@ export interface IState {
 }
 
 // 検索条件 初期値
-const dafaultCond: ICond = {category: '', keyword: '', favorite: false, entry: false}
+const dafaultCond: ICond = {category: '', content: '', price: null, attention: false}
 // 仕事詳細 初期値
 const dafaultJobDetail: IJob = {id: '', title: '', content: '', attention: false, job_category_id: '', image: '', sort_no: ''}
 

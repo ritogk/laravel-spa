@@ -23,9 +23,9 @@ class JobSeachRequest extends FormRequest
     public function rules() {
         return [
             'category' => 'nullable',
-            'keyword' => 'nullable',
-            'favorite' => 'nullable',
-            'entry' => 'nullable',
+            'content' => 'nullable',
+            'price' => 'nullable',
+            'attention' => 'nullable',
         ];
     }
 
@@ -37,9 +37,9 @@ class JobSeachRequest extends FormRequest
     public function attributes() {
         return [
             'category' => 'カテゴリ',
-            'keyword' => 'キーワード',
-            'favorite' => 'お気に入り',
-            'entry' => '申し込み',
+            'content' => '仕事内容',
+            'price' => '金額',
+            'attention' => '注目求人',
         ];
     }
 }

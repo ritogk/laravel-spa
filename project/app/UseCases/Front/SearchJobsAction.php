@@ -18,6 +18,15 @@ class SearchJobsAction{
         if(isset($request->category)) {
             $filters[] = ['job_category_id', '=', $request->category];
         }
+        if(isset($request->content)) {
+            $filters[] = ['content', 'LIKE', '%'. $request->content. '%'];
+        }
+        if(isset($request->price)) {
+            $filters[] = ['price', '>=', $request->price];
+        }
+        if($request->attention) {
+            $filters[] = ['attention', '=', $request->attention];
+        }
         return Job::where($filters)
                     ->select('id',
                             'title',

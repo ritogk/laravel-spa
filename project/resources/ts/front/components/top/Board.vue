@@ -21,6 +21,8 @@
     import { Vue, Component, Watch } from 'vue-property-decorator';
     // コンポーネント
     import Category from './Category.vue';
+    // モデル
+    import ICond from "@root/front/models/ICond";
     // 状態管理
     import { state } from "@root/front/state";
 
@@ -31,7 +33,8 @@
     })
     export default class App extends Vue {
         pageTransition(){
-            state.searchJob({category: '1', keyword: '', favorite: false, entry: false})
+            const cond: ICond = {category: '1', content: '', price: null, attention: false}
+            state.searchJob(cond)
             this.$router.push({ name: 'main'})
         }
     }

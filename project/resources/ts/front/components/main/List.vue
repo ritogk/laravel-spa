@@ -11,7 +11,14 @@
                 class="mb-2"
             >
                 <b-card-text>
-                    {{ job.content }}
+                    <div style="display: flex;justify-content: center;position: relative;">
+                        <p style="position: absolute;left: 0;">
+                            {{ job.content }}
+                        </p>
+                        <p v-if="job.attention" style="position: absolute;right: 0;padding: 1px 3px;border: solid 1px #FFDA45;background: #FFDA45;color: #333;text-align: right;">
+                            注目の求人
+                        </p>
+                    </div>
                 </b-card-text>
                 <a href="#" @click.prevent="openJob(job)" class="stretched-link"></a>
             </b-card>
