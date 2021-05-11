@@ -23,6 +23,7 @@ Route::get('/front/{any}', function () {
 
 Route::prefix('/front')->group(function () {
     Route::post('/jobs', [Controllers\Front\FrontController::class, 'searchJobs']);
+    Route::post('/categories', [Controllers\Front\FrontController::class, 'categories']);
 });
 
 // 共通

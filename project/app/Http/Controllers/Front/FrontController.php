@@ -11,6 +11,7 @@ use App\Http\Requests\Front\JobSeachRequest;
 // UseCases
 use App\UseCases\Front\ShowAction as ShowAction;
 use App\UseCases\Front\SearchJobsAction as SearchJobsAction;
+use App\UseCases\Front\CategoriesAction as CategoriesAction;
 
 class FrontController extends Controller
 {
@@ -33,7 +34,16 @@ class FrontController extends Controller
      * @return array
      */
     public function searchJobs(JobSeachRequest $request, SearchJobsAction $action): array{
-        \Log::debug($request);
         return $action($request);
+    }
+
+    /**
+     * カテゴリ一覧取得
+     *
+     * @param Request $request
+     * @return array
+     */
+    public function categories(Request $request, CategoriesAction $action): array{
+        return $action();
     }
 }
