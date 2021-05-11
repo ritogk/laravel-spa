@@ -21,6 +21,8 @@
     import { Vue, Component, Watch } from 'vue-property-decorator';
     // コンポーネント
     import Category from './Category.vue';
+    // 状態管理
+    import { state } from "@root/front/state";
 
     @Component({
         components: {
@@ -29,6 +31,7 @@
     })
     export default class App extends Vue {
         pageTransition(){
+            state.searchJob({category: '1', keyword: '', favorite: false, entry: false})
             this.$router.push({ name: 'main'})
         }
     }

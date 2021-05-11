@@ -21,6 +21,10 @@ Route::get('/front/{any}', function () {
     return view('front');
 })->where('any', '.*');
 
+Route::prefix('/front')->group(function () {
+    Route::post('/jobs', [Controllers\Front\FrontController::class, 'searchJobs']);
+});
+
 // 共通
 Route::prefix('/utility')->group(function () {
     Route::post('/empty_table_columns', [Controllers\UtilityController::class, 'getEmptyTableColumns']);

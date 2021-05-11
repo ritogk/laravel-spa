@@ -2,13 +2,13 @@ import { Mutation, Action, VuexModule, getModule, Module } from "vuex-module-dec
 import Vuex from 'vuex';
 import Vue from 'vue';
 
-export interface IJob {
-    title: string
-    content: string
-    attention: boolean
-    job_category_id: string
-    image: string
-    sort_no: string
+import IJob from "@root/front/models/IJob";
+
+export interface ICond {
+    category: string
+    keyword: string
+    favorite: boolean
+    entry: boolean
 }
 
 // state's interface
@@ -18,8 +18,10 @@ export interface IState {
     isShowDetail: boolean
 }
 
+// 検索条件 初期値
+const dafaultCond: ICond = {category: '', keyword: '', favorite: false, entry: false}
 // 仕事詳細 初期値
-const dafaultJobDetail: IJob = {title: '', content: '', attention: false, job_category_id: '', image: '', sort_no: ''}
+const dafaultJobDetail: IJob = {id: '', title: '', content: '', attention: false, job_category_id: '', image: '', sort_no: ''}
 
 Vue.use(Vuex);
 const store=new Vuex.Store({})
@@ -28,12 +30,16 @@ const store=new Vuex.Store({})
 class State extends VuexModule implements IState {
     // state
     jobs: Array<IJob> = [];
+    cond: ICond = dafaultCond;
     jobDetail: IJob = dafaultJobDetail;
     isShowDetail: boolean = false;
 
     // getter
     public get getJobs(): Array<IJob> {
         return this.jobs
+    }
+    public get getCond(): ICond {
+        return this.cond
     }
     public get getJobDetail(): IJob {
         return this.jobDetail
@@ -48,6 +54,10 @@ class State extends VuexModule implements IState {
         this.jobs = value;
     }
     @Mutation
+    public setCond(value: ICond) {
+        this.cond = value;
+    }
+    @Mutation
     public setJobDetail(value: IJob) {
         this.jobDetail = value;
     }
@@ -58,15 +68,23 @@ class State extends VuexModule implements IState {
 
     // action
     @Action
-    public openDetail(job: IJob) {
-        this.setJobDetail(job)
+    public openDetail(value: IJob) {
+        this.setJobDetail(value)
         this.setIsShowDetail(true)
     }
-
     @Action
     public closeDetail() {
         this.setJobDetail(dafaultJobDetail)
         this.setIsShowDetail(false)
+    }
+    @Action
+    public searchJob(value: ICond) {
+        // 条件保存
+        this.setCond(value)
+        // 仕事一覧取得処理
+        window.axios.post('/front/jobs', value).then(response => {
+            this.setJobs(response.data)
+        })
     }
 }
 export const state = getModule(State);
