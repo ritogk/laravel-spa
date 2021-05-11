@@ -11,7 +11,7 @@ class CreateAction{
     /**
      * __invoke
      *
-     * @param array $job_category
+     * @param Request $request
      * @return void
      */
     public function __invoke(Request $request): void

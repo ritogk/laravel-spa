@@ -73,7 +73,7 @@ class JobController extends Controller
     /**
      * 一件取得
      *
-     * @param  string $id
+     * @param  Request $request
      * @param  FindAction $action
      * @return array
      */

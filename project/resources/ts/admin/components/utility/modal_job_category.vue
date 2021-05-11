@@ -71,6 +71,10 @@
                         <template #cell(name)="row">
                             {{ row.item.name }}
                         </template>
+
+                        <template #cell(content)="row">
+                            {{ row.item.content }}
+                        </template>
                     </b-table>
 
                     <!-- User Interface controls -->
@@ -122,10 +126,11 @@
 
         items: Array<JobCategry> = []
         message: string = ''
-        selected: JobCategry = {id: '', name: '', sort_no: 1, updated_at: ''}
+        selected: JobCategry = {id: '', name: '', content: '', image: '', sort_no: 1, updated_at: ''}
         // 以降はデータテーブルで使用する値
         fields: Array<DataTableFileds> = [
-                        { key: 'name', label: '名称', sortable: true, sortDirection: 'desc' }
+                        { key: 'name', label: '名称', sortable: true, sortDirection: 'desc' },
+                        { key: 'content', label: '内容', sortable: true, sortDirection: 'desc' }
                     ]
         isBusy: boolean = false
         totalRows: number = 1
@@ -158,7 +163,7 @@
 
         delValue(){
             this.localValue = '';
-            this.selected = {id: '', name: '', sort_no: 1, updated_at: ''}
+            this.selected = {id: '', name: '', content: '', image: '', sort_no: 1, updated_at: ''}
         }
 
         submit(){

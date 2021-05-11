@@ -25,9 +25,12 @@ class JobCategoryRequest extends FormRequest
      */
     public function rules() {
         return [
-            'name' => 'required|max:25',
-            'sort_no' => 'required|integer|digits_between:1,9',
-            'updated_at' => 'date|nullable',
+            'item.name' => 'required|max:25',
+            'item.content' => 'required|max:1000',
+            'item.image' => 'nullable',
+            'item.sort_no' => 'required|integer|digits_between:1,9',
+            'item.updated_at' => 'date|nullable',
+            'image' => 'nullable',
         ];
     }
 
@@ -38,9 +41,12 @@ class JobCategoryRequest extends FormRequest
      */
     public function attributes() {
         return [
-            'name' => '名称',
-            'sort_no' => '並び順',
-            'updated_at' => '更新日時',
+            'item.name' => '名称',
+            'item.content' => '内容',
+            'item.image' => '画像',
+            'item.sort_no' => '並び順',
+            'item.updated_at' => '更新日',
+            'image' => '画像',
         ];
     }
 
@@ -52,6 +58,7 @@ class JobCategoryRequest extends FormRequest
     public function withValidator($validator) {
         /* ここにバリデーションを書く */
         $validator->after(function ($validator) {
+            \Log::debug($this->input('*'));
             if(!empty($this->input('id'))
                     && JobCategory::find($this->input('id'))->updated_at > $this->input('updated_at')){
                 $validator->errors()->add('updated_at', 'すでに変更されたデータの可能性があります。最新の状態で再度実行してください。');

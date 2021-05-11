@@ -16,6 +16,8 @@ class CreateJobCategories extends Migration
         Schema::create('job_categories', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->text('content');
+            $table->string('image');
             $table->integer('sort_no');
             $table->timestamps();
             $table->softDeletes()->index();

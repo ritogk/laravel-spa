@@ -32,24 +32,35 @@
         initialItem!: string
 
         // data
-        item: Item = {id: '', name: '', sort_no: 1, updated_at: ''}
+        item: Item = {id: '', name: '', content: '', image: '', sort_no: 1, updated_at: ''}
         message: string = ''
-        errors: BaseFormError = { name: '', sort_no: ''}
+        errors: BaseFormError = { name: '', content: '', image: '', sort_no: ''}
 
         // 初期化
         mounted(): void{
             this.item = JSON.parse(this.initialItem)
         }
 
-        edit(): void{
-            window.axios.put(window.format.sprintf('/admin/job_category/%1$s', this.item.id), this.item).then(response => {
+        edit(image_file: any): void{
+            const formData = new FormData()
+            formData.append('file',image_file)
+            formData.append('item', JSON.stringify(this.item))
+            window.axios.post('/admin/job_category/update',formData).then(response =>{
                 this.message = ""
                 this.$router.push({ name: "job_category_index" })
             }).catch(error => {
                 if (error.response.status == 400) {
-                    let request_errors = error.response.data.errors
-                    this.errors = (this as any).apply_request_errors(this.errors, request_errors)
-                    this.message = (this as any).msg_exclusive(request_errors)
+                    // エラー初期化
+                    this.errors = { name: '', content: '', image: '', sort_no: ''}
+                    // エラーセット
+                    const request_errors = error.response.data.errors
+                    for (var key in request_errors) {
+                        const error_key = key.replace("item.", "")
+                        this.errors[error_key] = request_errors[key][0]
+                    }
+                    if(request_errors.image){
+                        this.errors.image = request_errors.image;
+                    }
                 }else{
                     this.message = error
                 }

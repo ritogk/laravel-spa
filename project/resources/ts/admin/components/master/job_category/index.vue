@@ -73,6 +73,10 @@
                     {{ row.item.name }}
                 </template>
 
+                <template #cell(content))="row">
+                    {{ row.item.content }}
+                </template>
+
                 <template #cell(sort_no)="row">
                     {{ row.item.sort_no }}
                 </template>
@@ -134,6 +138,7 @@
         // 以降はデータテーブルで使用する値
         fields: Array<DataTableFileds> = [
                         { key: 'name', label: '名称', sortable: true, sortDirection: 'desc' },
+                        { key: 'content', label: '内容', sortable: true, sortDirection: 'desc' },
                         { key: 'sort_no', label: '並び順', sortable: true, class: 'text-left' },
                         { key: 'actions', label: 'Actions' }
                     ]

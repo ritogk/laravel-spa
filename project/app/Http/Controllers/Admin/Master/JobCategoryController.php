@@ -42,20 +42,19 @@ class JobCategoryController extends Controller
      */
     public function create(JobCategoryRequest $request, CreateAction $action)
     {
-        $action($request->all());
+        $action($request);
     }
 
     /**
      * 更新
      *
      * @param  JobCategoryRequest $request
-     * @param  string $id
      * @param  UpdateAction $action
      * @return void
      */
-    public function update(JobCategoryRequest $request, string $id, UpdateAction $action): void
+    public function update(JobCategoryRequest $request, UpdateAction $action): void
     {
-        $action($request->all(), $id);
+        $action($request);
     }
 
     /**
