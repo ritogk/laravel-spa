@@ -25,7 +25,7 @@
                             v-model="attention"
                             id="checkbox-1"
                             name="checkbox-1">
-                            注目求人
+                            注目の求人
                             </b-form-checkbox>
                         </div>
 
