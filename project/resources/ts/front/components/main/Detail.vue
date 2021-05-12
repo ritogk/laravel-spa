@@ -22,8 +22,8 @@
                             <span v-text='selectJob.content'></span>
                         </div>
                         <div class="py-3">
-                            <h3>給料</h3>
-                            <span v-text='selectJob.price'></span>
+                            <h3>金額</h3>
+                            <span v-text='price'></span>
                         </div>
                     </b-card-text>
                 </b-card>
@@ -46,6 +46,8 @@
 
     // 状態管理
     import { state } from "@root/front/state";
+    // モデル
+    import IJob from "@root/front/models/IJob";
 
     @Component
     export default class Detail extends Vue {
@@ -60,8 +62,14 @@
         private set isShow(value: boolean) {
             state.setIsShowDetail(value)
         }
-        get selectJob(): any{
+
+        get selectJob(): IJob{
             return state.getJobDetail
+        }
+
+        get price(): string{
+            if(this.selectJob.price == null) return ''
+            return (this.selectJob.price).toLocaleString() + '円 ～'
         }
 
         close_modal(): void{

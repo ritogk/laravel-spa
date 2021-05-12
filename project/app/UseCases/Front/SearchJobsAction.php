@@ -33,6 +33,7 @@ class SearchJobsAction{
                             'content',
                             'attention',
                             'job_category_id',
+                            'price',
                             'image',
                             'sort_no')
                     ->get()

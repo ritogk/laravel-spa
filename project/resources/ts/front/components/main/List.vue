@@ -46,6 +46,7 @@
                 </div>
                 <b-card-text>
                     <p v-text="job.content" class="job_content"></p>
+                    <p v-text="decoPrice(job.price)" class="job_content"></p>
                     <div >
                         <p v-if="job.attention" class="job_attention">
                             注目の求人
@@ -92,6 +93,10 @@
 
         openJob(job: IJob): void {
             state.openDetail(job)
+        }
+
+        decoPrice(num: number): string{
+            return num.toLocaleString() + '円 ～'
         }
     }
 </script>
