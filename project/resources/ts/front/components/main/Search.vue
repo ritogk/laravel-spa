@@ -15,7 +15,7 @@
                         <div class="m-3">
                             <div class="py-2">
                                 <label for="exampleInputEmail1">職種</label>
-                                <b-form-select :options="[1, 2, 3, 4, 5]" v-model="category"></b-form-select>
+                                <b-form-select :options="cmb_categories" v-model="category"></b-form-select>
 
                             </div>
 
@@ -51,8 +51,10 @@
 
 <script lang="ts">
     import { Vue, Component } from 'vue-property-decorator';
+
     // モデル
     import ICond from "@root/front/models/ICond";
+    import ICategory from "@root/front/models/ICategory";
     // 状態管理
     import { state } from "@root/front/state";
 
@@ -62,7 +64,19 @@
         content: string = state.getCond.content
         price: number|null = state.getCond.price
         attention: boolean = state.getCond.attention
+        // コンボボックスの選択一覧
+        cmb_categories: {[key:string]:string} = {}
 
+        mounted(){
+            // コンボボックのカテゴリ値取得
+            window.axios.post('/front/categories').then(response => {
+                const categories: ICategory = response.data
+                for (var key in categories) {
+                    this.cmb_categories[categories[key].id] = categories[key].name
+                }
+                this.cmb_categories = {...this.cmb_categories}
+            });
+        }
         search(): void{
             const cond: ICond = {category: this.category
                                 , content: this.content
