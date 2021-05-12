@@ -15,11 +15,11 @@ class CreateEntrys extends Migration
     {
         Schema::create('entrys', function (Blueprint $table) {
             $table->id();
-            $table->string('full_name');
-            $table->text('motivation');
-            $table->text('self_pr');
-            $table->string('tel');
-            $table->string('email', 256);
+            $table->string('full_name')->comment('氏名');
+            $table->text('motivation')->comment('志望動機');
+            $table->text('self_pr')->comment('自己PR');
+            $table->string('tel')->comment('電話番号');
+            $table->string('email', 256)->comment('メールアドレス');
             $table->timestamps();
             $table->softDeletes()->index();
         });

@@ -15,13 +15,13 @@ class CreateJobs extends Migration
     {
         Schema::create('jobs', function (Blueprint $table) {
             $table->id();
-            $table->string('title', 50);
-            $table->text('content');
-            $table->boolean('attention');
-            $table->integer('job_category_id');
-            $table->bigInteger('price');
-            $table->string('image');
-            $table->integer('sort_no');
+            $table->string('title', 50)->comment('タイトル');
+            $table->text('content')->comment('内容');
+            $table->boolean('attention')->comment('注目の求人');
+            $table->integer('job_category_id')->comment('仕事カテゴリID');
+            $table->bigInteger('price')->comment('金額');
+            $table->string('image')->comment('画像パス');
+            $table->integer('sort_no')->comment('並び順');
             $table->timestamps();
             $table->softDeletes()->index();
         });

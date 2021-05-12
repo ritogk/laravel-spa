@@ -15,10 +15,10 @@ class CreateJobCategories extends Migration
     {
         Schema::create('job_categories', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->text('content');
-            $table->string('image');
-            $table->integer('sort_no');
+            $table->string('name')->comment('名称');
+            $table->text('content')->comment('内容');
+            $table->string('image')->comment('画像パス');
+            $table->integer('sort_no')->comment('並び順');
             $table->timestamps();
             $table->softDeletes()->index();
         });

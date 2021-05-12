@@ -15,10 +15,10 @@ class CreateGeneralsTable extends Migration
     {
         Schema::create('generals', function (Blueprint $table) {
             $table->id();
-            $table->text('kbn');
-            $table->integer('code');
-            $table->text('value');
-            $table->integer('sort_no');
+            $table->text('kbn')->comment('区分');
+            $table->integer('code')->comment('コード');
+            $table->text('value')->comment('値');
+            $table->integer('sort_no')->comment('並び順');
             $table->integer('changeable')->nullable();
             $table->timestamps();
             $table->softDeletes()->index();
