@@ -34,26 +34,32 @@
     <div class="col" id="main">
         <div v-for="(job, index) in currentPageJobs" :key="`job-${index}`">
             <b-card
-                :title="job.title"
+                border-variant="info"
+                header-bg-variant="primary"
+                header-text-variant="white"
+                :header="job.title"
                 img-alt="Image"
                 img-top
                 tag="article"
-                class="mb-2"
+                class="mb-3"
+                no-body
             >
                 <div class="trim">
                     <b-card-img :src="job.image" alt="Image" class="trim_img">
                     </b-card-img>
                 </div>
-                <b-card-text>
-                    <p v-text="job.content" class="job_content"></p>
-                    <p v-text="decoPrice(job.price)" class="job_content"></p>
-                    <div >
-                        <p v-if="job.attention" class="job_attention">
-                            注目の求人
-                        </p>
-                    </div>
-                </b-card-text>
-                <a href="#" @click.prevent="openJob(job)" class="stretched-link"></a>
+                <div class="p-2">
+                    <b-card-text>
+                        <p v-text="job.content" class="job_content"></p>
+                        <p v-text="decoPrice(job.price)" class="job_content"></p>
+                        <div >
+                            <p v-if="job.attention" class="job_attention">
+                                注目の求人
+                            </p>
+                        </div>
+                    </b-card-text>
+                    <a href="#" @click.prevent="openJob(job)" class="stretched-link"></a>
+                </div>
             </b-card>
         </div>
 
