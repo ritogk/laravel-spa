@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateEntrys extends Migration
+class CreateEntries extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,9 @@ class CreateEntrys extends Migration
      */
     public function up()
     {
-        Schema::create('entrys', function (Blueprint $table) {
+        Schema::create('entries', function (Blueprint $table) {
             $table->id();
             $table->string('full_name')->comment('氏名');
-            $table->text('motivation')->comment('志望動機');
             $table->text('self_pr')->comment('自己PR');
             $table->string('tel')->comment('電話番号');
             $table->string('email', 256)->comment('メールアドレス');
@@ -32,6 +31,6 @@ class CreateEntrys extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('entrys');
+        Schema::dropIfExists('entries');
     }
 }

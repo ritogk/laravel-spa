@@ -71,11 +71,9 @@ Vue.use(IconsPlugin);
 // jsで文字列フォーマットを使うライブラリ
 window.format = require('sprintf-js');
 
-// // vueにグローバル定数セット
-// import gv from '../mixins/utils';
-// import gv2 from '../mixins/form_validation';
-// Vue.mixin(gv);
-// Vue.mixin(gv2);
+// vueにグローバル定数セット
+import gv2 from '../mixins/form_validation';
+Vue.mixin(gv2);
 
 import component from './components/App.vue';
 new Vue({

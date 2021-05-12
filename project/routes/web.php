@@ -24,6 +24,7 @@ Route::get('/front/{any}', function () {
 Route::prefix('/front')->group(function () {
     Route::post('/jobs', [Controllers\Front\FrontController::class, 'searchJobs']);
     Route::post('/categories', [Controllers\Front\FrontController::class, 'categories']);
+    Route::post('/save/entry', [Controllers\Front\FrontController::class, 'save_entry']);
 });
 
 // 共通

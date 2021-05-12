@@ -6,7 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class JobSeachRequest extends FormRequest
+class EntryRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,10 +24,10 @@ class JobSeachRequest extends FormRequest
      */
     public function rules() {
         return [
-            'category' => 'nullable',
-            'content' => 'nullable',
-            'price' => 'nullable',
-            'attention' => 'nullable',
+            'full_name' => 'required',
+            'self_pr' => 'required',
+            'email' => 'required',
+            'tel' => 'required',
         ];
     }
 
@@ -38,10 +38,10 @@ class JobSeachRequest extends FormRequest
      */
     public function attributes() {
         return [
-            'category' => 'カテゴリ',
-            'content' => '仕事内容',
-            'price' => '金額',
-            'attention' => '注目求人',
+            'full_name' => '氏名',
+            'self_pr' => '自己PR',
+            'email' => 'メールアドレス',
+            'tel' => '電話番号',
         ];
     }
 
