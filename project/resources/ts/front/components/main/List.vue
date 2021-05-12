@@ -11,11 +11,9 @@
                 class="mb-2"
             >
                 <b-card-text>
-                    <div style="display: flex;justify-content: center;position: relative;">
-                        <p style="position: absolute;left: 0;">
-                            {{ job.content }}
-                        </p>
-                        <p v-if="job.attention" style="position: absolute;right: 0;padding: 1px 3px;border: solid 1px #FFDA45;background: #FFDA45;color: #333;text-align: right;">
+                    <p v-text="job.content" style="white-space: pre-wrap;"></p>
+                    <div >
+                        <p v-if="job.attention" style="padding: 1px 3px;border: solid 1px #FFDA45;background: #FFDA45;color: #333;text-align: center;">
                             注目の求人
                         </p>
                     </div>
