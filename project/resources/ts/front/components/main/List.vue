@@ -1,19 +1,53 @@
+<style scoped>
+    /* トリミング外枠 */
+    .trim {
+        overflow: hidden;
+        width: 100%;
+        height: 300px;
+        position: relative;
+    }
+    /* 横幅に合わせてリサイズ、はみ出た分をトリミング */
+    .trim_img {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        -webkit-transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+        width: 100%;
+        height: auto;
+    }
+    /* 仕事内容 */
+    .job_content{
+        white-space: pre-wrap;
+    }
+    /* 注目の求人 */
+    .job_attention{
+        padding: 1px 3px;
+        border: solid 1px #FFDA45;
+        background: #FFDA45;color: #333;
+        text-align: center;
+    }
+</style>
+
 <template>
     <div class="col" id="main">
         <div v-for="(job, index) in currentPageJobs" :key="`job-${index}`">
             <b-card
                 :title="job.title"
-                :img-src="job.image"
                 img-alt="Image"
                 img-top
-                img-height="200px"
                 tag="article"
                 class="mb-2"
             >
+                <div class="trim">
+                    <b-card-img :src="job.image" alt="Image" class="trim_img">
+                    </b-card-img>
+                </div>
                 <b-card-text>
-                    <p v-text="job.content" style="white-space: pre-wrap;"></p>
+                    <p v-text="job.content" class="job_content"></p>
                     <div >
-                        <p v-if="job.attention" style="padding: 1px 3px;border: solid 1px #FFDA45;background: #FFDA45;color: #333;text-align: center;">
+                        <p v-if="job.attention" class="job_attention">
                             注目の求人
                         </p>
                     </div>
