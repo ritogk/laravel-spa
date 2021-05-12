@@ -13,6 +13,7 @@ class CategoriesAction{
     public function __invoke(): array
     {
         return JobCategory::select('id',
+                                    'name',
                                     'content',
                                     'image',
                                     'sort_no')
