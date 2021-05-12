@@ -1,6 +1,6 @@
 <template>
     <div class="col" id="main">
-        <div v-for="(job, index) in jobs" :key="`job-${index}`">
+        <div v-for="(job, index) in currentPageJobs" :key="`job-${index}`">
             <b-card
                 :title="job.title"
                 :img-src="job.image"
@@ -21,6 +21,14 @@
                 <a href="#" @click.prevent="openJob(job)" class="stretched-link"></a>
             </b-card>
         </div>
+
+        <b-pagination
+            v-model="currentPage"
+            :total-rows="jobs.length"
+            :per-page="perPage"
+            first-number
+            last-number
+        ></b-pagination>
     </div>
 </template>
 
@@ -34,6 +42,16 @@
 
     @Component
     export default class List extends Vue {
+        perPage: number = 5
+        currentPage: number = 1
+
+        get currentPageJobs(): Array<IJob>{
+            return this.jobs.slice(
+                                    (this.currentPage - 1) * this.perPage,
+                                    (this.currentPage - 1) * this.perPage + this.perPage
+                                    );
+        }
+
         get jobs(): Array<IJob>{
             return state.getJobs
         }
