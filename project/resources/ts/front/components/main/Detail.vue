@@ -1,3 +1,10 @@
+<style scoped>
+    /* 仕事内容 */
+    .job_content{
+        white-space: pre-wrap;
+    }
+</style>
+
 <template>
     <div>
         <b-modal
@@ -19,7 +26,7 @@
                         </div>
                         <div class="py-3">
                             <h3>仕事内容</h3>
-                            <span v-text='selectJob.content'></span>
+                            <span class="job_content" v-text='selectJob.content'></span>
                         </div>
                         <div class="py-3">
                             <h3>金額</h3>
