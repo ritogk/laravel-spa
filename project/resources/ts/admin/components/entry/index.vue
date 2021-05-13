@@ -1,6 +1,6 @@
 <template>
     <b-container fluid class="py-4">
-        <h2>仕事マスタ</h2>
+        <h2>求人一覧</h2>
         <msg-danger :message="message"></msg-danger>
 
         <!-- 抽出条件 -->
@@ -71,16 +71,18 @@
                     {{ row.item.full_name }}
                 </template>
 
-                <template #cell(self_pr)="row">
-                    {{ row.item.self_pr }}
-                </template>
-
                 <template #cell(email)="row">
                     {{ row.item.email }}
                 </template>
 
                 <template #cell(tel)="row">
                     {{ row.item.tel }}
+                </template>
+
+                <template #cell(self_pr)="row">{{ row.item.self_pr }}</template>
+
+                <template #cell(created_at)="row">
+                    {{ entryDate(row.item.created_at) }}
                 </template>
             </b-table>
 
@@ -132,11 +134,12 @@
         message: string = ""
         // 以降はデータテーブルで使用する値
         fields: Array<DataTableFileds> = [
-                        { key: 'job_nm', label: '仕事名', sortable: true, sortDirection: 'desc' },
+                        { key: 'job_nm', label: '求人名', sortable: true, sortDirection: 'desc' },
                         { key: 'full_name', label: '氏名'},
-                        { key: 'self_pr', label: '自己PR'},
                         { key: 'email', label: 'メールアドレス'},
-                        { key: 'tel', label: '電話番号' }
+                        { key: 'tel', label: '電話番号' },
+                        { key: 'self_pr', label: '自己PR'},
+                        { key: 'created_at', label: '申込日時' }
                     ]
         isBusy: boolean = false
         totalRows: number = 1
@@ -158,7 +161,7 @@
             // 一覧取得
             window.axios.post("/admin/entry/get_conds", {isInit: this.isInit}).then(response => {
                 if(!(this as any).isEmptyObject(response.data)){
-                    this.cond.full_name = response.data.full_name;
+                    this.cond.full_name = response.data.full_name
                 }
                 this.getItem();
             })
@@ -184,6 +187,11 @@
                 this.isBusy = false;
                 this.message = erorr;
             });
+        }
+
+        entryDate(str: string): string{
+            const date = new Date(str)
+            return date.getFullYear() + '年' + date.getMonth() + '月' + date.getDate() + '日'
         }
 
         onFiltered(filteredItems: Array<Item>): void {

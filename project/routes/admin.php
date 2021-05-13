@@ -56,8 +56,6 @@ Route::group(['middleware' => ['admin']], function () {
     // 求職者一覧
     Route::group(['prefix' => 'entry'], function () {
         Route::post('/list', [Controllers\Admin\EntryController::class, 'list']);
-        Route::delete('/{id}', [Controllers\Admin\EntryController::class, 'destroy']);
-        Route::post('/find', [Controllers\Admin\EntryController::class, 'find']);
         Route::post('/set_conds', [Controllers\Admin\EntryController::class, 'setConds']);
         Route::post('/get_conds', [Controllers\Admin\EntryController::class, 'getConds']);
     });

@@ -16,7 +16,7 @@ class Entry extends Model
     // リレーション
     public function job()
     {
-        return $this->hasMany('App\Models\Job');
+        return $this->belongsTo('App\Models\Job');
     }
 
     /**

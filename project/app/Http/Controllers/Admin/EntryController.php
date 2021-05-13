@@ -24,20 +24,7 @@ class EntryController extends Controller
      */
     public function list(EntryListRequest $request, ListAction $action): array
     {
-        return $action($request->filters());
-    }
-
-
-    /**
-     * 一件取得
-     *
-     * @param  Request $request
-     * @param  FindAction $action
-     * @return array
-     */
-    public function find(Request $request, FindAction $action): array
-    {
-        return $action($request->id);
+        return $action($request);
     }
 
     /**

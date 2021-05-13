@@ -38,20 +38,4 @@ class EntryListRequest extends FormRequest
             'job_category_id' => '仕事カテゴリ',
         ];
     }
-
-    /**
-     * 抽出条件
-     *
-     * @return array
-     */
-    public function filters(): array{
-        $filters = [];
-        if(isset($this->title)) {
-            $filters[] = ['title', 'LIKE', '%'. $this->title. '%'];
-        }
-        if(isset($this->job_category_id)) {
-            $filters[] = ['job_category_id', '=', $this->job_category_id];
-        }
-        return $filters;
-    }
 }

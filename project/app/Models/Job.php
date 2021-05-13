@@ -17,4 +17,10 @@ class Job extends Model
     {
         return $this->belongsTo('App\Models\JobCategory');
     }
+
+    // リレーション
+    public function entries()
+    {
+        return $this->hasMany('App\Models\Entry');
+    }
 }
