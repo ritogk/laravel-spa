@@ -16,9 +16,9 @@ class GetCondAction{
     {
         $rtn = [];
         if($isInit){
-            Session::forget(SessionKey::MASTER_JOB_CATEGORY_LIST_CONDS);
+            Session::forget(SessionKey::MASTER_JOB_LIST_CONDS);
         }else{
-            $session_val = Session::get(SessionKey::MASTER_JOB_CATEGORY_LIST_CONDS);
+            $session_val = Session::get(SessionKey::MASTER_JOB_LIST_CONDS);
             $rtn = $session_val ?? [];
         }
         return $rtn;

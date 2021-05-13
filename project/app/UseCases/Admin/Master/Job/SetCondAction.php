@@ -14,6 +14,6 @@ class SetCondAction{
      */
     public function __invoke(array $conds): void
     {
-        Session::put(SessionKey::MASTER_JOB_CATEGORY_LIST_CONDS, $conds);
+        Session::put(SessionKey::MASTER_JOB_LIST_CONDS, $conds);
     }
 }
