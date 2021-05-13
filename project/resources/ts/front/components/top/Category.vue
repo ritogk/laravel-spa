@@ -1,3 +1,9 @@
+<style scoped>
+    .card img{
+        filter: brightness(0.65);
+    }
+</style>
+
 <template>
     <b-card
         border-variant="info"
@@ -15,17 +21,19 @@
                 :category="category"
             >
                 <b-card
-                    :title='category.name'
                     :img-src='category.image'
                     img-alt="Image"
                     img-top
                     img-height="200px"
                     text-variant="white"
                     tag="article"
-                    class="mb-4"
+                    class="mb-4 category-card"
                     style="max-width: 20rem;"
                     overlay
                 >
+                    <b-card-title>
+                        <h2 v-text='category.name'></h2>
+                    </b-card-title>
                     <b-card-text>
                         <span v-text='category.content'></span>
                         <a href="#" @click.prevent="pageTransition(category)" class="stretched-link"></a>
