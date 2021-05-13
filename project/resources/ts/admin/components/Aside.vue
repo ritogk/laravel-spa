@@ -13,6 +13,13 @@
             <!-- Sidebar Menu -->
             <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu">
+                <!-- 求人一覧 -->
+                <li class="nav-item">
+                    <router-link :to="{ name: 'entry_index', params: { isInit: true }}" class="nav-link">
+                    <i class="nav-icon fas fa-th"></i>
+                    <p>求人一覧</p>
+                    </router-link>
+                </li>
                 <!-- マスタ -->
                 <li class="nav-item has-treeview">
                     <a href="#" class="nav-link">

@@ -3,6 +3,8 @@ import VueRouter from "vue-router";
 
 Vue.use(VueRouter);
 
+// 求人一覧
+import entry_index from "./components/entry/index.vue";
 // 仕事マスタ
 import job_index from "./components/master/job/index.vue";
 import job_edit from "./components/master/job/edit.vue";
@@ -22,6 +24,13 @@ import page_not_found from "./components/utility/page_not_found.vue";
 const router = new VueRouter({
     mode: "hash",
     routes: [
+        // 求人一覧
+        {
+            path: "/entry_index",
+            name: "entry_index",
+            component: entry_index,
+            props: true
+        },
         // 仕事マスタ
         {
             path: "/job_index",

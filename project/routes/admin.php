@@ -30,7 +30,7 @@ Route::group(['middleware' => ['admin']], function () {
         return view('admin');
     })->where('any', '.*');
 
-    // 仕事 マスタ
+    // 仕事マスタ
     Route::group(['prefix' => 'job'], function () {
         Route::post('/list', [Controllers\Admin\Master\JobController::class, 'list']);
         Route::post('/create', [Controllers\Admin\Master\JobController::class, 'create'])->middleware('job.save.request');
@@ -51,6 +51,15 @@ Route::group(['middleware' => ['admin']], function () {
         Route::post('/set_conds', [Controllers\Admin\Master\JobCategoryController::class, 'setConds']);
         Route::post('/get_conds', [Controllers\Admin\Master\JobCategoryController::class, 'getConds']);
         Route::post('/export_excel', [Controllers\Admin\Master\JobCategoryController::class, 'exportExcel']);
+    });
+
+    // 求職者一覧
+    Route::group(['prefix' => 'entry'], function () {
+        Route::post('/list', [Controllers\Admin\EntryController::class, 'list']);
+        Route::delete('/{id}', [Controllers\Admin\EntryController::class, 'destroy']);
+        Route::post('/find', [Controllers\Admin\EntryController::class, 'find']);
+        Route::post('/set_conds', [Controllers\Admin\EntryController::class, 'setConds']);
+        Route::post('/get_conds', [Controllers\Admin\EntryController::class, 'getConds']);
     });
 
     // 汎用マスタ
