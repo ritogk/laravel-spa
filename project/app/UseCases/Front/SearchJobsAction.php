@@ -36,6 +36,7 @@ class SearchJobsAction{
                             'price',
                             'image',
                             'sort_no')
+                    ->orderByDesc('attention')
                     ->get()
                     ->toArray();
     }
