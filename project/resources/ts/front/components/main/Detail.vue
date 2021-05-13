@@ -74,7 +74,7 @@
                                     :invalid-feedback="errors.tel"
                                     :state="input_state(errors.tel)">
                                         <b-form-input
-                                        placeholder="携帯電話, 固定電話"
+                                        placeholder="ハイフンを含めずに書いて下さい。"
                                         v-model="entry.tel"
                                         :state="input_state(errors.email)">
                                         </b-form-input>

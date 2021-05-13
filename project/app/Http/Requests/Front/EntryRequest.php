@@ -26,9 +26,9 @@ class EntryRequest extends FormRequest
         return [
             'job_id' => 'required',
             'full_name' => 'required',
-            'self_pr' => 'required',
-            'email' => 'required',
-            'tel' => 'required',
+            'self_pr' => ['required'],
+            'email' => ['required', 'email'],
+            'tel' => ['required', 'numeric', 'digits_between:8,11'],
         ];
     }
 
