@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Libs\Utility;
 use Illuminate\Http\Request;
-use App\Models\General;
 
 class UtilityController extends Controller
 {
@@ -17,16 +16,5 @@ class UtilityController extends Controller
     public function getEmptyTableColumns(Request $request) :array
     {
         return Utility::getEmptyTableColumns($request->table_nm, $request->num);
-    }
-    
-    /**
-     * セレクト用のデータ取得
-     *
-     * @param  String $kbn
-     * @return Array
-     */
-    public function selectData(string $kbn)
-    {
-        return General::getSelectData($kbn);
     }
 }
