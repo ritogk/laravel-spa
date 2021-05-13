@@ -16,7 +16,7 @@
                 <!-- 求人一覧 -->
                 <li class="nav-item">
                     <router-link :to="{ name: 'entry_index', params: { isInit: true }}" class="nav-link">
-                    <i class="nav-icon fas fa-th"></i>
+                    <i class="nav-icon fas fa-network-wired"></i>
                     <p>求人一覧</p>
                     </router-link>
                 </li>
@@ -31,14 +31,14 @@
                         <!-- 仕事マスタ -->
                         <li class="nav-item">
                             <router-link :to="{ name: 'job_index', params: { isInit: true }}" class="nav-link">
-                            <i class="nav-icon fas fa-th"></i>
-                            <p>仕事</p>
+                                <i class="nav-icon fas fa-diagnoses"></i>
+                                <p>仕事</p>
                             </router-link>
                         </li>
                         <!-- 仕事カテゴリマスタ -->
                         <li class="nav-item">
                             <router-link :to="{ name: 'job_category_index', params: { isInit: true }}" class="nav-link">
-                                <i class="nav-icon fas fa-th"></i>
+                                <i class="nav-icon fas fa-atlas"></i>
                                 <p>仕事カテゴリ</p>
                             </router-link>
                         </li>
