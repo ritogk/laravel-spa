@@ -75,6 +75,10 @@ window.format = require('sprintf-js');
 import gv2 from '../mixins/form_validation';
 Vue.mixin(gv2);
 
+// 入力値の復元
+import { state } from "@root/front/state";
+state.restore()
+
 import component from './components/App.vue';
 new Vue({
     el: '#app',

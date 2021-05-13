@@ -73,12 +73,23 @@ class State extends VuexModule implements IState {
     }
     @Action
     public searchJob(value: ICond) {
-        // 条件保存
         this.setCond(value)
-        // 仕事一覧取得処理
+        localStorage.setItem('cond', JSON.stringify(value));
         window.axios.post('/front/jobs', value).then(response => {
             this.setJobs(response.data)
+            localStorage.setItem('jobs', JSON.stringify(response.data));
         })
+    }
+    @Action // 入力値復元
+    public restore() {
+        let cond = localStorage.getItem('cond');
+        if(cond){
+            this.setCond(JSON.parse(cond))
+        }
+        let jobs = localStorage.getItem('jobs');
+        if(jobs){
+            this.setJobs(JSON.parse(jobs))
+        }
     }
 }
 export const state = getModule(State);
