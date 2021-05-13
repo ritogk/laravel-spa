@@ -114,6 +114,7 @@
     import IJob from "@root/front/models/IJob";
 
     export interface IEntry{
+        job_id: string
         full_name: string
         self_pr: string
         tel: string
@@ -123,11 +124,12 @@
     @Component
     export default class Detail extends Vue {
         // ヘッダスタイル
-        headerBgVariant: string = 'primary '
+        headerBgVariant: string = 'primary'
         headerTextVariant: string = 'light'
 
-        entry: IEntry = {full_name: '', self_pr: '', tel: '', emai: ''};
-        errors: any = {full_name: '', self_pr: '', tel: '', email: ''};
+        entry: IEntry = {job_id: '', full_name: '', self_pr: '', tel: '', emai: ''};
+        errors: {[key: string]: string}  = {full_name: '', self_pr: '', tel: '', email: ''};
+
         private get isShow(): boolean{
             return state.getIsShowDetail
         }
@@ -148,11 +150,12 @@
         // 閉じる際に実行する
         close_modal(): void{
             state.closeDetail()
-            this.entry = {full_name: '', self_pr: '', tel: '', emai: ''};
+            this.entry = {job_id: '', full_name: '', self_pr: '', tel: '', emai: ''};
         }
 
         // 仕事登録
         job_entry(){
+            this.entry.job_id = this.selectJob.id
             window.axios.post('/front/save/entry', this.entry).then(response => {
                 this.close_modal()
             }).catch(error => {

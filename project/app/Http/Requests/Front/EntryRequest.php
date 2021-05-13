@@ -24,6 +24,7 @@ class EntryRequest extends FormRequest
      */
     public function rules() {
         return [
+            'job_id' => 'required',
             'full_name' => 'required',
             'self_pr' => 'required',
             'email' => 'required',
@@ -38,6 +39,7 @@ class EntryRequest extends FormRequest
      */
     public function attributes() {
         return [
+            'job_id' => '仕事id',
             'full_name' => '氏名',
             'self_pr' => '自己PR',
             'email' => 'メールアドレス',
