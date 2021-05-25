@@ -29,7 +29,7 @@
     })
     export default class Edit extends Vue{
         @Prop({required: true })
-        initialItem!: string
+        id!: string
 
         // data
         item: Item = {id: '', name: '', content: '', image: '', sort_no: 1, updated_at: ''}
@@ -38,7 +38,9 @@
 
         // 初期化
         mounted(): void{
-            this.item = JSON.parse(this.initialItem)
+            window.axios.post('/admin/job_category/find', {id: this.id}).then(response => {
+                this.item = response.data
+            })
         }
 
         edit(image_file: any): void{

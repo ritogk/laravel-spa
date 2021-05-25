@@ -192,14 +192,12 @@
 
         // 編集
         edit(item: Item, index: number): void{
-            this.$router.push({ name: "job_category_edit" , params: {initialItem : JSON.stringify(item)}});
+            this.$router.push({ name: "job_category_edit" , params: {id : item.id.toString()}});
         }
 
         // 新規
         create(): void {
-            window.axios.post("/utility/empty_table_columns", {table_nm: 'job_categories', num: 1}).then(response => {
-                this.$router.push({ name: "job_category_create", params: {initialItem : JSON.stringify(response.data)}});
-            })
+            this.$router.push({ name: "job_category_create"});
         }
 
         // 削除

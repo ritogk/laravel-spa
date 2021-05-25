@@ -14,6 +14,7 @@ use App\UseCases\Admin\Master\JobCategory\ListAction;
 use App\UseCases\Admin\Master\JobCategory\CreateAction;
 use App\UseCases\Admin\Master\JobCategory\UpdateAction;
 use App\UseCases\Admin\Master\JobCategory\DeleteAction;
+use App\UseCases\Admin\Master\JobCategory\FindAction;
 use App\UseCases\Admin\Master\JobCategory\ExportAction;
 use App\UseCases\Admin\Master\JobCategory\SetCondAction;
 use App\UseCases\Admin\Master\JobCategory\GetCondAction;
@@ -67,6 +68,18 @@ class JobCategoryController extends Controller
     public function destroy(string $id, DeleteAction $action)
     {
         $action($id);
+    }
+
+    /**
+     * 一件取得
+     *
+     * @param  Request $request
+     * @param  FindAction $action
+     * @return array
+     */
+    public function find(Request $request, FindAction $action): array
+    {
+        return $action($request->id);
     }
 
     /**

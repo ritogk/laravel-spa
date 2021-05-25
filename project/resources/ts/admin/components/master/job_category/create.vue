@@ -28,18 +28,10 @@
         }
     })
     export default class Create extends Vue{
-        @Prop({required: true })
-        initialItem!: string
-
         // data
         item: Item = {id: '', name: '', content: '', image: '', sort_no: 1, updated_at: ''}
         message: string = ''
         errors: BaseFormError = { name: '', content: '', image: '', sort_no: ''}
-
-        // 初期化
-        mounted(): void{
-            this.item = JSON.parse(this.initialItem)
-        }
 
         create(image_file: any): void{
             const formData = new FormData()

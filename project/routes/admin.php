@@ -47,6 +47,7 @@ Route::group(['middleware' => ['admin']], function () {
         Route::post('/list', [Controllers\Admin\Master\JobCategoryController::class, 'list']);
         Route::post('/create', [Controllers\Admin\Master\JobCategoryController::class, 'create'])->middleware('job.category.save.request');
         Route::delete('/{id}', [Controllers\Admin\Master\JobCategoryController::class, 'destroy']);
+        Route::post('/find', [Controllers\Admin\Master\JobCategoryController::class, 'find']);
         Route::post('/update', [Controllers\Admin\Master\JobCategoryController::class, 'update'])->middleware('job.category.save.request');
         Route::post('/set_conds', [Controllers\Admin\Master\JobCategoryController::class, 'setConds']);
         Route::post('/get_conds', [Controllers\Admin\Master\JobCategoryController::class, 'getConds']);
