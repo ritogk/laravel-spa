@@ -2,7 +2,7 @@
     <div>
     <msg-danger :message="message"></msg-danger>
         <base-form
-            title="仕事カテゴリマスタ(登録)"
+            title="仕事マスタ(登録)"
             :errors="errors"
             :item="item"
             :isCreate="true"
