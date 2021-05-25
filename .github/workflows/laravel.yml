@@ -28,13 +28,13 @@ jobs:
         run: |
           sleep 20
           docker-compose exec -T db mysql -uroot -proot -e'create database laravel'
-      - name: laravel init
+      - name: image seeder download
         run: |
           wget https://github.com/homing-job/laravel-spa/files/6542800/seeder_images.zip
           unzip seeder_images.zip -d project/storage/app/public/images
-          ls -la
           rm -f seeder_images.zip
-          ls -la
+      - name: laravel init
+        run: |
           docker-compose exec -T php cp .env.base .env
           docker-compose exec -T php composer install
           docker-compose exec -T php composer install
