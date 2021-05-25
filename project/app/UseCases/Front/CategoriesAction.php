@@ -3,6 +3,7 @@
 namespace App\UseCases\Front;
 
 use App\Models\JobCategory;
+use Illuminate\Support\Facades\Storage;
 
 class CategoriesAction{
     /**
@@ -12,12 +13,16 @@ class CategoriesAction{
      */
     public function __invoke(): array
     {
-        return JobCategory::select('id',
+        $items = JobCategory::select('id',
                                     'name',
                                     'content',
                                     'image',
                                     'sort_no')
-                            ->get()
-                            ->toArray();
+                                ->get()
+                                ->toArray();
+        foreach ($items as &$item) {
+            $item['image'] = Storage::url($item['image']);
+        }
+        return $items;
     }
 }
