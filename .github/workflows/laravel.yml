@@ -67,3 +67,4 @@ jobs:
         ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOST_NAME} 'cd ~/github && docker-compose exec -T php php artisan config:clear'
         ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOST_NAME} 'cd ~/github && docker-compose exec -T php php artisan route:clear'
         ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOST_NAME} 'cd ~/github && docker-compose exec -T php php artisan view:clear'
+        
