@@ -1,0 +1,69 @@
+# This is a basic workflow to help you get started with Actions
+name: docker-compose
+
+# Controls when the action will run. Triggers the workflow on push or pull request
+# events but only for the master branch
+on:
+  push:
+    branches:
+      - main
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  laravel-test:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+
+      # Runs a single command using the runners shell
+      - name: compose-run
+        run: |
+          docker-compose up -d
+      - name: create table
+        run: |
+          sleep 20
+          docker-compose exec -T db mysql -uroot -proot -e'create database laravel'
+      - name: laravel init
+        run: |
+          docker-compose exec -T php cp .env.base .env
+          docker-compose exec -T php composer install
+          docker-compose exec -T php composer install
+          docker-compose exec -T php npm install
+          docker-compose exec -T php npm run prod
+          docker-compose exec -T php php artisan migrate:refresh --seed
+          docker-compose exec -T php php artisan key:generate
+          docker-compose exec -T php chmod -R 777 storage
+          docker-compose exec -T php chmod -R 777 bootstrap/cache
+      - name: laravel test
+        run: |
+          docker-compose exec -T php php artisan config:clear
+          docker-compose exec -T php php vendor/bin/phpstan analyse app --memory-limit=1G
+          docker-compose exec -T php php artisan test
+          
+  deploy:
+    if: github.ref == 'refs/heads/main'
+    needs: laravel-test
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Deploy
+      env:
+        PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
+        USER_NAME: ${{ secrets.USER_NAME }}
+        HOST_NAME: ${{ secrets.HOST_NAME }}
+      run: |
+        echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
+        ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOST_NAME} 'cd ~/github && sudo git pull origin main'
+        ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOST_NAME} 'cd ~/github && docker-compose exec -T php composer install'
+        ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOST_NAME} 'cd ~/github && docker-compose exec -T php npm install'
+        ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOST_NAME} 'cd ~/github && docker-compose exec -T php npm run prod'
+        ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOST_NAME} 'cd ~/github && docker-compose exec -T php php artisan migrate'
+        ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOST_NAME} 'cd ~/github && docker-compose exec -T php php artisan cache:clear'
+        ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOST_NAME} 'cd ~/github && docker-compose exec -T php php artisan config:clear'
+        ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOST_NAME} 'cd ~/github && docker-compose exec -T php php artisan route:clear'
+        ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOST_NAME} 'cd ~/github && docker-compose exec -T php php artisan view:clear'
