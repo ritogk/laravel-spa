@@ -18,7 +18,7 @@ class CreateAction{
     {
         DB::transaction(function () use($request){
             if(!empty($request->file)){
-                $path = Storage::url($request->file->store('images',"public"));
+                $path = Storage::putFile('public/images', $request->file, 'public');
             }else{
                 $path = '';
             }

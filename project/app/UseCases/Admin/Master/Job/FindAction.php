@@ -3,6 +3,7 @@
 namespace App\UseCases\Admin\Master\Job;
 
 use App\Models\Job;
+use Illuminate\Support\Facades\Storage;
 
 class FindAction{
     /**
@@ -13,8 +14,11 @@ class FindAction{
      */
     public function __invoke(string $id): array
     {
-        return Job::where('id', $id)
+        $job = Job::where('id', $id)
+                    ->select('id', 'title', 'content', 'attention', 'job_category_id', 'price', 'image', 'sort_no')
                     ->first()
                     ->toArray();
+        $job['image'] = Storage::url($job['image']);
+        return $job;
     }
 }
