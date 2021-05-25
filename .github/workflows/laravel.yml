@@ -58,13 +58,13 @@ jobs:
         HOST_NAME: ${{ secrets.HOST_NAME }}
       run: |
         echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
-        ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOST_NAME} 'cd ~/github && sudo git pull origin main'
-        ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOST_NAME} 'cd ~/github && docker-compose exec -T php composer install'
-        ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOST_NAME} 'cd ~/github && docker-compose exec -T php npm install'
-        ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOST_NAME} 'cd ~/github && docker-compose exec -T php npm run prod'
-        ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOST_NAME} 'cd ~/github && docker-compose exec -T php php artisan migrate'
-        ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOST_NAME} 'cd ~/github && docker-compose exec -T php php artisan cache:clear'
-        ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOST_NAME} 'cd ~/github && docker-compose exec -T php php artisan config:clear'
-        ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOST_NAME} 'cd ~/github && docker-compose exec -T php php artisan route:clear'
-        ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOST_NAME} 'cd ~/github && docker-compose exec -T php php artisan view:clear'
+        ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOST_NAME} 'cd ~/laravel-spa && sudo git pull origin main'
+        ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOST_NAME} 'cd ~/laravel-spa && docker-compose exec -T php composer install'
+        ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOST_NAME} 'cd ~/laravel-spa && docker-compose exec -T php npm install'
+        ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOST_NAME} 'cd ~/laravel-spa && docker-compose exec -T php npm run prod'
+        ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOST_NAME} 'cd ~/laravel-spa && docker-compose exec -T php php artisan migrate'
+        ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOST_NAME} 'cd ~/laravel-spa && docker-compose exec -T php php artisan cache:clear'
+        ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOST_NAME} 'cd ~/laravel-spa && docker-compose exec -T php php artisan config:clear'
+        ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOST_NAME} 'cd ~/laravel-spa && docker-compose exec -T php php artisan route:clear'
+        ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOST_NAME} 'cd ~/laravel-spa && docker-compose exec -T php php artisan view:clear'
         
