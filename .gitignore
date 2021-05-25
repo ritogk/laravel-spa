@@ -27,3 +27,5 @@ project/.phpunit.result.cache
 #docker
 docker/db/
 project/public/mix-manifest.json
+project/public/css
+project/public/js
