@@ -35,6 +35,8 @@ class SearchJobsAction{
                             'attention',
                             'job_category_id',
                             'price',
+                            'welfare',
+                            'holiday',
                             'image',
                             'sort_no')
                     ->orderByDesc('attention')

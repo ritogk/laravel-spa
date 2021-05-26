@@ -1,6 +1,6 @@
 <style scoped>
-    /* 仕事内容 */
-    .job_content{
+    /* 改行 */
+    .multiple{
         white-space: pre-wrap;
     }
 </style>
@@ -26,11 +26,19 @@
                         </div>
                         <div class="py-3">
                             <h3>仕事内容</h3>
-                            <span class="job_content" v-text='selectJob.content'></span>
+                            <span class="multiple" v-text='selectJob.content'></span>
                         </div>
                         <div class="py-3">
                             <h3>金額</h3>
                             <span v-text='price'></span>
+                        </div>
+                        <div class="py-3">
+                            <h3>福利厚生</h3>
+                            <span class="multiple" v-text='selectJob.welfare'></span>
+                        </div>
+                        <div class="py-3">
+                            <h3>休日</h3>
+                            <span class="multiple" v-text='selectJob.holiday'></span>
                         </div>
 
                         <b-card header="応募フォーム">

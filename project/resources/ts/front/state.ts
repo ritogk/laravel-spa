@@ -15,7 +15,7 @@ export interface IState {
 // 検索条件 初期値
 const dafaultCond: ICond = {category: '', content: '', price: null, attention: false}
 // 仕事詳細 初期値
-const dafaultJobDetail: IJob = {id: '', title: '', content: '', attention: false, job_category_id: '', image: '', price: null, sort_no: ''}
+const dafaultJobDetail: IJob = {id: '', title: '', content: '', attention: false, job_category_id: '', image: '', welfare: '', holiday: '', price: null, sort_no: ''}
 
 Vue.use(Vuex);
 const store=new Vuex.Store({})
