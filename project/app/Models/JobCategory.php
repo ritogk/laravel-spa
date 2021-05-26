@@ -5,11 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use DateTimeInterface;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class JobCategory extends Model
 {
-    use SoftDeletes, HasFactory;
+    use SoftDeletes;
 
     protected $guarded = ['id', 'updated_at', 'created_at', 'deleted_at']; // ブラックリスト
 
