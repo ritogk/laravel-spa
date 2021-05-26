@@ -25,10 +25,10 @@ class EntryRequest extends FormRequest
     public function rules() {
         return [
             'job_id' => 'required',
-            'full_name' => 'required',
-            'self_pr' => ['required'],
-            'email' => ['required', 'email'],
-            'tel' => ['required', 'numeric', 'digits_between:8,11'],
+            'full_name' => ['required', 'max:100'],
+            'self_pr' => ['required', 'max:1000'],
+            'email' => ['required', 'email', 'max:256'],
+            'tel' => ['required', 'regex:/^[0-9]{2,4}-[0-9]{2,4}-[0-9]{3,4}$/u'],
         ];
     }
 
