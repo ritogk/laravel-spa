@@ -36,7 +36,7 @@ class FrontController extends Controller
      * @return array
      */
     public function searchJobs(JobSeachRequest $request, SearchJobsAction $action): array{
-        return $action($request);
+        return $action($request->all());
     }
 
     /**

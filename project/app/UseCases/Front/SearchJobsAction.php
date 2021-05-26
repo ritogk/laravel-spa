@@ -10,23 +10,23 @@ class SearchJobsAction{
     /**
      * __invoke
      *
-     * @param Request $request
+     * @param array $inputs
      * @return array
      */
-    public function __invoke(Request $request): array
+    public function __invoke(array $inputs): array
     {
         $filters = [];
-        if(isset($request->category)) {
-            $filters[] = ['job_category_id', '=', $request->category];
+        if(isset($inputs['category'])) {
+            $filters[] = ['job_category_id', '=', $inputs['category']];
         }
-        if(isset($request->content)) {
-            $filters[] = ['content', 'LIKE', '%'. $request->content. '%'];
+        if(isset($inputs['content'])) {
+            $filters[] = ['content', 'LIKE', '%'. $inputs['content']. '%'];
         }
-        if(isset($request->price)) {
-            $filters[] = ['price', '>=', $request->price];
+        if(isset($inputs['price'])) {
+            $filters[] = ['price', '>=', $inputs['price']];
         }
-        if($request->attention) {
-            $filters[] = ['attention', '=', $request->attention];
+        if($inputs['attention']) {
+            $filters[] = ['attention', '=', $inputs['attention']];
         }
         $items = Job::where($filters)
                     ->select('id',
