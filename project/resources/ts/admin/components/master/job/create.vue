@@ -29,9 +29,9 @@
     })
     export default class Create extends Vue{
         // data
-        item: Item = {id: '', title: '', content: '', attention: false, job_category_id: '', price: null, image: '', sort_no: 1, updated_at: ''}
+        item: Item = {id: '', title: '', content: '', attention: false, job_category_id: '', price: null, welfare: '', holiday: '', image: '', sort_no: 1, updated_at: ''}
         message: string = ''
-        errors: BaseFormError = {title: '', content: '', attention: '', job_category_id: '', price: '', image: '', sort_no: ''}
+        errors: BaseFormError = {title: '', content: '', attention: '', job_category_id: '', price: '', welfare: '', holiday: '', image: '', sort_no: ''}
 
         create(image_file: any): void{
             const formData = new FormData()
@@ -43,7 +43,7 @@
             }).catch(error => {
                 if (error.response.status == 400) {
                     // エラー初期化
-                    this.errors = {title: '', content: '', attention: '', job_category_id: '', price: '', image: '', sort_no: ''}
+                    this.errors = {title: '', content: '', attention: '', job_category_id: '', price: '', welfare: '', holiday: '', image: '', sort_no: ''}
                     // エラーセット
                     const request_errors = error.response.data.errors
                     for (var key in request_errors) {

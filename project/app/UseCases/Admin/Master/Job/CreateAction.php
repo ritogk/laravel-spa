@@ -29,6 +29,8 @@ class CreateAction{
                 'attention' => $request->item['attention'],
                 'job_category_id' => $request->item['job_category_id'],
                 'price' => $request->item['price'],
+                'welfare' => $request->item['welfare'],
+                'holiday' => $request->item['holiday'],
                 'image' => $path,
                 'sort_no' => $request->item['sort_no'],
             ];

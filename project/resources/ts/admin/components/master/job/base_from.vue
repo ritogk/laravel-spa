@@ -82,6 +82,38 @@
 
             <b-col lg="12" class="my-1">
                 <b-form-group
+                label="福利厚生"
+                label-for="welfare"
+                :invalid-feedback="errors.welfare"
+                :state="input_state(errors.welfare)">
+                    <b-form-textarea
+                    id="welfare"
+                    v-model="item.welfare"
+                    rows="3"
+                    max-rows="4"
+                    :state="input_state(errors.welfare)">
+                    </b-form-textarea>
+                </b-form-group>
+            </b-col>
+
+            <b-col lg="12" class="my-1">
+                <b-form-group
+                label="休日"
+                label-for="holiday"
+                :invalid-feedback="errors.holiday"
+                :state="input_state(errors.holiday)">
+                    <b-form-textarea
+                    id="holiday"
+                    v-model="item.holiday"
+                    rows="3"
+                    max-rows="4"
+                    :state="input_state(errors.holiday)">
+                    </b-form-textarea>
+                </b-form-group>
+            </b-col>
+
+            <b-col lg="12" class="my-1">
+                <b-form-group
                 label="画像"
                 label-for="image"
                 :invalid-feedback="errors.image"

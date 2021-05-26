@@ -24,6 +24,8 @@ class JobExport implements FromCollection, WithHeadings, ShouldAutoSize, WithEve
                 'attention',
                 'job_category_id',
                 'price',
+                'welfare',
+                'holiday',
                 'image',
                 'sort_no',
                 'created_at',
