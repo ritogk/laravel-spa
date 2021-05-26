@@ -20,7 +20,7 @@ class UpdateAction{
             if(!empty($request->file)){
                 $path = Storage::putFile('public/images', $request->file, 'public');
             }else{
-                $path = $request->item['image'];
+                $path = Job::find($request->item['id'])->image;
             }
 
             $update = [
