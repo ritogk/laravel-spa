@@ -32,7 +32,8 @@
 
 <template>
     <div class="col" id="main">
-        <div v-for="(job, index) in currentPageJobs" :key="`job-${index}`">
+        <vue-loading type="spiningDubbles" color="#3490dc" :size="{ width: '50%', height: '50%' }" v-show="loading"></vue-loading>
+        <div v-for="(job, index) in currentPageJobs" :key="`job-${index}`" v-show="!loading">
             <b-card
                 border-variant="info"
                 header-bg-variant="primary"
@@ -85,6 +86,7 @@
     export default class List extends Vue {
         perPage: number = 5
         currentPage: number = 1
+        loading: boolean = true
 
         get currentPageJobs(): Array<IJob>{
             return this.jobs.slice(
@@ -94,7 +96,10 @@
         }
 
         get jobs(): Array<IJob>{
-            return state.getJobs
+            this.loading = true
+            let jobs:Array<IJob> = state.getJobs
+            this.loading = false
+            return jobs;
         }
 
         openJob(job: IJob): void {

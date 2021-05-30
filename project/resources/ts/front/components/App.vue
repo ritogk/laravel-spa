@@ -15,6 +15,8 @@
     // コンポーネント
     import Header from './utility/Header.vue';
     import Footer from './utility/Footer.vue';
+    import VueLoading from 'vue-loading-template';
+    Vue.use(VueLoading, /** options **/)
 
     @Component({
         components: {
