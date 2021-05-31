@@ -9,9 +9,8 @@ on:
       - main
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
-jobs:
-          
-  deploy_a:
+jobs:  
+  deploy:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -25,7 +24,30 @@ jobs:
         DEPLOY_A_USER_NAME: ${{ secrets.DEPLOY_A_USER_NAME }}
       run: |
         echo "$BATION_PRIVATE_KEY" > bation_private_key && chmod 600 bation_private_key
-        ssh -o StrictHostKeyChecking=no -i bation_private_key ${BATION_USER_NAME}@${BATION_HOST_NAME}
-        ls
-        ip -4 a
-        
+        ssh -o StrictHostKeyChecking=no -i bation_private_key ${BATION_USER_NAME}@${BATION_HOST_NAME} "ssh -i ~/.ssh/portfolio2.pem ${DEPLOY_A_USER_NAME}@${DEPLOY_A_HOST_NAME} 'cd ~/laravel-spa && sudo git pull origin main'"
+        ssh -o StrictHostKeyChecking=no -i bation_private_key ${BATION_USER_NAME}@${BATION_HOST_NAME} "ssh -i ~/.ssh/portfolio2.pem ${DEPLOY_A_USER_NAME}@${DEPLOY_A_HOST_NAME} 'cd ~/laravel-spa && docker-compose exec -T php composer install'"
+        ssh -o StrictHostKeyChecking=no -i bation_private_key ${BATION_USER_NAME}@${BATION_HOST_NAME} "ssh -i ~/.ssh/portfolio2.pem ${DEPLOY_A_USER_NAME}@${DEPLOY_A_HOST_NAME} 'cd ~/laravel-spa && docker-compose exec -T php npm install'"
+        ssh -o StrictHostKeyChecking=no -i bation_private_key ${BATION_USER_NAME}@${BATION_HOST_NAME} "ssh -i ~/.ssh/portfolio2.pem ${DEPLOY_A_USER_NAME}@${DEPLOY_A_HOST_NAME} 'cd ~/laravel-spa && docker-compose exec -T php npm run prod'"
+        ssh -o StrictHostKeyChecking=no -i bation_private_key ${BATION_USER_NAME}@${BATION_HOST_NAME} "ssh -i ~/.ssh/portfolio2.pem ${DEPLOY_A_USER_NAME}@${DEPLOY_A_HOST_NAME} 'cd ~/laravel-spa && docker-compose exec -T php php artisan migrate'"
+        ssh -o StrictHostKeyChecking=no -i bation_private_key ${BATION_USER_NAME}@${BATION_HOST_NAME} "ssh -i ~/.ssh/portfolio2.pem ${DEPLOY_A_USER_NAME}@${DEPLOY_A_HOST_NAME} 'cd ~/laravel-spa && docker-compose exec -T php php artisan cache:clear'"
+        ssh -o StrictHostKeyChecking=no -i bation_private_key ${BATION_USER_NAME}@${BATION_HOST_NAME} "ssh -i ~/.ssh/portfolio2.pem ${DEPLOY_A_USER_NAME}@${DEPLOY_A_HOST_NAME} 'cd ~/laravel-spa && docker-compose exec -T php php artisan config:clear'"
+        ssh -o StrictHostKeyChecking=no -i bation_private_key ${BATION_USER_NAME}@${BATION_HOST_NAME} "ssh -i ~/.ssh/portfolio2.pem ${DEPLOY_A_USER_NAME}@${DEPLOY_A_HOST_NAME} 'cd ~/laravel-spa && docker-compose exec -T php php artisan route:clear'"
+    - name: Deploy_B
+      env:
+        BATION_PRIVATE_KEY: ${{ secrets.BATION_PRIVATE_KEY }}
+        BATION_HOST_NAME: ${{ secrets.BATION_HOST_NAME }}
+        BATION_USER_NAME: ${{ secrets.BATION_USER_NAME }}
+        DEPLOY_B_PRIVATE_KEY: ${{ secrets.DEPLOY_B_PRIVATE_KEY }}
+        DEPLOY_B_HOST_NAME: ${{ secrets.DEPLOY_B_HOST_NAME }}
+        DEPLOY_B_USER_NAME: ${{ secrets.DEPLOY_B_HOST_NAME }}
+      run: |
+        ssh -o StrictHostKeyChecking=no -i bation_private_key ${BATION_USER_NAME}@${BATION_HOST_NAME} "ssh -i ~/.ssh/portfolio2.pem ${DEPLOY_B_USER_NAME}@${DEPLOY_B_HOST_NAME} 'cd ~/laravel-spa && sudo git pull origin main'"
+        ssh -o StrictHostKeyChecking=no -i bation_private_key ${BATION_USER_NAME}@${BATION_HOST_NAME} "ssh -i ~/.ssh/portfolio2.pem ${DEPLOY_B_USER_NAME}@${DEPLOY_B_HOST_NAME} 'cd ~/laravel-spa && docker-compose exec -T php composer install'"
+        ssh -o StrictHostKeyChecking=no -i bation_private_key ${BATION_USER_NAME}@${BATION_HOST_NAME} "ssh -i ~/.ssh/portfolio2.pem ${DEPLOY_B_USER_NAME}@${DEPLOY_B_HOST_NAME} 'cd ~/laravel-spa && docker-compose exec -T php npm install'"
+        ssh -o StrictHostKeyChecking=no -i bation_private_key ${BATION_USER_NAME}@${BATION_HOST_NAME} "ssh -i ~/.ssh/portfolio2.pem ${DEPLOY_B_USER_NAME}@${DEPLOY_B_HOST_NAME} 'cd ~/laravel-spa && docker-compose exec -T php npm run prod'"
+        ssh -o StrictHostKeyChecking=no -i bation_private_key ${BATION_USER_NAME}@${BATION_HOST_NAME} "ssh -i ~/.ssh/portfolio2.pem ${DEPLOY_B_USER_NAME}@${DEPLOY_B_HOST_NAME} 'cd ~/laravel-spa && docker-compose exec -T php php artisan migrate'"
+        ssh -o StrictHostKeyChecking=no -i bation_private_key ${BATION_USER_NAME}@${BATION_HOST_NAME} "ssh -i ~/.ssh/portfolio2.pem ${DEPLOY_B_USER_NAME}@${DEPLOY_B_HOST_NAME} 'cd ~/laravel-spa && docker-compose exec -T php php artisan cache:clear'"
+        ssh -o StrictHostKeyChecking=no -i bation_private_key ${BATION_USER_NAME}@${BATION_HOST_NAME} "ssh -i ~/.ssh/portfolio2.pem ${DEPLOY_B_USER_NAME}@${DEPLOY_B_HOST_NAME} 'cd ~/laravel-spa && docker-compose exec -T php php artisan config:clear'"
+        ssh -o StrictHostKeyChecking=no -i bation_private_key ${BATION_USER_NAME}@${BATION_HOST_NAME} "ssh -i ~/.ssh/portfolio2.pem ${DEPLOY_B_USER_NAME}@${DEPLOY_B_HOST_NAME} 'cd ~/laravel-spa && docker-compose exec -T php php artisan route:clear'"
+        ssh -o StrictHostKeyChecking=no -i bation_private_key ${BATION_USER_NAME}@${BATION_HOST_NAME} "ssh -i ~/.ssh/portfolio2.pem ${DEPLOY_B_USER_NAME}@${DEPLOY_B_HOST_NAME} 'cd ~/laravel-spa && docker-compose exec -T php php artisan view:clear'"
+        ssh -o StrictHostKeyChecking=no -i bation_private_key ${BATION_USER_NAME}@${BATION_HOST_NAME} "ssh -i ~/.ssh/portfolio2.pem ${DEPLOY_B_USER_NAME}@${DEPLOY_B_HOST_NAME} 'cd ~/laravel-spa && docker-compose exec -T php php artisan view:clear'"
