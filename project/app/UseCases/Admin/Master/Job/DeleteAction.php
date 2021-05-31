@@ -2,7 +2,7 @@
 
 namespace App\UseCases\Admin\Master\Job;
 
-use App\Models\JobCategory;
+use App\Models\Job;
 
 class DeleteAction{
     /**
@@ -13,6 +13,6 @@ class DeleteAction{
      */
     public function __invoke(string $id): void
     {
-        JobCategory::where('id', $id)->delete();
+        Job::where('id', $id)->delete();
     }
 }
