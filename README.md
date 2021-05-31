@@ -1,5 +1,12 @@
 ## laravelとspaのサンプルソース
 
+## URL
+https://portfolio-rito.net/
+
+### テスト用ユーザー
+メールアドレス:test@test.co.jp<br>
+パスワード:test
+
 ## 使用技術・環境
 ### フロントエンド
 - vue
@@ -52,14 +59,35 @@
 
 ## 開発環境構築
 ### 初期セットアップ
-docker-syncを使うため必要なツールのインストール
+
+git
 ```
-$ gem install docker-sync
-$ brew install unison eugenmayer/dockersync/unox
+$ mkdir laravel-spa
+$ cd laravel-spa
+$ git init
+$ git remote add origin https://github.com/homing-job/laravel-docker-github-actions.git
+$ git pull origin dev
 ```
 
+docker
+```
+$ sudo docker-compose up -d
+$ sudo cp project/.env.base project/.env
+$ sudo vim project/.env
+$ sudo docker-compose exec -T db mysql -uroot -proot -e'create database laravel'
+$ sudo docker-compose exec -T php composer install
+$ sudo docker-compose exec -T php npm install
+$ sudo docker-compose exec -T php npm run prod
+$ sudo docker-compose exec -T php php artisan migrate:refresh --seed
+$ sudo docker-compose exec -T php php artisan key:generate
+$ sudo docker-compose exec -T php chmod -R 777 storage
+$ sudo docker-compose exec -T php chmod -R 777 bootstrap/cache
+$ sudo docker-compose exec -T php php artisan storage:link
+```
 
-
-
-seeder_image<br>
-https://github.com/homing-job/laravel-spa/files/6542800/seeder_images.zip<br>
+seeder用の画像DL
+```
+$ wget https://github.com/homing-job/laravel-spa/files/6542800/seeder_images.zip
+$ unzip seeder_images.zip -d project/storage/app/public/images
+$ rm -f seeder_images.zip
+```
