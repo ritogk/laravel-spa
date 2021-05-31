@@ -25,6 +25,4 @@ jobs:
         DEPLOY1_USER_NAME: ${{ secrets.DEPLOY1_USER_NAME }}
       run: |
         echo "$BATION_PRIVATE_KEY" > bation_private_key && chmod 600 bation_private_key
-        echo "$DEPLOY1_USER_NAME"
-        echo "$DEPLOY1_HOST_NAME"
-        ssh -o StrictHostKeyChecking=no -i bation_private_key ${BATION_USER_NAME}@${BATION_HOST_NAME} "ssh -i ~/.ssh/portfolio2.pem ${DEPLOY1_USER_NAME}@${DEPLOY1_HOST_NAME} ls"
+        ssh -o StrictHostKeyChecking=no -i bation_private_key ${BATION_USER_NAME}@${BATION_HOST_NAME} "ssh -i ~/.ssh/portfolio2.pem ${DEPLOY1_USER_NAME}@${DEPLOY1_HOST_NAME} 'cd ~/laravel-spa && sudo git pull origin main'"
