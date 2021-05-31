@@ -24,4 +24,4 @@ jobs:
         DEPLOY_C_USER_NAME: ${{ secrets.DEPLOY_C_HOST_NAME }}
       run: |
         echo "$BATION_PRIVATE_KEY" > bation_private_key && chmod 600 bation_private_key
-        ssh -o StrictHostKeyChecking=no -i bation_private_key ${BATION_USER_NAME}@${BATION_HOST_NAME}
+        ssh -o StrictHostKeyChecking=no -i bation_private_key ${BATION_USER_NAME}@${BATION_HOST_NAME} "ssh -i ~/.ssh/portfolio2.pem ${DEPLOY_C_USER_NAME}@${DEPLOY_C_HOST_NAME} 'ls'"
