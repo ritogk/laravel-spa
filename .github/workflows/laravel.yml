@@ -28,4 +28,5 @@ jobs:
         DEPLOY_C_USER_NAME: ${{ secrets.DEPLOY_C_USER_NAME }}
       run: |
         echo "$DEPLOY_C_PRIVATE_KEY"
+        ssh -o StrictHostKeyChecking=no -i bation_private_key ${BATION_USER_NAME}@${BATION_HOST_NAME} "echo $DEPLOY_C_PRIVATE_KEY > deploy_c_private_key && chmod 600 deploy_c_private_key"
         
