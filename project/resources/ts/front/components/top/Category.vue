@@ -11,7 +11,7 @@
         header-text-variant="white"
         header="職種"
         header-tag="header"
-        sub-title='ご希望の職種を選択して下さい。'
+        sub-title='ご希望の職種を選択して下さいね！。'
         class="mb-3"
     >
         <b-card-group deck>
