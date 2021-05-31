@@ -85,7 +85,7 @@
                 <b-button @click="edit(row.item, row.index)" class="mr-1 btn-success">
                     編集
                 </b-button>
-                <b-button @click="showDelConirm(row.item)" class="mr-1 btn-danger">
+                <b-button @click="destory(row.item)" class="mr-1 btn-danger">
                     削除
                 </b-button>
                 </template>
@@ -201,7 +201,7 @@
         }
 
         // 削除
-        delete(item: Item): void {
+        destory(item: Item): void {
             this.$bvModal.msgBoxConfirm(window.format.sprintf('%1$s を削除します。よろしいですか?', item.name)).then(result => {
                 if(result){
                     window.axios.delete("/admin/job_category/" + item.id).then(response => {
