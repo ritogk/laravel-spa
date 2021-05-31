@@ -14,19 +14,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: CREATE_BATION_PRIVATE_KEY
+    - name: Deploy_A
       env:
         BATION_PRIVATE_KEY: ${{ secrets.BATION_PRIVATE_KEY }}
         BATION_HOST_NAME: ${{ secrets.BATION_HOST_NAME }}
         BATION_USER_NAME: ${{ secrets.BATION_USER_NAME }}
+        DEPLOY_A_PRIVATE_KEY: ${{ secrets.DEPLOY_A_PRIVATE_KEY }}
+        DEPLOY_A_HOST_NAME: ${{ secrets.DEPLOY_A_HOST_NAME }}
+        DEPLOY_A_USER_NAME: ${{ secrets.DEPLOY_A_USER_NAME }}
       run: |
         echo "$BATION_PRIVATE_KEY" > bation_private_key && chmod 600 bation_private_key
-    - name: Deploy_C
-      env:
-        DEPLOY_C_PRIVATE_KEY: ${{ secrets.DEPLOY_C_PRIVATE_KEY }}
-        DEPLOY_C_HOST_NAME: ${{ secrets.DEPLOY_C_HOST_NAME }}
-        DEPLOY_C_USER_NAME: ${{ secrets.DEPLOY_C_USER_NAME }}
-      run: |
-        
-        ssh -o StrictHostKeyChecking=no -i bation_private_key ${BATION_USER_NAME}@${BATION_HOST_NAME} "echo '$DEPLOY_C_PRIVATE_KEY'"
-        
+        ssh -o StrictHostKeyChecking=no -i bation_private_key ${BATION_USER_NAME}@${BATION_HOST_NAME} "echo '$BATION_PRIVATE_KEY' > deploy_private_key && chmod 600 deploy_private_key"
