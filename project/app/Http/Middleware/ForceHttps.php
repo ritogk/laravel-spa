@@ -16,7 +16,7 @@ class ForceHttps
      */
     public function handle(Request $request, Closure $next)
     {
-        if (\App::environment(['production']) && $_SERVER["HTTP_X_FORWARDED_PROTO"] != 'https') {
+        if (\App::environment(['production'])) {
             return redirect()->secure($request->getRequestUri());
         }
         return $next($request);
