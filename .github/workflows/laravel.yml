@@ -21,11 +21,11 @@ jobs:
         BATION_USER_NAME: ${{ secrets.BATION_USER_NAME }}
       run: |
         echo "$BATION_PRIVATE_KEY" > bation_private_key && chmod 600 bation_private_key
-    - name: Deploy_B
+    - name: Deploy_C
       env:
         DEPLOY_C_PRIVATE_KEY: ${{ secrets.DEPLOY_C_PRIVATE_KEY }}
         DEPLOY_C_HOST_NAME: ${{ secrets.DEPLOY_C_HOST_NAME }}
         DEPLOY_C_USER_NAME: ${{ secrets.DEPLOY_C_USER_NAME }}
       run: |
-        echo "${{DEPLOY_C_PRIVATE_KEY}}"
+        echo "$DEPLOY_C_PRIVATE_KEY"
         
