@@ -10,12 +10,52 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
+  # This workflow contains a single job called "build"
+  laravel-test:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
 
-  deploy1:
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+
+      # Runs a single command using the runners shell
+      - name: compose-run
+        run: |
+          docker-compose up -d
+      - name: create table
+        run: |
+          sleep 20
+          docker-compose exec -T db mysql -uroot -proot -e'create database laravel_test'
+      - name: image seeder download
+        run: |
+          wget https://github.com/homing-job/laravel-spa/files/6542800/seeder_images.zip
+          unzip seeder_images.zip -d project/storage/app/public/images
+          rm -f seeder_images.zip
+      - name: laravel init
+        run: |
+          docker-compose exec -T php composer install
+          docker-compose exec -T php composer install
+          docker-compose exec -T php npm install
+          docker-compose exec -T php npm run prod
+          docker-compose exec -T php php artisan migrate:refresh --seed --env=testing
+          docker-compose exec -T php php artisan key:generate --env=testing
+          docker-compose exec -T php chmod -R 777 storage
+          docker-compose exec -T php chmod -R 777 bootstrap/cache
+      - name: laravel test
+        run: |
+          docker-compose exec -T php php artisan config:clear
+          docker-compose exec -T php php vendor/bin/phpstan analyse app --memory-limit=1G
+          docker-compose exec -T php php artisan test --env=testing
+          
+  deploy_a:
+    if: github.ref == 'refs/heads/main'
+    needs: laravel-test
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Deploy_a
+    - name: Deploy_A
       env:
         BATION_PRIVATE_KEY: ${{ secrets.BATION_PRIVATE_KEY }}
         BATION_HOST_NAME: ${{ secrets.BATION_HOST_NAME }}
@@ -26,4 +66,11 @@ jobs:
       run: |
         echo "$BATION_PRIVATE_KEY" > bation_private_key && chmod 600 bation_private_key
         ssh -o StrictHostKeyChecking=no -i bation_private_key ${BATION_USER_NAME}@${BATION_HOST_NAME} "ssh -i ~/.ssh/portfolio2.pem ${DEPLOY_A_USER_NAME}@${DEPLOY_A_HOST_NAME} 'cd ~/laravel-spa && sudo git pull origin main'"
-    
+        ssh -o StrictHostKeyChecking=no -i bation_private_key ${BATION_USER_NAME}@${BATION_HOST_NAME} "ssh -i ~/.ssh/portfolio2.pem ${DEPLOY_A_USER_NAME}@${DEPLOY_A_HOST_NAME} 'cd ~/laravel-spa && docker-compose exec -T php composer install'"
+        ssh -o StrictHostKeyChecking=no -i bation_private_key ${BATION_USER_NAME}@${BATION_HOST_NAME} "ssh -i ~/.ssh/portfolio2.pem ${DEPLOY_A_USER_NAME}@${DEPLOY_A_HOST_NAME} 'cd ~/laravel-spa && docker-compose exec -T php npm install'"
+        ssh -o StrictHostKeyChecking=no -i bation_private_key ${BATION_USER_NAME}@${BATION_HOST_NAME} "ssh -i ~/.ssh/portfolio2.pem ${DEPLOY_A_USER_NAME}@${DEPLOY_A_HOST_NAME} 'cd ~/laravel-spa && docker-compose exec -T php npm run prod'"
+        ssh -o StrictHostKeyChecking=no -i bation_private_key ${BATION_USER_NAME}@${BATION_HOST_NAME} "ssh -i ~/.ssh/portfolio2.pem ${DEPLOY_A_USER_NAME}@${DEPLOY_A_HOST_NAME} 'cd ~/laravel-spa && docker-compose exec -T php php artisan migrate'"
+        ssh -o StrictHostKeyChecking=no -i bation_private_key ${BATION_USER_NAME}@${BATION_HOST_NAME} "ssh -i ~/.ssh/portfolio2.pem ${DEPLOY_A_USER_NAME}@${DEPLOY_A_HOST_NAME} 'cd ~/laravel-spa && docker-compose exec -T php php artisan cache:clear'"
+        ssh -o StrictHostKeyChecking=no -i bation_private_key ${BATION_USER_NAME}@${BATION_HOST_NAME} "ssh -i ~/.ssh/portfolio2.pem ${DEPLOY_A_USER_NAME}@${DEPLOY_A_HOST_NAME} 'cd ~/laravel-spa && docker-compose exec -T php php artisan config:clear'"
+        ssh -o StrictHostKeyChecking=no -i bation_private_key ${BATION_USER_NAME}@${BATION_HOST_NAME} "ssh -i ~/.ssh/portfolio2.pem ${DEPLOY_A_USER_NAME}@${DEPLOY_A_HOST_NAME} 'cd ~/laravel-spa && docker-compose exec -T php php artisan route:clear'"
+        ssh -o StrictHostKeyChecking=no -i bation_private_key ${BATION_USER_NAME}@${BATION_HOST_NAME} "ssh -i ~/.ssh/portfolio2.pem ${DEPLOY_A_USER_NAME}@${DEPLOY_A_HOST_NAME} 'cd ~/laravel-spa && docker-compose exec -T php php artisan view:clear'"
