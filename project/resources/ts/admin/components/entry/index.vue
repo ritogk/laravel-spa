@@ -1,6 +1,6 @@
 <template>
     <b-container fluid class="py-4">
-        <h2>求人一覧</h2>
+        <h2>選考一覧</h2>
         <msg-danger :message="message"></msg-danger>
 
         <!-- 抽出条件 -->

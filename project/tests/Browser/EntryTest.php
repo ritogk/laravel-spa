@@ -67,9 +67,9 @@ class EntryTest extends DuskTestCase
                     ->press('ログイン')
                     ->screenshot('admin');
 
-            // 管理画面(求人一覧) 申込した仕事が表示される。
+            // 管理画面(選考一覧) 申込した仕事が表示される。
             $entry = Entry::where('job_id', $job->id)->first();
-            $browser->clickLink('求人一覧')
+            $browser->clickLink('選考一覧')
                     ->pause(self::pause_time_1)
                     ->screenshot('admin_job_entry_list')
                     ->assertSee($job->title)
