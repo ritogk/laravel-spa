@@ -1,6 +1,6 @@
 <template>
     <b-container fluid class="py-4">
-        <h2>求人一覧</h2>
+        <h2>選考一覧</h2>
         <msg-danger :message="message"></msg-danger>
 
         <!-- 抽出条件 -->
@@ -79,7 +79,9 @@
                     {{ row.item.tel }}
                 </template>
 
-                <template #cell(self_pr)="row">{{ row.item.self_pr }}</template>
+                <template #cell(self_pr)="row">
+                    {{ row.item.self_pr }}
+                </template>
 
                 <template #cell(created_at)="row">
                     {{ entryDate(row.item.created_at) }}

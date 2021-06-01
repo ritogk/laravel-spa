@@ -32,6 +32,7 @@
                     class="mb-4 category-card"
                     style="max-width: 20rem;"
                     overlay
+                    :id="`category-${category.id}`"
                 >
                     <b-card-title>
                         <h2 v-text='category.name'></h2>
