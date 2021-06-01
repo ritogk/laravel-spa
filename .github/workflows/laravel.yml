@@ -35,19 +35,21 @@ jobs:
           rm -f seeder_images.zip
       - name: laravel init
         run: |
+          cp project/.env.testing project/.env
           docker-compose exec -T php composer install
           docker-compose exec -T php composer install
           docker-compose exec -T php npm install
           docker-compose exec -T php npm run prod
-          docker-compose exec -T php php artisan migrate:refresh --seed --env=testing
-          docker-compose exec -T php php artisan key:generate --env=testing
+          docker-compose exec -T php php artisan migrate:refresh --seed
+          docker-compose exec -T php php artisan key:generate
           docker-compose exec -T php chmod -R 777 storage
           docker-compose exec -T php chmod -R 777 bootstrap/cache
       - name: laravel test
         run: |
           docker-compose exec -T php php artisan config:clear
           docker-compose exec -T php php vendor/bin/phpstan analyse app --memory-limit=1G
-          docker-compose exec -T php php artisan test --env=testing
+          docker-compose exec -T php php artisan test
+          docker-compose exec -T php php artisan dusk
           
   deploy:
     if: github.ref == 'refs/heads/main'
