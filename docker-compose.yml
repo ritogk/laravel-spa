@@ -6,6 +6,7 @@ services:
     build: ./docker/php
     volumes:
     - ./project:/var/www/html
+    restart: always
 
   nginx:
     image: nginx
@@ -17,6 +18,7 @@ services:
     - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
     depends_on:
     - php
+    restart: always
 
   db:
     image: mysql:5.7
@@ -34,8 +36,11 @@ services:
     - ./docker/db/sql:/docker-entrypoint-initdb.d
     ports:
     - 53306:3306
+    restart: always
+
   selenium:
     container_name: selenium_chrome
     image: selenium/standalone-chrome
     ports:
       - 4444:4444
+    restart: always
