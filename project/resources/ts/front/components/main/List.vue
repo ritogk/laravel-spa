@@ -44,6 +44,7 @@
                 tag="article"
                 class="mb-3"
                 no-body
+                :id="`job-${job.id}`"
             >
                 <div class="trim">
                     <b-card-img :src="job.image" alt="Image" class="trim_img">

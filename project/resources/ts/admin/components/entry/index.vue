@@ -79,7 +79,9 @@
                     {{ row.item.tel }}
                 </template>
 
-                <template #cell(self_pr)="row">{{ row.item.self_pr }}</template>
+                <template #cell(self_pr)="row">
+                    {{ row.item.self_pr }}
+                </template>
 
                 <template #cell(created_at)="row">
                     {{ entryDate(row.item.created_at) }}

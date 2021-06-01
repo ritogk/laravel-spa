@@ -49,6 +49,7 @@
                                     :invalid-feedback="errors.full_name"
                                     :state="input_state(errors.full_name)">
                                         <b-form-input
+                                        id="full_name"
                                         v-model="entry.full_name"
                                         placeholder="フルーネムでお願いします。"
                                         :state="input_state(errors.full_name)"></b-form-input>
@@ -61,6 +62,7 @@
                                     :invalid-feedback="errors.self_pr"
                                     :state="input_state(errors.self_pr)">
                                         <b-form-textarea
+                                        id="self_pr"
                                         v-model="entry.self_pr"
                                         rows="3"
                                         max-rows="4"
@@ -76,6 +78,7 @@
                                     :invalid-feedback="errors.email"
                                     :state="input_state(errors.email)">
                                         <b-form-input
+                                            id="email"
                                             placeholder="test@yahoo.co.jp"
                                             v-model="entry.email"
                                             :state="input_state(errors.email)">
@@ -89,6 +92,7 @@
                                     :invalid-feedback="errors.tel"
                                     :state="input_state(errors.tel)">
                                         <b-form-input
+                                        id="tel"
                                         placeholder="ハイフンを含めずに書いて下さい。"
                                         v-model="entry.tel"
                                         :state="input_state(errors.email)">
