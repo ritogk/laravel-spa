@@ -23,7 +23,7 @@ https://portfolio-rito.net/
 
 | ログイン　|管理画面  |
 | :----: | :----: |
-| <img src="https://user-images.githubusercontent.com/72111956/120412146-ffd83b00-c390-11eb-8d7d-7d19ccba3fb9.png">   | <img src="https://user-images.githubusercontent.com/72111956/120408929-f21fb700-c38a-11eb-9781-e277c9937105.png">   |
+| <img src="https://user-images.githubusercontent.com/72111956/120412146-ffd83b00-c390-11eb-8d7d-7d19ccba3fb9.png">   | <img src="https://user-images.githubusercontent.com/72111956/120468483-3dae8100-c3dc-11eb-85fb-c2f95b207100.PNG">   |
 <br>
 
 | 選考一覧　|  |
@@ -31,14 +31,14 @@ https://portfolio-rito.net/
 | <img src="https://user-images.githubusercontent.com/72111956/120408952-f77d0180-c38a-11eb-933e-57bd51f473cb.png">   |   |
 <br>
 
-| 仕事カテゴリマスタ(一覧)　|仕事カテゴリマスタ(新規)  |
+| 職種マスタ(一覧)　|職種マスタ(新規)  |
 | :----: | :----: |
-| <img src="https://user-images.githubusercontent.com/72111956/120408943-f5b33e00-c38a-11eb-908e-7aaa55ee28d0.png">   | <img src="https://user-images.githubusercontent.com/72111956/120408945-f5b33e00-c38a-11eb-9833-a6da62f6b75d.png">   |
+| <img src="https://user-images.githubusercontent.com/72111956/120468478-3c7d5400-c3dc-11eb-9c07-8234287aff5c.PNG">   | <img src="https://user-images.githubusercontent.com/72111956/120468492-4010db00-c3dc-11eb-9903-a13d70a2b7b5.PNG">   |
 <br>
 
-| 仕事カテゴリマスタ(編集)　|  |
+| 職種マスタ(編集)　|  |
 | :----: | :----: |
-| <img src="https://user-images.githubusercontent.com/72111956/120408948-f64bd480-c38a-11eb-8dc5-0cd51d0e1d60.png">   |   |
+| <img src="https://user-images.githubusercontent.com/72111956/120468484-3dae8100-c3dc-11eb-93b1-2c0ec5d40d6b.png">   |   |
 <br>
 
 | 仕事マスタ(一覧)　|仕事マスタ(新規)  |
