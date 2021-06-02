@@ -13,7 +13,7 @@ class EntryTest extends DuskTestCase
 {
 
     CONST pause_time_1 = 1000;
-    CONST pause_time_2 = 10000;
+    CONST pause_time_2 = 3000;
     CONST pause_time_3 = 5000;
 
     /**
@@ -33,7 +33,8 @@ class EntryTest extends DuskTestCase
                     ->pause(self::pause_time_1)
                     ->screenshot('select_categories')
                     ->assertSee($category->name)
-                    ->assertSee($category->content);
+                    ->assertSee($category->content)
+                    ->pause(self::pause_time_2);
             // 職種一覧 職種(IT)選択
             $browser->click(sprintf("#category-%s", $category->id))
                     ->pause(self::pause_time_1)
