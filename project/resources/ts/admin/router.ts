@@ -9,7 +9,7 @@ import entry_index from "./components/entry/index.vue";
 import job_index from "./components/master/job/index.vue";
 import job_edit from "./components/master/job/edit.vue";
 import job_create from "./components/master/job/create.vue";
-// 仕事カテゴリマスタ
+// 職種マスタ
 import job_category_index from "./components/master/job_category/index.vue";
 import job_category_edit from "./components/master/job_category/edit.vue";
 import job_category_create from "./components/master/job_category/create.vue";
@@ -60,7 +60,7 @@ const router = new VueRouter({
                 }
             }
         },
-        // 仕事カテゴリマスタ
+        // 職種マスタ
         {
             path: "/job_category_index",
             name: "job_category_index",
