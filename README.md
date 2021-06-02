@@ -97,6 +97,7 @@ https://portfolio-rito.net/
 
 ## 工夫した点
 フロント側、管理側をspaで作成<br>
+JavaScriptには型定を使用してアプリの品質向上<br>
 Laravelをapiとして使用(一部除く)<br>
 ci/cdでテスト、デプロイを自動化<br>
 セキュリティを意識したaws構成<br>
