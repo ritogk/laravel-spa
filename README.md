@@ -118,7 +118,6 @@ $ git pull origin dev
 ```
 $ sudo docker-compose up -d
 $ sudo cp project/.env.base project/.env
-$ sudo vim project/.env
 $ sudo docker-compose exec -T db mysql -uroot -proot -e'create database laravel'
 $ sudo docker-compose exec -T php composer install
 $ sudo docker-compose exec -T php npm install
