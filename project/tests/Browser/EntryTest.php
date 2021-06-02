@@ -12,7 +12,7 @@ use App\Models\Entry;
 class EntryTest extends DuskTestCase
 {
 
-    CONST pause_time_1 = 500;
+    CONST pause_time_1 = 1000;
     CONST pause_time_2 = 10000;
     CONST pause_time_3 = 5000;
 
