@@ -192,7 +192,7 @@
                 }
                 this.getItem();
             })
-            // 仕事カテゴリ名称取得
+            // 職種マスタ名称取得
             window.axios.post("/admin/job_category/list", {isInit: true}).then(response => {
                 let keyValues: {[key: string]: string;} = {}
                 response.data.map((x: JobCategory) => keyValues[x.id] = x.name)

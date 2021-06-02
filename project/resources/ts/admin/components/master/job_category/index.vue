@@ -1,6 +1,6 @@
 <template>
     <b-container fluid class="py-4">
-    <h2>仕事カテゴリマスタ</h2>
+    <h2>職種マスタ</h2>
     <msg-danger :message="message"></msg-danger>
 
         <!-- 抽出条件 -->

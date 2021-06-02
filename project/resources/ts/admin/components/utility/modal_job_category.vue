@@ -6,7 +6,7 @@
             <b-button variant="outline-info" @click="delValue()">削除</b-button>
             <b-button variant="outline-info" v-b-modal.modal-1>選択</b-button>
 
-            <b-modal id="modal-1" size="lg" @ok="submit" title="仕事カテゴリマスタ選択">
+            <b-modal id="modal-1" size="lg" @ok="submit" title="選択">
                 <b-card>
                     <!-- User Interface controls -->
                     <b-row>

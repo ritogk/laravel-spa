@@ -35,11 +35,11 @@
                                 <p>仕事</p>
                             </router-link>
                         </li>
-                        <!-- 仕事カテゴリマスタ -->
+                        <!-- 職種マスタ -->
                         <li class="nav-item">
                             <router-link :to="{ name: 'job_category_index', params: { isInit: true }}" class="nav-link">
                                 <i class="nav-icon fas fa-atlas"></i>
-                                <p>仕事カテゴリ</p>
+                                <p>職種</p>
                             </router-link>
                         </li>
                     </ul>
