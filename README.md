@@ -4,6 +4,13 @@
 求人の検索サービスです。<br>
 求人設定、選考確認、求人への応募が行えます。
 
+## URL
+https://portfolio-rito.net/
+
+### テスト用ユーザー
+メールアドレス:test@test.co.jp<br>
+パスワード:test
+
 | 職種選択　|  |
 | :----: | :----: |
 | <img src="https://user-images.githubusercontent.com/72111956/120408935-f350e400-c38a-11eb-97aa-748d152cf5ac.png">   |   |
@@ -43,13 +50,6 @@
 | :----: | :----: |
 | <img src="https://user-images.githubusercontent.com/72111956/120408951-f6e46b00-c38a-11eb-851d-6d733c503f70.png">   |   |
 <br>
-
-## URL
-https://portfolio-rito.net/
-
-### テスト用ユーザー
-メールアドレス:test@test.co.jp<br>
-パスワード:test
 
 ## 使用技術・環境
 ### フロントエンド
