@@ -23,7 +23,7 @@ https://portfolio-rito.net/
 
 | ログイン　|管理画面  |
 | :----: | :----: |
-| <img src="https://user-images.githubusercontent.com/72111956/120408940-f51aa780-c38a-11eb-9199-28af63b2b620.png">   | <img src="https://user-images.githubusercontent.com/72111956/120408929-f21fb700-c38a-11eb-9781-e277c9937105.png">   |
+| <img src="https://user-images.githubusercontent.com/72111956/120412146-ffd83b00-c390-11eb-8d7d-7d19ccba3fb9.png">   | <img src="https://user-images.githubusercontent.com/72111956/120408929-f21fb700-c38a-11eb-9781-e277c9937105.png">   |
 <br>
 
 | 選考一覧　|  |
