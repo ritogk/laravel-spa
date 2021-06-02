@@ -74,6 +74,8 @@ https://portfolio-rito.net/
 - vscode
 - eslint
 - github
+- windows
+- wsl2
 
 ### CI/CD
 - GithubActions
