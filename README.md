@@ -110,7 +110,7 @@ ci/cdでテスト、デプロイを自動化<br>
 $ mkdir laravel-spa
 $ cd laravel-spa
 $ git init
-$ git remote add origin https://github.com/homing-job/laravel-docker-github-actions.git
+$ git remote add origin https://github.com/homing-job/laravel-spa.git
 $ git pull origin dev
 ```
 
