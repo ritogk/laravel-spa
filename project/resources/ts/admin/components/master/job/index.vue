@@ -1,3 +1,14 @@
+<style scoped>
+    /* 仕事内容 */
+    .job_content{
+        display: block;
+        width: 300px;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+    }
+</style>
+
 <template>
     <b-container fluid class="py-4">
         <h2>仕事マスタ</h2>
@@ -80,7 +91,7 @@
                 </template>
 
                 <template #cell(content)="row">
-                    {{ row.item.content }}
+                    <div class="job_content">{{ row.item.content }}</div>
                 </template>
 
                 <template #cell(job_category_nm)="row">
