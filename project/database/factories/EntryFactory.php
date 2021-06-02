@@ -28,7 +28,7 @@ class EntryFactory extends Factory
             'full_name' => $this->faker->name,
             'email' => $this->faker->email,
             'self_pr' => $this->faker->realText(1000),
-            'tel' => $this->faker->phoneNumber
+            'tel' => '090-9999-8888'
         ];
     }
 }
