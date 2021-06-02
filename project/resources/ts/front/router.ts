@@ -4,8 +4,8 @@ import VueRouter from "vue-router";
 Vue.use(VueRouter);
 
 // コンポーネント
-import main from './components/main/Board.vue';
-import top from './components/top/Board.vue';
+import job from './components/job/Board.vue';
+import category from './components/category/Board.vue';
 
 const router = new VueRouter({
     mode: "hash",
@@ -13,15 +13,15 @@ const router = new VueRouter({
         // トップ
         {
             path: "*",
-            name: "top",
-            component: top,
+            name: "category",
+            component: category,
             props: true
         },
         // メイン
         {
-            path: "/main",
-            name: "main",
-            component: main,
+            path: "/job",
+            name: "job",
+            component: job,
             props: true,
         },
     ]

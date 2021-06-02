@@ -72,7 +72,7 @@
         pageTransition(category: ICategory){
             const cond: ICond = {category: category.id, content: '', price: null, attention: false}
             state.searchJob(cond)
-            this.$router.push({ name: 'main'})
+            this.$router.push({ name: 'job'})
         }
     }
 </script>
