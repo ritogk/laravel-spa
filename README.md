@@ -136,3 +136,6 @@ $ wget https://github.com/homing-job/laravel-spa/files/6542800/seeder_images.zip
 $ unzip seeder_images.zip -d project/storage/app/public/images
 $ rm -f seeder_images.zip
 ```
+
+## 職務経歴書
+https://github.com/homing-job/laravel-spa/blob/main/resume.md
