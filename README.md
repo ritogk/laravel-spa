@@ -99,6 +99,7 @@ https://portfolio-rito.net/
 フロント側、管理側をspaで作成<br>
 JavaScriptには型定を使用してアプリの品質向上<br>
 Laravelをapiとして使用(一部除く)<br>
+コンテナはローカル環境と本番環境で同じものを使用<br>
 ci/cdでテスト、デプロイを自動化<br>
 セキュリティを意識したaws構成<br>
 高可用でスケール可能なaws構成<br>
