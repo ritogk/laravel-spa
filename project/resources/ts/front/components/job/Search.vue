@@ -82,7 +82,7 @@
                                 , content: this.content
                                 , price: this.price
                                 , attention: this.attention}
-            state.searchJob(cond)
+            state.search(cond)
         }
     }
 </script>
