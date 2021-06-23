@@ -8,25 +8,26 @@
 <template>
     <div>
         <b-modal
-        v-model="isShow"
+        id="bv-modal"
+        @show="open_modal()"
         @close="close_modal()"
         size="lg"
-        :title="selectJob.title"
+        :title="convert_job.title"
         :header-bg-variant="headerBgVariant"
         :header-text-variant="headerTextVariant"
         >
             <b-card-group deck>
                 <b-card
-                :img-src="selectJob.image"
+                :img-src="convert_job.image"
                 img-alt="Card image"
                 img-top>
                     <b-card-text>
                         <div>
-                            <h1 v-text='selectJob.title'></h1>
+                            <h1 v-text='convert_job.title'></h1>
                         </div>
                         <div class="py-3">
                             <h3>仕事内容</h3>
-                            <span class="multiple" v-text='selectJob.content'></span>
+                            <span class="multiple" v-text='convert_job.content'></span>
                         </div>
                         <div class="py-3">
                             <h3>金額</h3>
@@ -34,11 +35,11 @@
                         </div>
                         <div class="py-3">
                             <h3>福利厚生</h3>
-                            <span class="multiple" v-text='selectJob.welfare'></span>
+                            <span class="multiple" v-text='convert_job.welfare'></span>
                         </div>
                         <div class="py-3">
                             <h3>休日</h3>
-                            <span class="multiple" v-text='selectJob.holiday'></span>
+                            <span class="multiple" v-text='convert_job.holiday'></span>
                         </div>
 
                         <b-card header="応募フォーム">
@@ -125,10 +126,8 @@
 </template>
 
 <script lang="ts">
-    import { Vue, Component, Prop } from 'vue-property-decorator';
+    import { Vue, Component, Prop, Watch } from 'vue-property-decorator';
 
-    // 状態管理
-    import { state } from "@root/front/state";
     // モデル
     import IJob from "@root/front/models/IJob";
 
@@ -142,6 +141,18 @@
 
     @Component
     export default class Detail extends Vue {
+        @Prop()
+        job!: IJob|null
+
+        @Watch('job')
+        onChangeJob() {
+            if(this.job == null) return
+            // jobが変更されたタイミングでモーダル表示
+            this.$nextTick(() => {
+                this.$bvModal.show('bv-modal')
+            })
+        }
+
         // ヘッダスタイル
         headerBgVariant: string = 'primary'
         headerTextVariant: string = 'light'
@@ -149,32 +160,34 @@
         entry: IEntry = {job_id: '', full_name: '', self_pr: '', tel: '', emai: ''};
         errors: {[key: string]: string}  = {full_name: '', self_pr: '', tel: '', email: ''};
 
-        private get isShow(): boolean{
-            return state.getIsShowDetail
+        // 画面表示用のjob
+        get convert_job(): IJob{
+            if(this.job != null){
+                return this.job
+            }else{
+                return {id: '', title: '', content: '', attention: false, job_category_id: '', image: '', welfare: '', holiday: '', price: null, sort_no: ''}
+            }
         }
-        private set isShow(value: boolean) {
-            state.setIsShowDetail(value)
-        }
-
-        get selectJob(): IJob{
-            return state.getJobDetail
-        }
-
         // 金額表示
         get price(): string{
-            if(this.selectJob.price == null) return ''
-            return (this.selectJob.price).toLocaleString() + '円 ～'
+            if(this.convert_job.price == null) return ''
+            return (this.convert_job.price).toLocaleString() + '円 ～'
+        }
+
+        // 開く際に実行する
+        open_modal(): void{
+            this.entry = {job_id: '', full_name: '', self_pr: '', tel: '', emai: ''};
         }
 
         // 閉じる際に実行する
         close_modal(): void{
-            state.closeDetail()
-            this.entry = {job_id: '', full_name: '', self_pr: '', tel: '', emai: ''};
+            this.$bvModal.hide('bv-modal')
+            this.$emit('close');
         }
 
         // 仕事登録
-        job_entry(){
-            this.entry.job_id = this.selectJob.id
+        job_entry(): void{
+            this.entry.job_id = this.convert_job.id
             window.axios.post('/front/save/entry', this.entry).then(response => {
                 this.close_modal()
             }).catch(error => {

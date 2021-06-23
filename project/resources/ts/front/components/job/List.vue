@@ -31,7 +31,7 @@
 </style>
 
 <template>
-    <div class="col" id="main">
+    <div class="col">
         <vue-loading type="spiningDubbles" color="#3490dc" :size="{ width: '50%', height: '50%' }" v-show="loading"></vue-loading>
         <div v-for="(job, index) in currentPageJobs" :key="`job-${index}`" v-show="!loading">
             <b-card
@@ -60,7 +60,7 @@
                             </p>
                         </div>
                     </b-card-text>
-                    <a href="#" @click.prevent="openJob(job)" class="stretched-link"></a>
+                    <a href="#" @click.prevent="openDetail(job)" class="stretched-link"></a>
                 </div>
             </b-card>
         </div>
@@ -72,21 +72,34 @@
             first-number
             last-number
         ></b-pagination>
+
+        <app-detail :job="selJob" v-on:close="closeDetail"></app-detail>
     </div>
 </template>
 
 <script lang="ts">
     import { Vue, Component, Watch } from 'vue-property-decorator';
 
+    // コンポーネント
+    import Detail from './Detail.vue';
     // モデル
     import IJob from "@root/front/models/IJob";
+    import ICond from "@root/front/models/ICond";
     // 状態管理
     import { state } from "@root/front/state";
 
-    @Component
+    @Component({
+        components: {
+            'app-detail': Detail,
+        }
+    })
     export default class List extends Vue {
+        allJobs:Array<IJob> = []
         perPage: number = 5
         currentPage: number = 1
+
+        selJob:IJob|null = null
+
         loading: boolean = true
 
         get currentPageJobs(): Array<IJob>{
@@ -96,15 +109,32 @@
                                     );
         }
 
-        get jobs(): Array<IJob>{
-            this.loading = true
-            let jobs:Array<IJob> = state.getJobs
-            this.loading = false
-            return jobs;
+        get conds(): ICond{
+            return state.getCond
         }
 
-        openJob(job: IJob): void {
-            state.openDetail(job)
+        get jobs(): Array<IJob>{
+            const _this: any = this
+            return this.allJobs.filter( function(job: IJob){
+                return job.job_category_id == _this.conds.category
+            })
+        }
+
+        mounted(): void{
+            this.loading = true
+            const cond: ICond = {category: '', content: '', price: null, attention: false}
+            window.axios.post('/front/jobs', cond).then(response => {
+                this.allJobs = response.data
+                this.loading = false
+            })
+        }
+
+        openDetail(job: IJob): void {
+            this.selJob = job
+        }
+
+        closeDetail(): void {
+            this.selJob = null
         }
 
         decoPrice(num: number): string{
