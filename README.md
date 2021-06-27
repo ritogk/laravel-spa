@@ -97,7 +97,7 @@ https://portfolio-rito.net/
 
 ## 工夫した点
 フロント側、管理側をspaで作成<br>
-JavaScriptには型定を使用してアプリの品質向上<br>
+typescript, 静的チェック, テストコード等を使用してアプリの品質向上<br>
 Laravelをapiとして使用(一部除く)<br>
 コンテナはローカル環境と本番環境で同じものを使用<br>
 ci/cdでテスト、デプロイを自動化<br>
