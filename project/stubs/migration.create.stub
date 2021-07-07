@@ -1,0 +1,39 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+class {{ class }} extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('{{ table }}', function (Blueprint $table) {
+            $table->id();
+//            $table->string('*****')->comment('*****');
+//            $table->text('*****')->comment('*****');
+//            $table->integer('*****')->comment('*****');
+//            $table->boolean('*****')->comment('*****');
+//            $table->date('*****')->comment('*****');
+//            $table->dateTime('*****')->comment('*****');
+//            $table->time('*****')->comment('*****');
+            $table->timestamps();
+            $table->softDeletes()->index();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('{{ table }}');
+    }
+}
