@@ -63,14 +63,14 @@
         // 初期化
         mounted(){
             this.loading = true
-            window.axios.post('/front/categories').then(response => {
+            window.axios.get('/api/front/categories').then(response => {
                 this.categories = response.data
                 this.loading = false
             })
         }
 
         pageTransition(category: ICategory){
-            const cond: ICond = {category: category.id, content: '', price: null, attention: false}
+            const cond: ICond = {category: category.id, content: '', price: '', attention: false}
             state.search(cond)
             this.$router.push({ name: 'job'})
         }

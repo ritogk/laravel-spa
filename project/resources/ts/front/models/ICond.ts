@@ -1,6 +1,6 @@
 export default interface ICond {
     category: string
     content: string
-    price: number|null
+    price: string
     attention: boolean
 }

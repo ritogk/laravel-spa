@@ -16,14 +16,12 @@ class SearchJobsActionTest extends TestCase
      */
     public function test_200()
     {
-
-        $post_data = ['category' => '', 'content' => '', 'price' => '', 'attention' => ''];
         // アクセス
-        $response = $this->post('/front/jobs', $post_data);
+        $response = $this->get('/api/front/jobs');
         // データ取得
         $action =  new SearchJobsAction();
         // チェック
         $response->assertStatus(200)
-                ->assertJsonFragment($action($post_data));
+                ->assertJsonFragment($action());
     }
 }

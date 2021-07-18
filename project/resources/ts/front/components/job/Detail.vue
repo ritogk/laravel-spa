@@ -165,7 +165,7 @@
             if(this.job != null){
                 return this.job
             }else{
-                return {id: '', title: '', content: '', attention: false, job_category_id: '', image: '', welfare: '', holiday: '', price: null, sort_no: ''}
+                return {id: '', title: '', content: '', attention: false, job_category_id: '', image: '', welfare: '', holiday: '', price: 0, sort_no: ''}
             }
         }
         // 金額表示
@@ -188,7 +188,7 @@
         // 仕事登録
         job_entry(): void{
             this.entry.job_id = this.convert_job.id
-            window.axios.post('/front/save/entry', this.entry).then(response => {
+            window.axios.post('/api/front/entry', this.entry).then(response => {
                 this.close_modal()
             }).catch(error => {
                 let request_errors = error.response.data.errors;

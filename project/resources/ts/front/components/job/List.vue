@@ -114,16 +114,23 @@
         }
 
         get jobs(): Array<IJob>{
-            const _this: any = this
-            return this.allJobs.filter( function(job: IJob){
-                return job.job_category_id == _this.conds.category
-            })
+            let jobs_filter: Array<IJob> = this.allJobs;
+            jobs_filter = jobs_filter.filter(job => job.job_category_id == this.conds.category);
+            if(this.conds.content != ''){
+                jobs_filter = jobs_filter.filter(job => job.content.indexOf(this.conds.content) > -1);
+            }
+            if(this.conds.price != ''){
+                jobs_filter = jobs_filter.filter(job => job.price >= Number(this.conds.price));
+            }
+            if(this.conds.attention){
+                jobs_filter = jobs_filter.filter(job => job.attention == true);
+            }
+            return jobs_filter;
         }
 
         mounted(): void{
             this.loading = true
-            const cond: ICond = {category: '', content: '', price: null, attention: false}
-            window.axios.post('/front/jobs', cond).then(response => {
+            window.axios.get('/api/front/jobs').then(response => {
                 this.allJobs = response.data
                 this.loading = false
             })

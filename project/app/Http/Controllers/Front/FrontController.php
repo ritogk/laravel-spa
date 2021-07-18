@@ -31,21 +31,19 @@ class FrontController extends Controller
     /**
      * 仕事一覧取得
      *
-     * @param JobSeachRequest $request
      * @param SearchJobsAction $action
      * @return array
      */
-    public function searchJobs(JobSeachRequest $request, SearchJobsAction $action): array{
-        return $action($request->all());
+    public function index_jobs(SearchJobsAction $action): array{
+        return $action();
     }
 
     /**
      * カテゴリ一覧取得
      *
-     * @param Request $request
      * @return array
      */
-    public function categories(Request $request, CategoriesAction $action): array{
+    public function index_categories(CategoriesAction $action): array{
         return $action();
     }
 
@@ -56,7 +54,7 @@ class FrontController extends Controller
      * @param SaveEntryAction $action
      * @return void
      */
-    public function save_entry(EntryRequest $request, SaveEntryAction $action): void{
+    public function store_entry(EntryRequest $request, SaveEntryAction $action): void{
         $action($request->all());
     }
 }
