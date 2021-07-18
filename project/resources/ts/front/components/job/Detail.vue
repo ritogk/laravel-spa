@@ -188,7 +188,7 @@
         // 仕事登録
         job_entry(): void{
             this.entry.job_id = this.convert_job.id
-            window.axios.post('/api/front/entry', this.entry).then(response => {
+            window.axios.post('/api/entry', this.entry).then(response => {
                 this.close_modal()
             }).catch(error => {
                 let request_errors = error.response.data.errors;

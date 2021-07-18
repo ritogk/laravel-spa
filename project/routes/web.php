@@ -17,12 +17,12 @@ Auth::routes();
 Route::get('/', [Controllers\Front\FrontController::class, 'index']);
 
 // spa ルーティング用
-Route::get('/front/{any}', function () {
+Route::get('/spa/{any}', function () {
     return view('front');
 })->where('any', '.*');
 
 // api用
-Route::prefix('api/front')->group(function () {
+Route::prefix('/api')->group(function () {
     Route::get('/jobs', [Controllers\Front\FrontController::class, 'index_jobs']);
     Route::get('/categories', [Controllers\Front\FrontController::class, 'index_categories']);
     Route::post('/entry', [Controllers\Front\FrontController::class, 'store_entry']);
