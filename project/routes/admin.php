@@ -21,14 +21,13 @@ Route::group(['middleware' => ['admin']], function () {
     })->where('any', '.*');
 
     // api用
-    Route::prefix('/api')->group(function () {
+    Route::group(['prefix' => 'api'], function () {
+        // ログイン系
         Route::group(['prefix' => 'auth'], function () {
-            // ユーザー情報取得
-            Route::middleware('auth:web')->get('/user', function () {
+            Route::get('/user', function () {
                 return Auth::user();
             });
-            // ログアウト
-            Route::middleware('auth:web')->get('/logout', function () {
+            Route::get('/logout', function () {
                 return Auth::logout();
             });
         });
