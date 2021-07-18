@@ -22,6 +22,6 @@ class SearchJobsActionTest extends TestCase
         $action =  new SearchJobsAction();
         // チェック
         $response->assertStatus(200)
-                ->assertJsonFragment($action());
+                ->assertJson($action());
     }
 }
