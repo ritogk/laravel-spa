@@ -62,14 +62,14 @@
     export default class Search extends Vue {
         category: string = state.getCond.category
         content: string = state.getCond.content
-        price: number|null = state.getCond.price
+        price: string = state.getCond.price
         attention: boolean = state.getCond.attention
         // コンボボックスの選択一覧
         cmb_categories: {[key:string]:string} = {}
 
         mounted(){
             // コンボボックのカテゴリ値取得
-            window.axios.post('/front/categories').then(response => {
+            window.axios.get('/api/front/categories').then(response => {
                 const categories: ICategory = response.data
                 for (var key in categories) {
                     this.cmb_categories[categories[key].id] = categories[key].name

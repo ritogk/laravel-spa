@@ -21,10 +21,10 @@ Route::get('/front/{any}', function () {
     return view('front');
 })->where('any', '.*');
 
-Route::prefix('/front')->group(function () {
-    Route::post('/jobs', [Controllers\Front\FrontController::class, 'searchJobs']);
-    Route::post('/categories', [Controllers\Front\FrontController::class, 'categories']);
-    Route::post('/save/entry', [Controllers\Front\FrontController::class, 'save_entry']);
+Route::prefix('api/front')->group(function () {
+    Route::get('/jobs', [Controllers\Front\FrontController::class, 'index_jobs']);
+    Route::get('/categories', [Controllers\Front\FrontController::class, 'index_categories']);
+    Route::post('/entry', [Controllers\Front\FrontController::class, 'store_entry']);
 });
 
 // 共通

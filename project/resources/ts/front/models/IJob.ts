@@ -4,7 +4,7 @@ export default interface IJob {
     content: string
     attention: boolean
     job_category_id: string
-    price: number|null
+    price: number
     welfare:string
     holiday:string
     image: string

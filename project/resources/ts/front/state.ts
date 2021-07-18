@@ -10,7 +10,7 @@ export interface IState {
 }
 
 // 検索条件 初期値
-const dafaultCond: ICond = {category: '', content: '', price: null, attention: false}
+const dafaultCond: ICond = {category: '', content: '', price: '', attention: false}
 
 Vue.use(Vuex);
 const store=new Vuex.Store({})
