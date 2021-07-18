@@ -29,7 +29,7 @@ class JobCategoryController extends Controller
      * @param  ListAction $action
      * @return array
      */
-    public function list(JobCategoryListRequest $request, ListAction $action): array
+    public function index(JobCategoryListRequest $request, ListAction $action): array
     {
         return $action($request->filters());
     }
@@ -50,12 +50,13 @@ class JobCategoryController extends Controller
      * 更新
      *
      * @param  JobCategoryRequest $request
+     * @param string $id
      * @param  UpdateAction $action
      * @return void
      */
-    public function update(JobCategoryRequest $request, UpdateAction $action): void
+    public function update(JobCategoryRequest $request, string $id, UpdateAction $action): void
     {
-        $action($request);
+        $action($id, $request);
     }
 
     /**
@@ -73,13 +74,13 @@ class JobCategoryController extends Controller
     /**
      * 一件取得
      *
-     * @param  Request $request
+     * @param string $id
      * @param  FindAction $action
      * @return array
      */
-    public function find(Request $request, FindAction $action): array
+    public function find(string $id, FindAction $action): array
     {
-        return $action($request->id);
+        return $action($id);
     }
 
     /**

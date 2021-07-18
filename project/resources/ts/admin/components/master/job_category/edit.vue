@@ -38,16 +38,20 @@
 
         // 初期化
         mounted(): void{
-            window.axios.post('/admin/api/job_category/find', {id: this.id}).then(response => {
+            window.axios.get('/admin/api/job_categories/' + this.id).then(response => {
                 this.item = response.data
-            })
+            });
         }
 
         edit(image_file: any): void{
             const formData = new FormData()
             formData.append('file',image_file)
             formData.append('item', JSON.stringify(this.item))
-            window.axios.post('/admin/api/job_category/update',formData).then(response =>{
+            window.axios.post('/admin/api/job_categories/' + this.id, formData, {
+                headers: {
+                    'X-HTTP-Method-Override': 'PUT'
+                }
+            }).then(response =>{
                 this.message = ""
                 this.$router.push({ name: "job_category_index" })
             }).catch(error => {

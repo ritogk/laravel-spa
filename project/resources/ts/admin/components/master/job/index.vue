@@ -193,7 +193,7 @@
                 this.getItem();
             })
             // 職種マスタ名称取得
-            window.axios.post("/admin/api/job_category/list", {isInit: true}).then(response => {
+            window.axios.post("/admin/api/job_categories/list", {isInit: true}).then(response => {
                 let keyValues: {[key: string]: string;} = {}
                 response.data.map((x: JobCategory) => keyValues[x.id] = x.name)
                 this.jobCategoryNms = keyValues

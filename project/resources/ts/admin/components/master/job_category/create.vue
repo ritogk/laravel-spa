@@ -32,12 +32,11 @@
         item: Item = {id: '', name: '', content: '', image: '', sort_no: 1, updated_at: ''}
         message: string = ''
         errors: BaseFormError = { name: '', content: '', image: '', sort_no: ''}
-
         create(image_file: any): void{
             const formData = new FormData()
             formData.append('file',image_file)
             formData.append('item', JSON.stringify(this.item))
-            window.axios.post('/admin/api/job_category/create',formData).then(response =>{
+            window.axios.post('/admin/api/job_categories',formData).then(response =>{
                 this.message = ""
                 this.$router.push({ name: "job_category_index" })
             }).catch(error => {
