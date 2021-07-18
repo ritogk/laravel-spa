@@ -134,7 +134,7 @@
         items: Array<Item> = []
         cond: Cond = {name: ''}
         message: string = ""
-        dlMasterUrl: string = '/admin/job_category/export_excel'
+        dlMasterUrl: string = '/admin/api/job_category/export_excel'
         // 以降はデータテーブルで使用する値
         fields: Array<DataTableFileds> = [
                         { key: 'name', label: '名称', sortable: true, sortDirection: 'desc' },
@@ -159,7 +159,7 @@
         // 初期化
         mounted(){
             this.isBusy = true;
-            window.axios.post("/admin/job_category/get_conds", {isInit: this.isInit})
+            window.axios.post("/admin/api/job_category/get_conds", {isInit: this.isInit})
             .then(response => {
                 if(!(this as any).isEmptyObject(response.data)){
                     this.cond.name = response.data.name;
@@ -171,12 +171,12 @@
         // 一覧取得
         getItem(): void{
             // 条件をセッションに保存
-            window.axios.post("/admin/job_category/set_conds", {
+            window.axios.post("/admin/api/job_category/set_conds", {
                 name: this.cond.name
             }).catch();
 
             // 一覧読込
-            window.axios.post("/admin/job_category/list", {
+            window.axios.post("/admin/api/job_category/list", {
                 name: this.cond.name,
                 isInit: this.isInit
             }).then(response => {
@@ -204,7 +204,7 @@
         destory(item: Item): void {
             this.$bvModal.msgBoxConfirm(window.format.sprintf('%1$s を削除します。よろしいですか?', item.name)).then(result => {
                 if(result){
-                    window.axios.delete("/admin/job_category/" + item.id).then(response => {
+                    window.axios.delete("/admin/api/job_category/" + item.id).then(response => {
                         this.getItem();
                         this.message = "";
                     }).catch(error => {

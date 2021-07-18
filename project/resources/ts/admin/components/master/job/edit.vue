@@ -38,7 +38,7 @@
 
         // 初期化
         mounted(): void{
-            window.axios.post('/admin/job/find', {id: this.id}).then(response => {
+            window.axios.post('/admin/api/job/find', {id: this.id}).then(response => {
                 this.item = response.data
             })
         }
@@ -47,7 +47,7 @@
             const formData = new FormData()
             formData.append('file',image_file)
             formData.append('item', JSON.stringify(this.item))
-            window.axios.post('/admin/job/update',formData).then(response =>{
+            window.axios.post('/admin/api/job/update',formData).then(response =>{
                 this.message = ""
                 this.$router.push({ name: "job_index" })
             }).catch(error => {

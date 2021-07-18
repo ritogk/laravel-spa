@@ -150,7 +150,7 @@
         // 初期化
         mounted(){
             this.isBusy = true;
-            window.axios.post("/admin/job_category/list", {isInit: true}).then(response => {
+            window.axios.post("/admin/api/job_category/list", {isInit: true}).then(response => {
                 this.items = response.data;
                 this.totalRows = this.items.length
                 this.isBusy = false;
