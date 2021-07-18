@@ -15,7 +15,7 @@ class CategoriesActionTest extends TestCase
     public function test_200()
     {
         // アクセス
-        $response = $this->get('/api/front/categories');
+        $response = $this->get('/api/categories');
         // データ取得
         $action =  new CategoriesAction();
         // チェック

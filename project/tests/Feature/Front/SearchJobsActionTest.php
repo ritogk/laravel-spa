@@ -17,7 +17,7 @@ class SearchJobsActionTest extends TestCase
     public function test_200()
     {
         // アクセス
-        $response = $this->get('/api/front/jobs');
+        $response = $this->get('/api/jobs');
         // データ取得
         $action =  new SearchJobsAction();
         // チェック
