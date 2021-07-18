@@ -12,7 +12,13 @@ use App\Http\Controllers;
 */
 
 Route::group(['middleware' => ['admin']], function () {
+    // 画面表示用
     Route::get('/', [Controllers\Admin\AdminController::class, 'index'])->name('admin');
+
+    // spa ルーティング用
+    Route::get('/spa/{any}', function () {
+        return view('admin');
+    })->where('any', '.*');
 
     Route::group(['prefix' => 'auth'], function () {
         // ユーザー情報取得
@@ -24,11 +30,6 @@ Route::group(['middleware' => ['admin']], function () {
             return Auth::logout();
         });
     });
-
-    // 管理画面spa用
-    Route::get('/{any}', function () {
-        return view('admin');
-    })->where('any', '.*');
 
     // 仕事マスタ
     Route::group(['prefix' => 'job'], function () {
