@@ -47,12 +47,10 @@ Route::group(['middleware' => ['admin']], function () {
         // 仕事カテゴリ マスタ
         Route::group(['prefix' => 'job_categories'], function () {
             Route::get('/', [Controllers\Admin\Master\JobCategoryController::class, 'index']);
-            Route::get('/{id}', [Controllers\Admin\Master\JobCategoryController::class, 'find']);
             Route::post('/', [Controllers\Admin\Master\JobCategoryController::class, 'create'])->middleware('job.category.save.request');
+            Route::get('/{id}', [Controllers\Admin\Master\JobCategoryController::class, 'find']);
             Route::put('/{id}', [Controllers\Admin\Master\JobCategoryController::class, 'update'])->middleware('job.category.save.request');
             Route::delete('/{id}', [Controllers\Admin\Master\JobCategoryController::class, 'destroy']);
-            Route::post('/set_conds', [Controllers\Admin\Master\JobCategoryController::class, 'setConds']);
-            Route::post('/get_conds', [Controllers\Admin\Master\JobCategoryController::class, 'getConds']);
             Route::post('/export_excel', [Controllers\Admin\Master\JobCategoryController::class, 'exportExcel']);
         });
 

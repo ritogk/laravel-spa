@@ -16,9 +16,6 @@ use App\UseCases\Admin\Master\JobCategory\UpdateAction;
 use App\UseCases\Admin\Master\JobCategory\DeleteAction;
 use App\UseCases\Admin\Master\JobCategory\FindAction;
 use App\UseCases\Admin\Master\JobCategory\ExportAction;
-use App\UseCases\Admin\Master\JobCategory\SetCondAction;
-use App\UseCases\Admin\Master\JobCategory\GetCondAction;
-
 
 class JobCategoryController extends Controller
 {
@@ -91,29 +88,5 @@ class JobCategoryController extends Controller
      */
     public function exportExcel(ExportAction $action): BinaryFileResponse{
         return $action();
-    }
-
-    /**
-     * 入力条件取得
-     *
-     * @param  Request $request
-     * @param  GetCondAction $action
-     * @return array
-     */
-    public function getConds(Request $request, GetCondAction $action) : array
-    {
-        return $action($request->isInit);
-    }
-
-    /**
-     * 入力条件セット
-     *
-     * @param  JobCategoryListRequest $request
-     * @param  SetCondAction $action
-     * @return void
-     */
-    public function setConds(JobCategoryListRequest $request, SetCondAction $action) : void
-    {
-        $action($request->all());
     }
 }

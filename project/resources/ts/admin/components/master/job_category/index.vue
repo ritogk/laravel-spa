@@ -159,22 +159,19 @@
         // 初期化
         mounted(){
             this.isBusy = true;
-            window.axios.post("/admin/api/job_categories/get_conds", {isInit: this.isInit})
-            .then(response => {
-                if(!(this as any).isEmptyObject(response.data)){
-                    this.cond.name = response.data.name;
-                }
-                this.getItem();
-            })
+            // 条件復元
+            const cond_restore_json: string|null = localStorage.getItem('job_category_conds')
+            if(cond_restore_json){
+                const cond_restore: Cond = JSON.parse(cond_restore_json)
+                this.cond.name = cond_restore.name
+            }
+            this.getItem();
         }
 
         // 一覧取得
         getItem(): void{
-            // 条件をセッションに保存
-            window.axios.post("/admin/api/job_categories/set_conds", {
-                name: this.cond.name
-            }).catch();
-
+            // // 条件保存
+            localStorage.setItem('job_category_conds',JSON.stringify(this.cond))
             // 一覧読込
             window.axios.get("/admin/api/job_categories", {
                 params: {
