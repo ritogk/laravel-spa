@@ -60,15 +60,4 @@ Route::group(['middleware' => ['admin']], function () {
         Route::post('/set_conds', [Controllers\Admin\EntryController::class, 'setConds']);
         Route::post('/get_conds', [Controllers\Admin\EntryController::class, 'getConds']);
     });
-
-    // 汎用マスタ
-    Route::group(['prefix' => 'general'], function () {
-        Route::post('/list', [Controllers\Admin\Master\GeneralController::class, 'list']);
-        Route::post('/create', [Controllers\Admin\Master\GeneralController::class, 'create']);
-        Route::delete('/{id}', [Controllers\Admin\Master\GeneralController::class, 'destroy']);
-        Route::put('/{id}', [Controllers\Admin\Master\GeneralController::class, 'update']);
-        Route::post('/set_conds', [Controllers\Admin\Master\GeneralController::class, 'setConds']);
-        Route::post('/get_conds', [Controllers\Admin\Master\GeneralController::class, 'getConds']);
-        Route::post('/export_excel', [Controllers\Admin\Master\GeneralController::class, 'exportExcel']);
-    });
 });
