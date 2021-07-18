@@ -13,14 +13,15 @@ use App\Http\Controllers;
 
 Auth::routes();
 
-// フロント画面
+// 画面表示用
 Route::get('/', [Controllers\Front\FrontController::class, 'index']);
 
-// フロント画面spa用
+// spa ルーティング用
 Route::get('/front/{any}', function () {
     return view('front');
 })->where('any', '.*');
 
+// api用
 Route::prefix('api/front')->group(function () {
     Route::get('/jobs', [Controllers\Front\FrontController::class, 'index_jobs']);
     Route::get('/categories', [Controllers\Front\FrontController::class, 'index_categories']);
