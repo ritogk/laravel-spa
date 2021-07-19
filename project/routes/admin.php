@@ -33,12 +33,13 @@ Route::group(['middleware' => ['admin']], function () {
         });
 
         // 仕事マスタ
-        Route::group(['prefix' => 'job'], function () {
-            Route::post('/list', [Controllers\Admin\Master\JobController::class, 'list']);
-            Route::post('/create', [Controllers\Admin\Master\JobController::class, 'create'])->middleware('job.save.request');
+        Route::group(['prefix' => 'jobs'], function () {
+            Route::get('/', [Controllers\Admin\Master\JobController::class, 'index']);
+            Route::post('/', [Controllers\Admin\Master\JobController::class, 'create'])->middleware('job.save.request');
+            Route::get('/{id}', [Controllers\Admin\Master\JobController::class, 'find']);
+            Route::put('/{id}', [Controllers\Admin\Master\JobController::class, 'update'])->middleware('job.save.request');
             Route::delete('/{id}', [Controllers\Admin\Master\JobController::class, 'destroy']);
-            Route::post('/find', [Controllers\Admin\Master\JobController::class, 'find']);
-            Route::post('/update', [Controllers\Admin\Master\JobController::class, 'update'])->middleware('job.save.request');
+
             Route::post('/set_conds', [Controllers\Admin\Master\JobController::class, 'setConds']);
             Route::post('/get_conds', [Controllers\Admin\Master\JobController::class, 'getConds']);
             Route::post('/export_excel', [Controllers\Admin\Master\JobController::class, 'exportExcel']);
