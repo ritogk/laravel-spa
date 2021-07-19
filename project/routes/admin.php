@@ -39,9 +39,6 @@ Route::group(['middleware' => ['admin']], function () {
             Route::get('/{id}', [Controllers\Admin\Master\JobController::class, 'find']);
             Route::put('/{id}', [Controllers\Admin\Master\JobController::class, 'update'])->middleware('job.save.request');
             Route::delete('/{id}', [Controllers\Admin\Master\JobController::class, 'destroy']);
-
-            Route::post('/set_conds', [Controllers\Admin\Master\JobController::class, 'setConds']);
-            Route::post('/get_conds', [Controllers\Admin\Master\JobController::class, 'getConds']);
             Route::post('/export_excel', [Controllers\Admin\Master\JobController::class, 'exportExcel']);
         });
 

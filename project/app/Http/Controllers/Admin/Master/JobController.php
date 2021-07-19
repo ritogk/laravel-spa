@@ -16,8 +16,6 @@ use App\UseCases\Admin\Master\Job\UpdateAction;
 use App\UseCases\Admin\Master\Job\DeleteAction;
 use App\UseCases\Admin\Master\Job\FindAction;
 use App\UseCases\Admin\Master\Job\ExportAction;
-use App\UseCases\Admin\Master\Job\SetCondAction;
-use App\UseCases\Admin\Master\Job\GetCondAction;
 
 
 class JobController extends Controller
@@ -91,29 +89,5 @@ class JobController extends Controller
      */
     public function exportExcel(ExportAction $action): BinaryFileResponse{
         return $action();
-    }
-
-    /**
-     * 入力条件取得
-     *
-     * @param  Request $request
-     * @param  GetCondAction $action
-     * @return array
-     */
-    public function getConds(Request $request, GetCondAction $action) : array
-    {
-        return $action($request->isInit);
-    }
-
-    /**
-     * 入力条件セット
-     *
-     * @param  JobListRequest $request
-     * @param  SetCondAction $action
-     * @return void
-     */
-    public function setConds(JobListRequest $request, SetCondAction $action) : void
-    {
-        $action($request->all());
     }
 }

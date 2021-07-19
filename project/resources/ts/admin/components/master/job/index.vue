@@ -185,13 +185,15 @@
         // 初期化
         mounted(){
             this.isBusy = true;
-            // 一覧取得
-            window.axios.post("/admin/api/jobs/get_conds", {isInit: this.isInit}).then(response => {
-                if(!(this as any).isEmptyObject(response.data)){
-                    this.cond.title = response.data.title;
-                }
-                this.getItem();
-            })
+            // 条件復元
+            const cond_restore_json: string|null = localStorage.getItem('job_conds')
+            if(cond_restore_json){
+                const cond_restore: Cond = JSON.parse(cond_restore_json)
+                this.cond.title = cond_restore.title
+                this.cond.job_category = cond_restore.job_category
+            }
+            this.getItem();
+
             // 職種マスタ名称取得
             window.axios.get("/admin/api/job_categories").then(response => {
                 let keyValues: {[key: string]: string;} = {}
@@ -206,11 +208,8 @@
 
         // 一覧取得
         getItem(): void{
-            // 条件をセッションに保存
-            window.axios.post("/admin/api/jobs/set_conds", {
-                title: this.cond.title,
-                job_category_id: this.cond.job_category
-            }).catch();
+            // 条件保存
+            localStorage.setItem('job_conds',JSON.stringify(this.cond))
 
             // 一覧読込
             window.axios.get("/admin/api/jobs", {
