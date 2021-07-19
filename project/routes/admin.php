@@ -53,8 +53,8 @@ Route::group(['middleware' => ['admin']], function () {
         });
 
         // 求職者一覧
-        Route::group(['prefix' => 'entry'], function () {
-            Route::post('/list', [Controllers\Admin\EntryController::class, 'list']);
+        Route::group(['prefix' => 'entries'], function () {
+            Route::get('/', [Controllers\Admin\EntryController::class, 'index']);
             Route::post('/set_conds', [Controllers\Admin\EntryController::class, 'setConds']);
             Route::post('/get_conds', [Controllers\Admin\EntryController::class, 'getConds']);
         });

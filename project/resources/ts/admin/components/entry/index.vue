@@ -161,7 +161,7 @@
         mounted(){
             this.isBusy = true;
             // 一覧取得
-            window.axios.post("/admin/api/entry/get_conds", {isInit: this.isInit}).then(response => {
+            window.axios.post("/admin/api/entries/get_conds", {isInit: this.isInit}).then(response => {
                 if(!(this as any).isEmptyObject(response.data)){
                     this.cond.full_name = response.data.full_name
                 }
@@ -172,14 +172,16 @@
         // 一覧取得
         getItem(): void{
             // 条件をセッションに保存
-            window.axios.post("/admin/api/entry/set_conds", {
+            window.axios.post("/admin/api/entries/set_conds", {
                 full_name: this.cond.full_name
             }).catch();
 
             // 一覧読込
-            window.axios.post("/admin/api/entry/list", {
-                full_name: this.cond.full_name,
-                isInit: this.isInit
+            window.axios.get("/admin/api/entries", {
+                params:{
+                    full_name: this.cond.full_name,
+                    isInit: this.isInit
+                }
             }).then(response => {
                 this.items = response.data;
                 this.totalRows = this.items.length
