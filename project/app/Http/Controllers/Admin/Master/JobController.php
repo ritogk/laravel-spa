@@ -82,12 +82,12 @@ class JobController extends Controller
     }
 
     /**
-     * excel出力
+     * excel取得
      *
      * @param ExportAction $action
      * @return BinaryFileResponse
      */
-    public function exportExcel(ExportAction $action): BinaryFileResponse{
+    public function excel(ExportAction $action): BinaryFileResponse{
         return $action();
     }
 }

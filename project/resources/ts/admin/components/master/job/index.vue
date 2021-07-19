@@ -159,7 +159,7 @@
         jobCategoryNms: {[key: string]: string} = {}
         cond: Cond = {title: '', job_category: ''}
         message: string = ""
-        dlMasterUrl: string = '/admin/api/jobs/export_excel'
+        dlMasterUrl: string = '/admin/api/jobs/files/excel'
         // 以降はデータテーブルで使用する値
         fields: Array<DataTableFileds> = [
                         { key: 'title', label: 'タイトル', sortable: true, sortDirection: 'desc' },

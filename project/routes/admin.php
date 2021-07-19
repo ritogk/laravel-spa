@@ -39,7 +39,7 @@ Route::group(['middleware' => ['admin']], function () {
             Route::get('/{id}', [Controllers\Admin\Master\JobController::class, 'find']);
             Route::put('/{id}', [Controllers\Admin\Master\JobController::class, 'update'])->middleware('job.save.request');
             Route::delete('/{id}', [Controllers\Admin\Master\JobController::class, 'destroy']);
-            Route::post('/export_excel', [Controllers\Admin\Master\JobController::class, 'exportExcel']);
+            Route::get('/files/excel', [Controllers\Admin\Master\JobController::class, 'excel']);
         });
 
         // 仕事カテゴリ マスタ
