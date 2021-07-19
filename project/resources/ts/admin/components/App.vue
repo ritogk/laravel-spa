@@ -17,7 +17,7 @@
 <script lang="ts">
     import { Vue, Component, Watch } from 'vue-property-decorator';
     // モデル
-    import User from '@root/models/User';
+    import User from '@root/models/IUser';
     // コンポーネント
     import Header from './Header.vue';
     import Aside from './Aside.vue';

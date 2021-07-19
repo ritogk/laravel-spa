@@ -29,7 +29,7 @@
 <script lang="ts">
     import { Vue, Component, Prop } from 'vue-property-decorator';
     // モデル
-    import User from '@root/models/User';
+    import User from '@root/models/IUser';
 
     @Component
     export default class App extends Vue {

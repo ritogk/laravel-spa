@@ -1,4 +1,4 @@
-export default interface Fileds {
+export default interface IFileds {
     key: string
     label: string
     sortable?: boolean

@@ -18,8 +18,8 @@
     import BaseForm from './base_from.vue';
     import MsgDanger from '@root/admin/components/utility/msg_danger.vue';
     // モデル
-    import Item from './models/Item';
-    import BaseFormError from './models/BaseFormError';
+    import Item from './models/IItem';
+    import BaseFormError from './models/IBaseFormError';
 
     @Component({
         components: {

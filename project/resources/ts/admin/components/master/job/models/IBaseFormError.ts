@@ -1,4 +1,4 @@
-export default interface BaseFormError {
+export default interface IBaseFormError {
     [key: string]: string
     content:string
     title:string

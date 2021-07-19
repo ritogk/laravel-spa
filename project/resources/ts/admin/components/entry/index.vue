@@ -113,10 +113,10 @@
     import MsgDanger from '@root/admin/components/utility/msg_danger.vue';
     import BtnModalJobCategory from '@root/admin/components/utility/modal_job_category.vue'
     // モデル
-    import Item from './models/Item';
-    import Cond from './models/Cond';
-    import DataTableFileds from '@root/models/data_table/Fileds';
-    import DataTablePageOptions from '@root/models/data_table/PageOptions';
+    import Item from './models/IItem';
+    import Cond from './models/ICond';
+    import DataTableFileds from '@root/models/data_table/IFileds';
+    import DataTablePageOptions from '@root/models/data_table/IPageOptions';
 
     @Component({
         components: {

@@ -116,9 +116,9 @@
     import MsgDanger from '@root/admin/components/utility/msg_danger.vue';
     // モデル
     import Item from './models/Item';
-    import Cond from './models/Cond';
-    import DataTableFileds from '@root/models/data_table/Fileds';
-    import DataTablePageOptions from '@root/models/data_table/PageOptions';
+    import Cond from './models/ICond';
+    import DataTableFileds from '@root/models/data_table/IFileds';
+    import DataTablePageOptions from '@root/models/data_table/IPageOptions';
 
     @Component({
         components: {
