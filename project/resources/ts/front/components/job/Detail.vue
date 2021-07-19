@@ -94,7 +94,7 @@
                                     :state="input_state(errors.tel)">
                                         <b-form-input
                                         id="tel"
-                                        placeholder="ハイフンを含めずに書いて下さい。"
+                                        placeholder="ハイフンを含めて書いて下さい。"
                                         v-model="entry.tel"
                                         :state="input_state(errors.email)">
                                         </b-form-input>

@@ -52,7 +52,7 @@ Route::group(['middleware' => ['admin']], function () {
             Route::get('/files/excel', [Controllers\Admin\Master\JobCategoryController::class, 'excel']);
         });
 
-        // 求職者一覧
+        // 選考一覧
         Route::group(['prefix' => 'entries'], function () {
             Route::get('/', [Controllers\Admin\EntryController::class, 'index']);
         });
