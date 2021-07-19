@@ -27,14 +27,3 @@ Route::prefix('/api')->group(function () {
     Route::get('/categories', [Controllers\Front\FrontController::class, 'index_categories']);
     Route::post('/entry', [Controllers\Front\FrontController::class, 'create_entry']);
 });
-
-// 共通
-Route::prefix('/utility')->group(function () {
-    Route::post('/empty_table_columns', [Controllers\UtilityController::class, 'getEmptyTableColumns']);
-    Route::get('/general_code', function () {
-        return App\Libs\Consts::getConstants();
-    });
-    Route::get('/general_code_value', function () {
-        return App\Libs\Consts::getFlipConstants();
-    });
-});
