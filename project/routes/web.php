@@ -25,7 +25,7 @@ Route::get('/spa/{any}', function () {
 Route::prefix('/api')->group(function () {
     Route::get('/jobs', [Controllers\Front\FrontController::class, 'index_jobs']);
     Route::get('/categories', [Controllers\Front\FrontController::class, 'index_categories']);
-    Route::post('/entry', [Controllers\Front\FrontController::class, 'store_entry']);
+    Route::post('/entry', [Controllers\Front\FrontController::class, 'create_entry']);
 });
 
 // 共通
