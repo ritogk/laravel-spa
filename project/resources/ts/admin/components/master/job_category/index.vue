@@ -134,7 +134,7 @@
         items: Array<Item> = []
         cond: Cond = {name: ''}
         message: string = ""
-        dlMasterUrl: string = '/admin/job_category/export_excel'
+        dlMasterUrl: string = '/admin/api/job_categories/files/excel'
         // 以降はデータテーブルで使用する値
         fields: Array<DataTableFileds> = [
                         { key: 'name', label: '名称', sortable: true, sortDirection: 'desc' },
@@ -159,26 +159,24 @@
         // 初期化
         mounted(){
             this.isBusy = true;
-            window.axios.post("/admin/job_category/get_conds", {isInit: this.isInit})
-            .then(response => {
-                if(!(this as any).isEmptyObject(response.data)){
-                    this.cond.name = response.data.name;
-                }
-                this.getItem();
-            })
+            // 条件復元
+            const cond_restore_json: string|null = localStorage.getItem('job_category_conds')
+            if(cond_restore_json){
+                const cond_restore: Cond = JSON.parse(cond_restore_json)
+                this.cond.name = cond_restore.name
+            }
+            this.getItem();
         }
 
         // 一覧取得
         getItem(): void{
-            // 条件をセッションに保存
-            window.axios.post("/admin/job_category/set_conds", {
-                name: this.cond.name
-            }).catch();
-
+            // // 条件保存
+            localStorage.setItem('job_category_conds',JSON.stringify(this.cond))
             // 一覧読込
-            window.axios.post("/admin/job_category/list", {
-                name: this.cond.name,
-                isInit: this.isInit
+            window.axios.get("/admin/api/job_categories", {
+                params: {
+                    name: this.cond.name,
+                }
             }).then(response => {
                 this.items = response.data;
                 this.totalRows = this.items.length
@@ -204,7 +202,7 @@
         destory(item: Item): void {
             this.$bvModal.msgBoxConfirm(window.format.sprintf('%1$s を削除します。よろしいですか?', item.name)).then(result => {
                 if(result){
-                    window.axios.delete("/admin/job_category/" + item.id).then(response => {
+                    window.axios.delete("/admin/api/job_categories/" + item.id).then(response => {
                         this.getItem();
                         this.message = "";
                     }).catch(error => {

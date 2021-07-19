@@ -19,7 +19,7 @@ const router = new VueRouter({
         },
         // メイン
         {
-            path: "/job",
+            path: "/spa/job",
             name: "job",
             component: job,
             props: true,

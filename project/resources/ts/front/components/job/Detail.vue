@@ -94,7 +94,7 @@
                                     :state="input_state(errors.tel)">
                                         <b-form-input
                                         id="tel"
-                                        placeholder="ハイフンを含めずに書いて下さい。"
+                                        placeholder="ハイフンを含めて書いて下さい。"
                                         v-model="entry.tel"
                                         :state="input_state(errors.email)">
                                         </b-form-input>
@@ -188,7 +188,7 @@
         // 仕事登録
         job_entry(): void{
             this.entry.job_id = this.convert_job.id
-            window.axios.post('/api/front/entry', this.entry).then(response => {
+            window.axios.post('/api/entry', this.entry).then(response => {
                 this.close_modal()
             }).catch(error => {
                 let request_errors = error.response.data.errors;

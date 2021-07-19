@@ -16,9 +16,6 @@ use App\UseCases\Admin\Master\JobCategory\UpdateAction;
 use App\UseCases\Admin\Master\JobCategory\DeleteAction;
 use App\UseCases\Admin\Master\JobCategory\FindAction;
 use App\UseCases\Admin\Master\JobCategory\ExportAction;
-use App\UseCases\Admin\Master\JobCategory\SetCondAction;
-use App\UseCases\Admin\Master\JobCategory\GetCondAction;
-
 
 class JobCategoryController extends Controller
 {
@@ -29,7 +26,7 @@ class JobCategoryController extends Controller
      * @param  ListAction $action
      * @return array
      */
-    public function list(JobCategoryListRequest $request, ListAction $action): array
+    public function index(JobCategoryListRequest $request, ListAction $action): array
     {
         return $action($request->filters());
     }
@@ -50,12 +47,13 @@ class JobCategoryController extends Controller
      * 更新
      *
      * @param  JobCategoryRequest $request
+     * @param string $id
      * @param  UpdateAction $action
      * @return void
      */
-    public function update(JobCategoryRequest $request, UpdateAction $action): void
+    public function update(JobCategoryRequest $request, string $id, UpdateAction $action): void
     {
-        $action($request);
+        $action($id, $request);
     }
 
     /**
@@ -73,46 +71,22 @@ class JobCategoryController extends Controller
     /**
      * 一件取得
      *
-     * @param  Request $request
+     * @param string $id
      * @param  FindAction $action
      * @return array
      */
-    public function find(Request $request, FindAction $action): array
+    public function find(string $id, FindAction $action): array
     {
-        return $action($request->id);
+        return $action($id);
     }
 
     /**
-     * excel出力
+     * excel取得
      *
      * @param ExportAction $action
      * @return BinaryFileResponse
      */
-    public function exportExcel(ExportAction $action): BinaryFileResponse{
+    public function excel(ExportAction $action): BinaryFileResponse{
         return $action();
-    }
-
-    /**
-     * 入力条件取得
-     *
-     * @param  Request $request
-     * @param  GetCondAction $action
-     * @return array
-     */
-    public function getConds(Request $request, GetCondAction $action) : array
-    {
-        return $action($request->isInit);
-    }
-
-    /**
-     * 入力条件セット
-     *
-     * @param  JobCategoryListRequest $request
-     * @param  SetCondAction $action
-     * @return void
-     */
-    public function setConds(JobCategoryListRequest $request, SetCondAction $action) : void
-    {
-        $action($request->all());
     }
 }

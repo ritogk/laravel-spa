@@ -11,16 +11,17 @@ class UpdateAction{
     /**
      * __invoke
      *
+     * @param String $id
      * @param Request $request
      * @return void
      */
-    public function __invoke(Request $request): void
+    public function __invoke(String $id, Request $request): void
     {
-        DB::transaction(function () use($request){
+        DB::transaction(function () use($request, $id){
             if(!empty($request->file)){
                 $path = Storage::putFile('public/images', $request->file, 'public');
             }else{
-                $path = JobCategory::find($request->item['id'])->image;
+                $path = JobCategory::find($id)->image;
             }
 
             $update = [
@@ -29,7 +30,7 @@ class UpdateAction{
                 'image' => $path,
                 'sort_no' => $request->item['sort_no'],
             ];
-            JobCategory::where('id', $request->item['id'])->update($update);
+            JobCategory::where('id', $id)->update($update);
         });
     }
 }

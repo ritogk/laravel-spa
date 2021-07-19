@@ -22,39 +22,39 @@ const router = new VueRouter({
     routes: [
         // 求人一覧
         {
-            path: "/entry_index",
+            path: "/spa/entry_index",
             name: "entry_index",
             component: entry_index,
             props: true
         },
         // 仕事マスタ
         {
-            path: "/job_index",
+            path: "/spa/job_index",
             name: "job_index",
             component: job_index,
             props: true
         },
         {
-            path: "/job_edit",
+            path: "/spa/job_edit",
             name: "job_edit",
             component: job_edit,
             props: true,
             beforeEnter: function (to, from, next) {
-                if (from.path !== "/job_index") {
-                    next('/job_index')
+                if (from.path !== "/spa/job_index") {
+                    next('/spa/job_index')
                 } else {
                     next()
                 }
             }
         },
         {
-            path: "/job_create",
+            path: "/spa/job_create",
             name: "job_create",
             component: job_create,
             props: true,
             beforeEnter: function (to, from, next) {
-                if (from.path !== "/job_index") {
-                    next('/job_index')
+                if (from.path !== "/spa/job_index") {
+                    next('/spa/job_index')
                 } else {
                     next()
                 }
@@ -62,32 +62,32 @@ const router = new VueRouter({
         },
         // 職種マスタ
         {
-            path: "/job_category_index",
+            path: "/spa/job_category_index",
             name: "job_category_index",
             component: job_category_index,
             props: true
         },
         {
-            path: "/job_category_edit",
+            path: "/spa/job_category_edit",
             name: "job_category_edit",
             component: job_category_edit,
             props: true,
             beforeEnter: function (to, from, next) {
-                if (from.path !== "/job_category_index") {
-                    next('/job_category_index')
+                if (from.path !== "/spa/job_category_index") {
+                    next('/spa/job_category_index')
                 } else {
                     next()
                 }
             }
         },
         {
-            path: "/job_category_create",
+            path: "/spa/job_category_create",
             name: "job_category_create",
             component: job_category_create,
             props: true,
             beforeEnter: function (to, from, next) {
-                if (from.path !== "/job_category_index") {
-                    next('/job_category_index')
+                if (from.path !== "/spa/job_category_index") {
+                    next('/spa/job_category_index')
                 } else {
                     next()
                 }

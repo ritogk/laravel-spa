@@ -130,7 +130,7 @@
 
         mounted(): void{
             this.loading = true
-            window.axios.get('/api/front/jobs').then(response => {
+            window.axios.get('/api/jobs').then(response => {
                 this.allJobs = response.data
                 this.loading = false
             })

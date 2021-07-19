@@ -37,7 +37,7 @@
         user!: User
 
         logout() {
-            window.axios.get("/admin/auth/logout").then(response => {
+            window.axios.get("/admin/api/auth/logout").then(response => {
                 localStorage.removeItem("auth")
                 window.location.href = '/'
             })

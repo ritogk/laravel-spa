@@ -54,7 +54,7 @@ class FrontController extends Controller
      * @param SaveEntryAction $action
      * @return void
      */
-    public function store_entry(EntryRequest $request, SaveEntryAction $action): void{
+    public function create_entry(EntryRequest $request, SaveEntryAction $action): void{
         $action($request->all());
     }
 }

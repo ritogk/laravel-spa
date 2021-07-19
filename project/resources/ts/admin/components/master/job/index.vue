@@ -159,7 +159,7 @@
         jobCategoryNms: {[key: string]: string} = {}
         cond: Cond = {title: '', job_category: ''}
         message: string = ""
-        dlMasterUrl: string = '/admin/job/export_excel'
+        dlMasterUrl: string = '/admin/api/jobs/files/excel'
         // 以降はデータテーブルで使用する値
         fields: Array<DataTableFileds> = [
                         { key: 'title', label: 'タイトル', sortable: true, sortDirection: 'desc' },
@@ -185,15 +185,17 @@
         // 初期化
         mounted(){
             this.isBusy = true;
-            // 一覧取得
-            window.axios.post("/admin/job/get_conds", {isInit: this.isInit}).then(response => {
-                if(!(this as any).isEmptyObject(response.data)){
-                    this.cond.title = response.data.title;
-                }
-                this.getItem();
-            })
+            // 条件復元
+            const cond_restore_json: string|null = localStorage.getItem('job_conds')
+            if(cond_restore_json){
+                const cond_restore: Cond = JSON.parse(cond_restore_json)
+                this.cond.title = cond_restore.title
+                this.cond.job_category = cond_restore.job_category
+            }
+            this.getItem();
+
             // 職種マスタ名称取得
-            window.axios.post("/admin/job_category/list", {isInit: true}).then(response => {
+            window.axios.get("/admin/api/job_categories").then(response => {
                 let keyValues: {[key: string]: string;} = {}
                 response.data.map((x: JobCategory) => keyValues[x.id] = x.name)
                 this.jobCategoryNms = keyValues
@@ -206,17 +208,16 @@
 
         // 一覧取得
         getItem(): void{
-            // 条件をセッションに保存
-            window.axios.post("/admin/job/set_conds", {
-                title: this.cond.title,
-                job_category_id: this.cond.job_category
-            }).catch();
+            // 条件保存
+            localStorage.setItem('job_conds',JSON.stringify(this.cond))
 
             // 一覧読込
-            window.axios.post("/admin/job/list", {
-                title: this.cond.title,
-                job_category_id: this.cond.job_category,
-                isInit: this.isInit
+            window.axios.get("/admin/api/jobs", {
+                params: {
+                    title: this.cond.title,
+                    job_category_id: this.cond.job_category,
+                    isInit: this.isInit
+                }
             }).then(response => {
                 this.items = response.data;
                 this.totalRows = this.items.length
@@ -242,7 +243,7 @@
         destory(item: Item): void {
             this.$bvModal.msgBoxConfirm(window.format.sprintf('%1$s を削除します。よろしいですか?', item.title)).then(result => {
                 if(result){
-                    window.axios.delete("/admin/job/" + item.id).then(response => {
+                    window.axios.delete("/admin/api/jobs/" + item.id).then(response => {
                         this.getItem();
                         this.message = "";
                     }).catch(error => {

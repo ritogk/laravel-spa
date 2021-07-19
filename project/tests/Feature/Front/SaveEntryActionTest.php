@@ -16,7 +16,7 @@ class SaveEntryActionTest extends TestCase
     {
         $post_data = Entry::factory()->make();
         // アクセス
-        $response = $this->post('/api/front/entry', $post_data->toArray());
+        $response = $this->post('/api/entry', $post_data->toArray());
         // チェック
         $response->assertStatus(200);
         // 登録データ存在チェック
@@ -36,7 +36,7 @@ class SaveEntryActionTest extends TestCase
     public function test_400()
     {
         // アクセス
-        $response = $this->post('/api/front/entry');
+        $response = $this->post('/api/entry');
         // ステータスチェック
         $response->assertStatus(400);
     }

@@ -69,7 +69,7 @@
 
         mounted(){
             // コンボボックのカテゴリ値取得
-            window.axios.get('/api/front/categories').then(response => {
+            window.axios.get('/api/categories').then(response => {
                 const categories: ICategory = response.data
                 for (var key in categories) {
                     this.cmb_categories[categories[key].id] = categories[key].name

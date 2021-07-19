@@ -114,7 +114,6 @@
     import BtnModalJobCategory from '@root/admin/components/utility/modal_job_category.vue'
     // モデル
     import Item from './models/Item';
-    import JobCategory from '@root/admin/components/master/job_category/models/Item'
     import Cond from './models/Cond';
     import DataTableFileds from '@root/models/data_table/Fileds';
     import DataTablePageOptions from '@root/models/data_table/PageOptions';
@@ -160,26 +159,26 @@
         // 初期化
         mounted(){
             this.isBusy = true;
-            // 一覧取得
-            window.axios.post("/admin/entry/get_conds", {isInit: this.isInit}).then(response => {
-                if(!(this as any).isEmptyObject(response.data)){
-                    this.cond.full_name = response.data.full_name
-                }
-                this.getItem();
-            })
+            // 条件復元
+            const cond_restore_json: string|null = localStorage.getItem('entry_conds')
+            if(cond_restore_json){
+                const cond_restore: Cond = JSON.parse(cond_restore_json)
+                this.cond.full_name = cond_restore.full_name
+            }
+            this.getItem();
         }
 
         // 一覧取得
         getItem(): void{
-            // 条件をセッションに保存
-            window.axios.post("/admin/entry/set_conds", {
-                full_name: this.cond.full_name
-            }).catch();
+            // 条件保存
+            localStorage.setItem('entry_conds',JSON.stringify(this.cond))
 
             // 一覧読込
-            window.axios.post("/admin/entry/list", {
-                full_name: this.cond.full_name,
-                isInit: this.isInit
+            window.axios.get("/admin/api/entries", {
+                params:{
+                    full_name: this.cond.full_name,
+                    isInit: this.isInit
+                }
             }).then(response => {
                 this.items = response.data;
                 this.totalRows = this.items.length

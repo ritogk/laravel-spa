@@ -22,8 +22,7 @@ class EntryListRequest extends FormRequest
      */
     public function rules() {
         return [
-            'title' => 'nullable',
-            'job_category_id' => 'nullable',
+            'full_name' => 'nullable',
         ];
     }
 
@@ -34,8 +33,7 @@ class EntryListRequest extends FormRequest
      */
     public function attributes() {
         return [
-            'title' => 'タイトル',
-            'job_category_id' => '仕事カテゴリ',
+            'full_name' => '氏名',
         ];
     }
 }
