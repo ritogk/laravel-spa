@@ -13,7 +13,7 @@
         dlUrl!: string;
 
         download(): void{
-            window.axios.post(this.dlUrl, {},{
+            window.axios.get(this.dlUrl,{
                 responseType: 'arraybuffer',
                 headers: {
                     'Accept': 'application/excel'

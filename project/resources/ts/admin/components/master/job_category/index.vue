@@ -134,7 +134,7 @@
         items: Array<Item> = []
         cond: Cond = {name: ''}
         message: string = ""
-        dlMasterUrl: string = '/admin/api/job_categories/export_excel'
+        dlMasterUrl: string = '/admin/api/job_categories/files/excel'
         // 以降はデータテーブルで使用する値
         fields: Array<DataTableFileds> = [
                         { key: 'name', label: '名称', sortable: true, sortDirection: 'desc' },

@@ -51,7 +51,7 @@ Route::group(['middleware' => ['admin']], function () {
             Route::get('/{id}', [Controllers\Admin\Master\JobCategoryController::class, 'find']);
             Route::put('/{id}', [Controllers\Admin\Master\JobCategoryController::class, 'update'])->middleware('job.category.save.request');
             Route::delete('/{id}', [Controllers\Admin\Master\JobCategoryController::class, 'destroy']);
-            Route::post('/export_excel', [Controllers\Admin\Master\JobCategoryController::class, 'exportExcel']);
+            Route::get('/files/excel', [Controllers\Admin\Master\JobCategoryController::class, 'excel']);
         });
 
         // 求職者一覧
