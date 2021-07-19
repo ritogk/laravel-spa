@@ -8,10 +8,6 @@ use App\Http\Requests\Admin\EntryListRequest;
 
 // usecase
 use App\UseCases\Admin\Entry\ListAction;
-use App\UseCases\Admin\Entry\FindAction;
-use App\UseCases\Admin\Entry\SetCondAction;
-use App\UseCases\Admin\Entry\GetCondAction;
-
 
 class EntryController extends Controller
 {
@@ -25,29 +21,5 @@ class EntryController extends Controller
     public function index(EntryListRequest $request, ListAction $action): array
     {
         return $action($request);
-    }
-
-    /**
-     * 入力条件取得
-     *
-     * @param  Request $request
-     * @param  GetCondAction $action
-     * @return array
-     */
-    public function getConds(Request $request, GetCondAction $action) : array
-    {
-        return $action($request->isInit);
-    }
-
-    /**
-     * 入力条件セット
-     *
-     * @param  EntryListRequest $request
-     * @param  SetCondAction $action
-     * @return void
-     */
-    public function setConds(EntryListRequest $request, SetCondAction $action) : void
-    {
-        $action($request->all());
     }
 }
