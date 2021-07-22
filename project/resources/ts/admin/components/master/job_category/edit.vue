@@ -38,7 +38,7 @@
 
         // 初期化
         mounted(): void{
-            window.axios.get('/admin/api/job_categories/' + this.id).then(response => {
+            window.axios.get('/api/job_categories/' + this.id).then(response => {
                 this.item = response.data
             });
         }
@@ -47,7 +47,7 @@
             const formData = new FormData()
             formData.append('file',image_file)
             formData.append('item', JSON.stringify(this.item))
-            window.axios.post('/admin/api/job_categories/' + this.id, formData, {
+            window.axios.post('/api/job_categories/' + this.id, formData, {
                 headers: {
                     'X-HTTP-Method-Override': 'PUT'
                 }

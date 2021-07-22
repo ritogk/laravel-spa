@@ -36,7 +36,7 @@
             const formData = new FormData()
             formData.append('file',image_file)
             formData.append('item', JSON.stringify(this.item))
-            window.axios.post('/admin/api/job_categories',formData).then(response =>{
+            window.axios.post('/api/job_categories',formData).then(response =>{
                 this.message = ""
                 this.$router.push({ name: "job_category_index" })
             }).catch(error => {

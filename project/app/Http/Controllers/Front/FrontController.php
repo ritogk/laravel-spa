@@ -12,7 +12,6 @@ use App\Http\Requests\Front\EntryRequest;
 // UseCases
 use App\UseCases\Front\ShowAction as ShowAction;
 use App\UseCases\Front\SearchJobsAction as SearchJobsAction;
-use App\UseCases\Front\CategoriesAction as CategoriesAction;
 use App\UseCases\Front\SaveEntryAction as SaveEntryAction;
 
 class FrontController extends Controller
@@ -35,15 +34,6 @@ class FrontController extends Controller
      * @return array
      */
     public function index_jobs(SearchJobsAction $action): array{
-        return $action();
-    }
-
-    /**
-     * カテゴリ一覧取得
-     *
-     * @return array
-     */
-    public function index_categories(CategoriesAction $action): array{
         return $action();
     }
 

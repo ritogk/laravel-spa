@@ -28,7 +28,7 @@ class JobCategoryController extends Controller
      */
     public function index(JobCategoryListRequest $request, ListAction $action): array
     {
-        return $action($request->filters());
+        return $action($request->filters_json, $request->fields);
     }
 
     /**
