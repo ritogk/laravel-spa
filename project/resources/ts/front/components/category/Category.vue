@@ -67,7 +67,7 @@
                 , {
                     params:{
                         filters_json:JSON.stringify(''),
-                        fields:['name', 'content', 'image', 'sort_no']
+                        fields:['id', 'name', 'content', 'image', 'sort_no']
                     }
                 }
             ).then(response => {
