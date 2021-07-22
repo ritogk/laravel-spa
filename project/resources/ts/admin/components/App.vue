@@ -34,7 +34,7 @@
         user: User = {id: '', name: '', email: '', email_verified_at: '', password: ''}
 
         created() {
-            window.axios.get('/admin/api/auth/user').then(response => {
+            window.axios.get('/api/auth/user').then(response => {
                 this.user = response.data
             }).catch(error => {
                 this.isError = true
