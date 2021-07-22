@@ -11,17 +11,10 @@ use App\Http\Controllers;
 |
 */
 
-Route::group(['middleware' => ['admin']], function () {
-    // 画面表示用
-    Route::get('/', [Controllers\Admin\AdminController::class, 'index'])->name('admin');
+// 画面表示用
+Route::get('/', [Controllers\Admin\AdminController::class, 'index'])->name('admin');
 
-    // spa ルーティング用
-    Route::get('/spa/{any}', function () {
-        return view('admin');
-    })->where('any', '.*');
-
-    // api用
-    Route::group(['prefix' => 'api'], function () {
-
-    });
-});
+// spa ルーティング用
+Route::get('/spa/{any}', function () {
+    return view('admin');
+})->where('any', '.*');
