@@ -17,7 +17,7 @@ class ListAction{
     {
         $filters = json_decode($filters_json, true);
         $wheres = [];
-        if(isset($filters['name'])) {
+        if(isset($filters['name']) && $filters['name'] != '') {
             $wheres[] = ['name', 'LIKE', '%'. $filters['name']. '%'];
         }
 
