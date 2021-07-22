@@ -29,7 +29,7 @@ class JobController extends Controller
      */
     public function index(JobListRequest $request, ListAction $action): array
     {
-        return $action($request->filters());
+        return $action($request->filters_json, $request->fields);
     }
 
     /**

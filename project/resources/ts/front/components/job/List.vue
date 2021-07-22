@@ -130,7 +130,23 @@
 
         mounted(): void{
             this.loading = true
-            window.axios.get('/api/jobs').then(response => {
+            window.axios.get('/api/jobs',
+                {
+                    params:{
+                        filters_json:JSON.stringify(''),
+                        fields:['id',
+                                'title',
+                                'content',
+                                'attention',
+                                'job_category_id',
+                                'price',
+                                'welfare',
+                                'holiday',
+                                'image',
+                                'sort_no']
+                    }
+                }
+            ).then(response => {
                 this.allJobs = response.data
                 this.loading = false
             })
