@@ -3,7 +3,7 @@ import VueRouter from "vue-router";
 
 Vue.use(VueRouter);
 
-// 求人一覧
+// 選考一覧
 import entry_index from "./components/entry/index.vue";
 // 仕事マスタ
 import job_index from "./components/master/job/index.vue";

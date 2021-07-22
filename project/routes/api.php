@@ -33,7 +33,8 @@ Route::group(['prefix' => 'job_categories'], function () {
     Route::get('/files/excel', [Controllers\Admin\Master\JobCategoryController::class, 'excel']);
 });
 
-// 選考一覧
+// エントリー マスタ
 Route::group(['prefix' => 'entries'], function () {
-    Route::get('/', [Controllers\Admin\EntryController::class, 'index']);
+    Route::get('/', [Controllers\Admin\Master\EntryController::class, 'index']);
+    Route::post('/', [Controllers\Admin\Master\EntryController::class, 'create']);
 });
