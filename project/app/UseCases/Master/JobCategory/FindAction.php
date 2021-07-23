@@ -15,7 +15,6 @@ class FindAction{
     public function __invoke(string $id): array
     {
         $item = JobCategory::where('id', $id)
-                        ->select('id', 'name', 'content', 'image', 'sort_no', 'updated_at')
                         ->first()
                         ->toArray();
         $item['image'] = Storage::url($item['image']);

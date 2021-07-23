@@ -2,10 +2,9 @@
 
 namespace Tests\Feature\Front;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class ShowActionTest extends TestCase
+class FrontShowTest extends TestCase
 {
     /**
      * 200 test

@@ -14,12 +14,12 @@
                     <div v-text="message" style="color:red"></div>
                     <div class="py-2">
                         <label for="exampleInputEmail1">メールアドレス</label>
-                        <b-form-input placeholder="test@test.co.jp" v-model="email"></b-form-input>
+                        <b-form-input id="email" placeholder="test@test.co.jp" v-model="email"></b-form-input>
                     </div>
 
                     <div class="py-2">
                         <label for="exampleInputEmail1">パスワード</label>
-                        <b-form-input type="password" placeholder="test" v-model="password"></b-form-input>
+                        <b-form-input type="password" id="password" placeholder="test" v-model="password"></b-form-input>
                     </div>
 
                     <div class="py-2" hidden>
