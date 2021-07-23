@@ -1,8 +1,8 @@
 # laravel + spa + awsのポートフォリオ
 
 ## 概要
-求人の検索サービスです。<br>
-求人設定、選考確認、求人への応募が行えます。
+求人検索サービスです。<br>
+求人の追加、求人への応募が行えます。
 
 ## URL
 https://portfolio-rito.net/
@@ -96,8 +96,9 @@ https://portfolio-rito.net/
 ![aws構成図](https://user-images.githubusercontent.com/72111956/120178867-e88c3700-c244-11eb-9410-372e8fc977b9.png)
 
 ## 工夫した点
+バックエンドとフロントエンドをapiとvueで切り離した設計<br>
 フロント側、管理側をspaで作成<br>
-typescript, 静的チェック, テストコード等を使用してアプリの品質向上<br>
+typescript, 静的チェック, テストコード等を使用して品質向上<br>
 コンテナはローカル環境と本番環境で同じものを使用<br>
 ci/cdでテスト、デプロイを自動化<br>
 セキュリティを意識したaws構成<br>
