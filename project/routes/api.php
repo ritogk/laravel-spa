@@ -3,14 +3,11 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers;
 
-// ログイン系
+// ユーザー認証系
 Route::group(['prefix' => 'auth'], function () {
-    Route::get('/user', function () {
-        return Auth::user();
-    });
-    Route::get('/logout', function () {
-        return Auth::logout();
-    });
+    Route::get('/user', [Controllers\AuthController::class, 'user']);
+    Route::post('/login', [Controllers\AuthController::class, 'login']);
+    Route::post('/logout', [Controllers\AuthController::class, 'logout']);
 });
 
 // 仕事マスタ
