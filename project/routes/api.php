@@ -3,6 +3,13 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers;
 
+/*
+|--------------------------------------------------------------------------
+| Api Routes
+|--------------------------------------------------------------------------
+|
+*/
+
 // ユーザー認証系
 Route::group(['prefix' => 'auth'], function () {
     Route::get('/user', [Controllers\AuthController::class, 'user']);
