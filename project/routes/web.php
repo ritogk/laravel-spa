@@ -20,3 +20,6 @@ Route::get('/', [Controllers\Front\FrontController::class, 'index']);
 Route::get('/spa/{any}', function () {
     return view('front');
 })->where('any', '.*');
+
+
+Route::get('/login', [Controllers\Front\FrontController::class, 'login']);

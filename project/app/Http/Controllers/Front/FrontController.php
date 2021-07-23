@@ -47,4 +47,14 @@ class FrontController extends Controller
     public function create_entry(EntryRequest $request, SaveEntryAction $action): void{
         $action($request->all());
     }
+
+    /**
+     * 画面表示
+     *
+     * @return View
+     */
+    public function login(): View
+    {
+        return view('login');
+    }
 }
