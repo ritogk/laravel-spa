@@ -19,10 +19,10 @@ const mix = require('laravel-mix');
 mix.ts('resources/ts/front/front.ts', 'public/js')
     .ts('resources/ts/login/login.ts', 'public/js')
     .ts('resources/ts/admin/admin.ts', 'public/js')
-    .ts("resources/ts/admin/router.ts", "public/js")
-    .sass('resources/sass/admin.scss', 'public/css')
+    //.ts("resources/ts/admin/router.ts", "public/js")
     .sass('resources/sass/front.scss', 'public/css')
     .sass('resources/sass/login.scss', 'public/css')
+    .sass('resources/sass/admin.scss', 'public/css')
     .version();
 
 mix.webpackConfig({
