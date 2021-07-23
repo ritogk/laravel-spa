@@ -165,8 +165,8 @@
     import MsgDanger from '@root/admin/components/utility/msg_danger.vue';
     import BtnModalJobCategory from '@root/admin/components/utility/modal_job_category.vue'
     // モデル
-    import Item from './models/Item';
-    import BaseFormError from './models/BaseFormError';
+    import Item from './models/IItem';
+    import BaseFormError from './models/IBaseFormError';
 
     @Component({
         components: {

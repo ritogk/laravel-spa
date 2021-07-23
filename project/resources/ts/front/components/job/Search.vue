@@ -69,13 +69,20 @@
 
         mounted(){
             // コンボボックのカテゴリ値取得
-            window.axios.get('/api/categories').then(response => {
+            window.axios.get('/api/job_categories'
+                , {
+                    params:{
+                        filters_json:JSON.stringify(''),
+                        fields:['id', 'name']
+                    }
+                }
+            ).then(response => {
                 const categories: ICategory = response.data
                 for (var key in categories) {
                     this.cmb_categories[categories[key].id] = categories[key].name
                 }
                 this.cmb_categories = {...this.cmb_categories}
-            });
+            })
         }
         search(): void{
             const cond: ICond = {category: this.category

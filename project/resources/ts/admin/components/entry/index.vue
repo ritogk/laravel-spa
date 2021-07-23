@@ -63,11 +63,11 @@
                     </div>
                 </template>
 
-                <template #cell(job_nm))="row">
-                    {{ row.item.job_nm }}
+                <template #cell(job_id)="row">
+                    {{ jobNms[row.item.job_id] }}
                 </template>
 
-                <template #cell(full_name))="row">
+                <template #cell(full_name)="row">
                     {{ row.item.full_name }}
                 </template>
 
@@ -113,10 +113,11 @@
     import MsgDanger from '@root/admin/components/utility/msg_danger.vue';
     import BtnModalJobCategory from '@root/admin/components/utility/modal_job_category.vue'
     // モデル
-    import Item from './models/Item';
-    import Cond from './models/Cond';
-    import DataTableFileds from '@root/models/data_table/Fileds';
-    import DataTablePageOptions from '@root/models/data_table/PageOptions';
+    import Item from './models/IItem';
+    import Cond from './models/ICond';
+    import Job from '@root/admin/components/master/job/models/IItem'
+    import DataTableFileds from '@root/models/data_table/IFileds';
+    import DataTablePageOptions from '@root/models/data_table/IPageOptions';
 
     @Component({
         components: {
@@ -133,9 +134,10 @@
         items: Array<Item> = []
         cond: Cond = {full_name: ''}
         message: string = ""
+        jobNms: {[key: string]: string} = {}
         // 以降はデータテーブルで使用する値
         fields: Array<DataTableFileds> = [
-                        { key: 'job_nm', label: '求人名', sortable: true, sortDirection: 'desc' },
+                        { key: 'job_id', label: '求人名', sortable: true, sortDirection: 'desc' },
                         { key: 'full_name', label: '氏名'},
                         { key: 'email', label: 'メールアドレス'},
                         { key: 'tel', label: '電話番号' },
@@ -166,18 +168,31 @@
                 this.cond.full_name = cond_restore.full_name
             }
             this.getItem();
+
+            // 仕事名称取得
+            window.axios.get('/api/jobs'
+                , {
+                    params:{
+                        filters_json:JSON.stringify(''),
+                        fields:['id', 'title']
+                    }
+                }
+            ).then(response => {
+                let keyValues: {[key: string]: string;} = {}
+                response.data.map((x: Job) => keyValues[x.id] = x.title)
+                this.jobNms = keyValues
+            })
         }
 
         // 一覧取得
         getItem(): void{
             // 条件保存
             localStorage.setItem('entry_conds',JSON.stringify(this.cond))
-
             // 一覧読込
-            window.axios.get("/admin/api/entries", {
+            window.axios.get("/api/entries", {
                 params:{
-                    full_name: this.cond.full_name,
-                    isInit: this.isInit
+                    filters_json:JSON.stringify({full_name: this.cond.full_name}),
+                    fields:['*']
                 }
             }).then(response => {
                 this.items = response.data;

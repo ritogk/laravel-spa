@@ -116,9 +116,9 @@
     import MsgDanger from '@root/admin/components/utility/msg_danger.vue';
     // モデル
     import Item from './models/Item';
-    import Cond from './models/Cond';
-    import DataTableFileds from '@root/models/data_table/Fileds';
-    import DataTablePageOptions from '@root/models/data_table/PageOptions';
+    import Cond from './models/ICond';
+    import DataTableFileds from '@root/models/data_table/IFileds';
+    import DataTablePageOptions from '@root/models/data_table/IPageOptions';
 
     @Component({
         components: {
@@ -134,7 +134,7 @@
         items: Array<Item> = []
         cond: Cond = {name: ''}
         message: string = ""
-        dlMasterUrl: string = '/admin/api/job_categories/files/excel'
+        dlMasterUrl: string = '/api/job_categories/files/excel'
         // 以降はデータテーブルで使用する値
         fields: Array<DataTableFileds> = [
                         { key: 'name', label: '名称', sortable: true, sortDirection: 'desc' },
@@ -173,10 +173,14 @@
             // // 条件保存
             localStorage.setItem('job_category_conds',JSON.stringify(this.cond))
             // 一覧読込
-            window.axios.get("/admin/api/job_categories", {
-                params: {
-                    name: this.cond.name,
+            window.axios.get("/api/job_categories", {
+                params:{
+                    filters_json:JSON.stringify({name: this.cond.name,}),
+                    fields:['*']
                 }
+                // params: {
+                //     name: this.cond.name,
+                // }
             }).then(response => {
                 this.items = response.data;
                 this.totalRows = this.items.length
@@ -202,7 +206,7 @@
         destory(item: Item): void {
             this.$bvModal.msgBoxConfirm(window.format.sprintf('%1$s を削除します。よろしいですか?', item.name)).then(result => {
                 if(result){
-                    window.axios.delete("/admin/api/job_categories/" + item.id).then(response => {
+                    window.axios.delete("/api/job_categories/" + item.id).then(response => {
                         this.getItem();
                         this.message = "";
                     }).catch(error => {

@@ -95,7 +95,7 @@
                 </template>
 
                 <template #cell(job_category_nm)="row">
-                    {{ row.item.job_category_nm }}
+                    {{ jobCategoryNms[row.item.job_category_id] }}
                 </template>
 
                 <template #cell(price)="row">
@@ -137,11 +137,11 @@
     import MsgDanger from '@root/admin/components/utility/msg_danger.vue';
     import BtnModalJobCategory from '@root/admin/components/utility/modal_job_category.vue'
     // モデル
-    import Item from './models/Item';
+    import Item from './models/IItem';
     import JobCategory from '@root/admin/components/master/job_category/models/Item'
-    import Cond from './models/Cond';
-    import DataTableFileds from '@root/models/data_table/Fileds';
-    import DataTablePageOptions from '@root/models/data_table/PageOptions';
+    import Cond from './models/ICond';
+    import DataTableFileds from '@root/models/data_table/IFileds';
+    import DataTablePageOptions from '@root/models/data_table/IPageOptions';
 
     @Component({
         components: {
@@ -159,7 +159,7 @@
         jobCategoryNms: {[key: string]: string} = {}
         cond: Cond = {title: '', job_category: ''}
         message: string = ""
-        dlMasterUrl: string = '/admin/api/jobs/files/excel'
+        dlMasterUrl: string = '/api/jobs/files/excel'
         // 以降はデータテーブルで使用する値
         fields: Array<DataTableFileds> = [
                         { key: 'title', label: 'タイトル', sortable: true, sortDirection: 'desc' },
@@ -195,7 +195,14 @@
             this.getItem();
 
             // 職種マスタ名称取得
-            window.axios.get("/admin/api/job_categories").then(response => {
+            window.axios.get('/api/job_categories'
+                , {
+                    params:{
+                        filters_json:JSON.stringify(''),
+                        fields:['id', 'name']
+                    }
+                }
+            ).then(response => {
                 let keyValues: {[key: string]: string;} = {}
                 response.data.map((x: JobCategory) => keyValues[x.id] = x.name)
                 this.jobCategoryNms = keyValues
@@ -210,13 +217,15 @@
         getItem(): void{
             // 条件保存
             localStorage.setItem('job_conds',JSON.stringify(this.cond))
-
-            // 一覧読込
-            window.axios.get("/admin/api/jobs", {
-                params: {
-                    title: this.cond.title,
-                    job_category_id: this.cond.job_category,
-                    isInit: this.isInit
+            window.axios.get("/api/jobs", {
+                params:{
+                    filters_json:JSON.stringify(
+                        {
+                            title: this.cond.title,
+                            job_category_id: this.cond.job_category,
+                        }
+                    ),
+                    fields:['*']
                 }
             }).then(response => {
                 this.items = response.data;
@@ -243,7 +252,7 @@
         destory(item: Item): void {
             this.$bvModal.msgBoxConfirm(window.format.sprintf('%1$s を削除します。よろしいですか?', item.title)).then(result => {
                 if(result){
-                    window.axios.delete("/admin/api/jobs/" + item.id).then(response => {
+                    window.axios.delete("/api/jobs/" + item.id).then(response => {
                         this.getItem();
                         this.message = "";
                     }).catch(error => {

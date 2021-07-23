@@ -17,7 +17,7 @@
 <script lang="ts">
     import { Vue, Component, Watch } from 'vue-property-decorator';
     // モデル
-    import User from '@root/models/User';
+    import User from '@root/models/IUser';
     // コンポーネント
     import Header from './Header.vue';
     import Aside from './Aside.vue';
@@ -34,7 +34,7 @@
         user: User = {id: '', name: '', email: '', email_verified_at: '', password: ''}
 
         created() {
-            window.axios.get('/admin/api/auth/user').then(response => {
+            window.axios.get('/api/auth/user').then(response => {
                 this.user = response.data
             }).catch(error => {
                 this.isError = true

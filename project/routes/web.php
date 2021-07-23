@@ -1,29 +1,31 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers;
 
 /*
 |--------------------------------------------------------------------------
-| Front Routes
+| Web Routes
 |--------------------------------------------------------------------------
 |
 */
 
-Auth::routes();
+// ログイン画面
+Route::get('/login', [Controllers\Web\WebController::class, 'login'])->name('login');
 
-// 画面表示用
-Route::get('/', [Controllers\Front\FrontController::class, 'index']);
-
-// spa ルーティング用
+// 仕事選択画面
+Route::get('/', [Controllers\Web\WebController::class, 'index']);
+// 仕事選択画面spaルーティング用
 Route::get('/spa/{any}', function () {
     return view('front');
 })->where('any', '.*');
 
-// api用
-Route::prefix('/api')->group(function () {
-    Route::get('/jobs', [Controllers\Front\FrontController::class, 'index_jobs']);
-    Route::get('/categories', [Controllers\Front\FrontController::class, 'index_categories']);
-    Route::post('/entry', [Controllers\Front\FrontController::class, 'create_entry']);
+// 管理画面側
+Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
+    // 管理画面
+    Route::get('/', [Controllers\Web\WebController::class, 'admin'])->name('admin');
+    // 管理画面spaルーティング用
+    Route::get('/spa/{any}', function () {
+        return view('admin');
+    })->where('any', '.*');
 });

@@ -18,8 +18,8 @@
     import BaseForm from './base_from.vue'
     import MsgDanger from '@root/admin/components/utility/msg_danger.vue'
     // モデル
-    import Item from './models/Item';
-    import BaseFormError from './models/BaseFormError';
+    import Item from './models/IItem';
+    import BaseFormError from './models/IBaseFormError';
 
     @Component({
         components: {
@@ -38,7 +38,7 @@
 
         // 初期化
         mounted(): void{
-            window.axios.get('/admin/api/jobs/' + this.id).then(response => {
+            window.axios.get('/api/jobs/' + this.id).then(response => {
                 this.item = response.data
             })
         }
@@ -48,7 +48,7 @@
             formData.append('file',image_file)
             formData.append('item', JSON.stringify(this.item))
 
-            window.axios.post('/admin/api/jobs/' + this.id, formData, {
+            window.axios.post('/api/jobs/' + this.id, formData, {
                 headers: {
                     'X-HTTP-Method-Override': 'PUT'
                 }

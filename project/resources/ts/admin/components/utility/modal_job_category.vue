@@ -101,8 +101,8 @@
     import { Vue, Component, Emit, Prop } from 'vue-property-decorator';
     // モデル
     import JobCategry from '@root/admin/components/master/job_category/models/Item'
-    import DataTableFileds from '@root/models/data_table/Fileds';
-    import DataTablePageOptions from '@root/models/data_table/PageOptions';
+    import DataTableFileds from '@root/models/data_table/IFileds';
+    import DataTablePageOptions from '@root/models/data_table/IPageOptions';
 
     @Component
     export default class Modal extends Vue{
@@ -150,7 +150,14 @@
         // 初期化
         mounted(){
             this.isBusy = true;
-            window.axios.get("/admin/api/job_categories", {params:{isInit: true}}).then(response => {
+            window.axios.get('/api/job_categories'
+                , {
+                    params:{
+                        filters_json:JSON.stringify(''),
+                        fields:['*']
+                    }
+                }
+            ).then(response => {
                 this.items = response.data;
                 this.totalRows = this.items.length
                 this.isBusy = false;
