@@ -11,9 +11,7 @@ use App\Http\Controllers;
 |
 */
 
-Auth::routes();
-
-// 画面表示用
+// 仕事選択画面
 Route::get('/', [Controllers\Front\FrontController::class, 'index']);
 
 // spa ルーティング用
@@ -21,5 +19,5 @@ Route::get('/spa/{any}', function () {
     return view('front');
 })->where('any', '.*');
 
-
-Route::get('/login', [Controllers\Front\FrontController::class, 'login']);
+// ログイン画面
+Route::get('/login', [Controllers\Front\FrontController::class, 'login'])->name('login');
