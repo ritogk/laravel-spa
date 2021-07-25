@@ -58,9 +58,6 @@ https://portfolio-rito.net/
 - vuex 3.6.2
 - bootstrap-vue 2.19.x
 - typescript 4.2.4
-- axios 0.19
-- bootstrap 4.x.x
-- jquery 3.2
 
 ### バックエンド
 - php 7.4
