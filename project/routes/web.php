@@ -11,7 +11,7 @@ use App\Http\Controllers;
 */
 
 // ログイン画面
-Route::get('/login', [Controllers\Web\WebController::class, 'login'])->name('login');
+Route::get('/admin_login', [Controllers\Web\WebController::class, 'admin_login'])->name('admin.login');
 
 // 仕事選択画面
 Route::get('/', [Controllers\Web\WebController::class, 'index']);
@@ -21,7 +21,7 @@ Route::get('/spa/{any}', function () {
 })->where('any', '.*');
 
 // 管理画面側
-Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
+Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function () {
     // 管理画面
     Route::get('/', [Controllers\Web\WebController::class, 'admin'])->name('admin');
     // 管理画面spaルーティング用

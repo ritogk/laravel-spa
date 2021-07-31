@@ -18,13 +18,13 @@ class WebController extends Controller
     }
 
     /**
-     * ログイン画面
+     * 管理者ログイン画面
      *
      * @return View
      */
-    public function login(): View
+    public function admin_login(): View
     {
-        return view('login');
+        return view('admin.login');
     }
 
     /**
@@ -34,6 +34,6 @@ class WebController extends Controller
      */
     public function admin(): View
     {
-        return view('admin');
+        return view('admin.admin');
     }
 }

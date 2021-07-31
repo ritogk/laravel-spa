@@ -10,8 +10,21 @@ use App\Http\Controllers;
 |
 */
 
+Route::group(["middleware" => "auth:api"], function () {
+    Route::get('/current_admin_user', function () {
+        return Auth::user();
+    });
+});
+
 // ユーザー認証系
 Route::group(['prefix' => 'auth'], function () {
+    // 管理者
+    Route::group(['prefix' => 'admin'], function () {
+        Route::get('/user', [Controllers\Api\AdminAuthController::class, 'user']);
+        Route::post('/login', [Controllers\Api\AdminAuthController::class, 'login']);
+        Route::post('/logout', [Controllers\Api\AdminAuthController::class, 'logout']);
+    });
+    // 一般
     Route::get('/user', [Controllers\Api\AuthController::class, 'user']);
     Route::post('/login', [Controllers\Api\AuthController::class, 'login']);
     Route::post('/logout', [Controllers\Api\AuthController::class, 'logout']);

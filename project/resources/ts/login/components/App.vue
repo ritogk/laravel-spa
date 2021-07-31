@@ -56,7 +56,7 @@
 
         // ログイン
         login(): void{
-            window.axios.post('/api/auth/login',
+            window.axios.post('/api/auth/admin/login',
                 {
                     'email':this.email,
                     'password':this.password,
