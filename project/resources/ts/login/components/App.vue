@@ -22,7 +22,7 @@
                         <b-form-input type="password" id="password" placeholder="test" v-model="password"></b-form-input>
                     </div>
 
-                    <div class="py-2">
+                    <div class="py-2" hidden>
                         <b-form-checkbox
                         v-model="remeber"
                         id="checkbox-1"
@@ -50,7 +50,7 @@
     export default class Login extends Vue {
         email: string = ''
         password: string = ''
-        remeber: boolean = true
+        remeber: boolean = false
 
         message: string = ''
 
