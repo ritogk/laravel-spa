@@ -22,7 +22,7 @@
                         <b-form-input type="password" id="password" placeholder="test" v-model="password"></b-form-input>
                     </div>
 
-                    <div class="py-2" hidden>
+                    <div class="py-2">
                         <b-form-checkbox
                         v-model="remeber"
                         id="checkbox-1"

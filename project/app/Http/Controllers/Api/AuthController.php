@@ -56,4 +56,16 @@ class AuthController extends Controller
         $request->session()->regenerateToken();
         return response()->json(['message' => '成功'], 200);
     }
+
+    /**
+     * @param  Request  $request
+     * @param $credentials
+     * @return mixed
+     */
+    private function attemptLogin(Request $request)
+    {
+        return $this->guard()->attempt($this->credentials($request)
+                                        , $request->remember);
+    }
+
 }
