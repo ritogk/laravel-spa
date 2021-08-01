@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use App\Http\Requests\Auth\Front\LoginRequest;
 
 class FrontAuthController extends Controller
 {
@@ -31,11 +32,14 @@ class FrontAuthController extends Controller
      */
     public function login(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'email' => ['required', 'string'],
-            'password' => ['required', 'string'],
-            'remember' => ['required', 'boolean'],
-        ]);
+        $requestClass = new LoginRequest();
+        $validator = Validator::make($request->all(), $requestClass->rules(), [], $requestClass->attributes());
+
+        // $validator = Validator::make($request->all(), [
+        //     'email' => ['required', 'string'],
+        //     'password' => ['required', 'string'],
+        //     'remember' => ['required', 'boolean'],
+        // ]);
 
         if($validator->fails()){
             return response()->json(['message' => 'バリデーション失敗', 'errors' => $validator->errors()], 400);
