@@ -7,6 +7,7 @@ Vue.use(VueRouter);
 import job from './components/job/Board.vue';
 import category from './components/category/Board.vue';
 import login from './components/login/Board.vue';
+import register from './components/register/Board.vue';
 
 const router = new VueRouter({
     mode: "hash",
@@ -16,6 +17,13 @@ const router = new VueRouter({
             path: "/spa/login",
             name: "login",
             component: login,
+            props: true
+        },
+        // 新規登録
+        {
+            path: "/spa/register",
+            name: "register",
+            component: register,
             props: true
         },
         // トップ
