@@ -7,6 +7,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class FrontAuthController extends Controller
 {
@@ -30,11 +31,15 @@ class FrontAuthController extends Controller
      */
     public function login(Request $request)
     {
-        $request->validate([
-            'email' => 'required|string',
-            'password' => 'required|string',
-            'remember' => 'required|boolean',
+        $validator = Validator::make($request->all(), [
+            'email' => ['required', 'string'],
+            'password' => ['required', 'string'],
+            'remember' => ['required', 'boolean'],
         ]);
+
+        if($validator->fails()){
+            return response()->json(['message' => '失敗', 'errors' => $validator->errors()], 400);
+        }
 
         if ($this->attemptLogin($request)) {
             $request->session()->regenerate();
@@ -42,7 +47,7 @@ class FrontAuthController extends Controller
             return response()->json(['message' => '成功'], 200);
         }
 
-        return response()->json(['message' => '失敗'], 422);
+        return response()->json(['message' => '失敗'], 400);
     }
 
     /**
