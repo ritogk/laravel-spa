@@ -24,15 +24,15 @@ class UsersTableSeeder extends Seeder
             'updated_at' => $now,
             'created_at' => $now
         ]);
-        
+
         DB::table('users')->insert([
-            'name' => 'test',
-            'email' => 'test@test.co.jp',
-            'password' => bcrypt('test'),
+            'name' => 'normal',
+            'email' => 'normal@normal.co.jp',
+            'password' => bcrypt('normal'),
             'updated_at' => $now,
             'created_at' => $now
         ]);
-        
+
         User::factory()->count(5)->create();
     }
 }
