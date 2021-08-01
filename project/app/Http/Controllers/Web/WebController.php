@@ -18,16 +18,6 @@ class WebController extends Controller
     }
 
     /**
-     * 一般ログイン画面
-     *
-     * @return View
-     */
-    public function login_front(): View
-    {
-        return view('front.login');
-    }
-
-    /**
      * 管理者ログイン画面
      *
      * @return View

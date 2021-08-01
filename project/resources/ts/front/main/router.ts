@@ -6,10 +6,18 @@ Vue.use(VueRouter);
 // コンポーネント
 import job from './components/job/Board.vue';
 import category from './components/category/Board.vue';
+import login from './components/login/Board.vue';
 
 const router = new VueRouter({
     mode: "hash",
     routes: [
+        // ログイン
+        {
+            path: "/spa/login",
+            name: "login",
+            component: login,
+            props: true
+        },
         // トップ
         {
             path: "*",

@@ -18,8 +18,6 @@ const mix = require('laravel-mix');
  */
 mix.ts('resources/ts/front/main/main.ts', 'public/js/front')
     .sass('resources/sass/front/main.scss', 'public/css/front')
-    .ts('resources/ts/front/login/login.ts', 'public/js/front')
-    .sass('resources/sass/front/login.scss', 'public/css/front')
     .ts('resources/ts/admin/main/main.ts', 'public/js/admin')
     .sass('resources/sass/admin/main.scss', 'public/css/admin')
     .ts('resources/ts/admin/login/login.ts', 'public/js/admin')
