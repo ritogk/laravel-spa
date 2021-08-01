@@ -27,6 +27,7 @@ Route::group(['prefix' => 'auth'], function () {
     // 一般
     Route::group(['prefix' => 'front'], function () {
         Route::get('/user', [Controllers\Api\FrontAuthController::class, 'user']);
+        Route::post('/register', [Controllers\Api\FrontRegisterController::class, 'register'])->middleware(['guest:user']);
         Route::post('/login', [Controllers\Api\FrontAuthController::class, 'login']);
         Route::post('/logout', [Controllers\Api\FrontAuthController::class, 'logout']);
     });
