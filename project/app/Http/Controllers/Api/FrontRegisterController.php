@@ -41,7 +41,7 @@ class FrontRegisterController extends Controller
         ]);
 
         if($validator->fails()){
-            return response()->json(['message' => '失敗', 'errors' => $validator->errors()], 400);
+            return response()->json(['message' => 'バリデーション失敗', 'errors' => $validator->errors()], 400);
         }
 
         event(new Registered($user = $this->create($request->all())));

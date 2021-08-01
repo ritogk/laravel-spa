@@ -38,7 +38,7 @@ class AdminAuthController extends Controller
         ]);
 
         if($validator->fails()){
-            return response()->json(['message' => '失敗', 'errors' => $validator->errors()], 400);
+            return response()->json(['message' => 'バリデーション失敗', 'errors' => $validator->errors()], 400);
         }
 
         if ($this->attemptLogin($request)) {
@@ -47,7 +47,7 @@ class AdminAuthController extends Controller
             return response()->json(['message' => '成功'], 200);
         }
 
-        return response()->json(['message' => '失敗'], 400);
+        return response()->json(['message' => 'ログイン失敗'], 400);
     }
 
     /**
