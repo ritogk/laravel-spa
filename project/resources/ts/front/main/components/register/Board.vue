@@ -118,9 +118,6 @@
     }
 
     import { Vue, Component, Watch } from 'vue-property-decorator';
-    // コンポーネント
-    import VueLoading from 'vue-loading-template';
-    Vue.use(VueLoading, /** options **/)
 
     @Component
     export default class Register extends Vue {
@@ -131,9 +128,9 @@
         password: string = 'normal'
         password_confirmation: string = 'normal'
 
-        message: string = ''
-
         errors: IErrors = {name:'', self_pr:'', tel:'', email:'', password:'', password_confirmation:''};
+
+        message: string = ''
 
         // ログイン
         login(): void{
@@ -147,11 +144,10 @@
                     'password_confirmation': this.password_confirmation,
                 }
             ).then(response => {
-                //window.location.href = '/'
-                debugger
-            }).catch(response => {
-                debugger
-                //this.message = 'メールアドレス又はパスワードが間違っています。'
+                window.location.href = '/'
+            }).catch(error => {
+                let request_errors = error.response.data.errors;
+                this.errors = (this as any).apply_request_errors(this.errors, request_errors);
             })
         }
     }

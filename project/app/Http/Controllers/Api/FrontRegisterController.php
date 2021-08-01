@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
@@ -12,19 +11,11 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Auth\Events\Registered;
 
+use App\Http\Requests\Auth\Front\RegisterRequest;
+
 class FrontRegisterController extends Controller
 {
     use RegistersUsers;
-
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('guest');
-    }
 
     /**
      * Handle a registration request for the application.
@@ -34,11 +25,8 @@ class FrontRegisterController extends Controller
      */
     public function register(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-        ]);
+        $requestClass = new RegisterRequest();
+        $validator = Validator::make($request->all(), $requestClass->rules(), [], $requestClass->attributes());
 
         if($validator->fails()){
             return response()->json(['message' => 'バリデーション失敗', 'errors' => $validator->errors()], 400);
@@ -61,6 +49,8 @@ class FrontRegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'self_pr' => $data['self_pr'],
+            'tel' => $data['tel'],
         ]);
     }
 
