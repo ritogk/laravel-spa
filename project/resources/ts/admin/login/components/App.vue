@@ -48,8 +48,8 @@
 
     @Component
     export default class Login extends Vue {
-        email: string = ''
-        password: string = ''
+        email: string = 'test@test.co.jp'
+        password: string = 'test'
         remeber: boolean = false
 
         message: string = ''
