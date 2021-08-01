@@ -34,20 +34,20 @@ Route::group(['prefix' => 'auth'], function () {
 Route::group(['prefix' => 'jobs'], function () {
     Route::get('/', [Controllers\Api\Master\JobController::class, 'index']);
     Route::get('/{id}', [Controllers\Api\Master\JobController::class, 'find']);
-    Route::post('/', [Controllers\Api\Master\JobController::class, 'create'])->middleware(['auth', 'job.save.request']);
-    Route::put('/{id}', [Controllers\Api\Master\JobController::class, 'update'])->middleware(['auth', 'job.save.request']);
-    Route::delete('/{id}', [Controllers\Api\Master\JobController::class, 'destroy'])->middleware(['auth']);
-    Route::get('/files/excel', [Controllers\Api\Master\JobController::class, 'excel'])->middleware(['auth']);
+    Route::post('/', [Controllers\Api\Master\JobController::class, 'create'])->middleware(['auth:admin', 'job.save.request']);
+    Route::put('/{id}', [Controllers\Api\Master\JobController::class, 'update'])->middleware(['auth:admin', 'job.save.request']);
+    Route::delete('/{id}', [Controllers\Api\Master\JobController::class, 'destroy'])->middleware(['auth:admin']);
+    Route::get('/files/excel', [Controllers\Api\Master\JobController::class, 'excel'])->middleware(['auth:admin']);
 });
 
 // 仕事カテゴリ マスタ
 Route::group(['prefix' => 'job_categories'], function () {
     Route::get('/', [Controllers\Api\Master\JobCategoryController::class, 'index']);
     Route::get('/{id}', [Controllers\Api\Master\JobCategoryController::class, 'find']);
-    Route::post('/', [Controllers\Api\Master\JobCategoryController::class, 'create'])->middleware(['auth', 'job.category.save.request']);
-    Route::put('/{id}', [Controllers\Api\Master\JobCategoryController::class, 'update'])->middleware(['auth', 'job.category.save.request']);
-    Route::delete('/{id}', [Controllers\Api\Master\JobCategoryController::class, 'destroy'])->middleware(['auth']);
-    Route::get('/files/excel', [Controllers\Api\Master\JobCategoryController::class, 'excel'])->middleware(['auth']);
+    Route::post('/', [Controllers\Api\Master\JobCategoryController::class, 'create'])->middleware(['auth:admin', 'job.category.save.request']);
+    Route::put('/{id}', [Controllers\Api\Master\JobCategoryController::class, 'update'])->middleware(['auth:admin', 'job.category.save.request']);
+    Route::delete('/{id}', [Controllers\Api\Master\JobCategoryController::class, 'destroy'])->middleware(['auth:admin']);
+    Route::get('/files/excel', [Controllers\Api\Master\JobCategoryController::class, 'excel'])->middleware(['auth:admin']);
 });
 
 // エントリー マスタ
