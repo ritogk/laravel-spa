@@ -55,6 +55,10 @@ class Handler extends ExceptionHandler
         }
 
         // 一般画面
-        //return redirect()->guest(route('login'));
+        if (in_array('user', $exception->guards())) {
+            return redirect()->guest(route('login.front'));
+        }
+
+        return redirect()->guest(route('login.front'));
     }
 }

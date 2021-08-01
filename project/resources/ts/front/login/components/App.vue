@@ -22,7 +22,7 @@
                         <b-form-input type="password" id="password" placeholder="test" v-model="password"></b-form-input>
                     </div>
 
-                    <div class="py-2" hidden>
+                    <div class="py-2">
                         <b-form-checkbox
                         v-model="remeber"
                         id="checkbox-1"
@@ -48,8 +48,8 @@
 
     @Component
     export default class Login extends Vue {
-        email: string = ''
-        password: string = ''
+        email: string = 'normal@normal.co.jp'
+        password: string = 'normal'
         remeber: boolean = false
 
         message: string = ''
@@ -63,7 +63,7 @@
                     'remember': this.remeber
                 }
             ).then(response => {
-                window.location.href = '/admin'
+                window.location.href = '/'
             }).catch(response => {
                 this.message = 'メールアドレス又はパスワードが間違っています。'
             })

@@ -8,18 +8,18 @@ use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
 
-class AuthController extends Controller
+class FrontAuthController extends Controller
 {
     use AuthenticatesUsers;
 
     /**
-     * ログインユーザー情報
+     * ログイン済ユーザー情報 取得
      *
      * @return \App\Models\User|null
      */
     public function user()
     {
-        return Auth::user();
+        return $this->guard()->user();
     }
 
     /**
@@ -37,7 +37,8 @@ class AuthController extends Controller
         ]);
 
         if ($this->attemptLogin($request)) {
-            $this->sendLoginResponse($request);
+            $request->session()->regenerate();
+            $this->clearLoginAttempts($request);
             return response()->json(['message' => '成功'], 200);
         }
 
@@ -52,12 +53,12 @@ class AuthController extends Controller
      */
     public function logout(Request $request){
         $this->guard()->logout();
-        $request->session()->invalidate();
         $request->session()->regenerateToken();
         return response()->json(['message' => '成功'], 200);
     }
 
     /**
+     *
      * @param  Request  $request
      * @param $credentials
      * @return mixed
@@ -68,4 +69,12 @@ class AuthController extends Controller
                                         , $request->remember);
     }
 
+    /**
+     * ガード変更
+     *
+     */
+    private function guard()
+    {
+        return Auth::guard('user');
+    }
 }

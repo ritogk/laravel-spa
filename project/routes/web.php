@@ -16,9 +16,9 @@ Route::group(['prefix' => 'login'], function () {
     Route::get('/front', [Controllers\Web\WebController::class, 'login_front'])->name('login.front');
 });
 
-// 仕事選択画面
+// 一般画面
 Route::get('/', [Controllers\Web\WebController::class, 'index']);
-// 仕事選択画面spaルーティング用
+// 一般画面spaルーティング用
 Route::get('/spa/{any}', function () {
     return view('front');
 })->where('any', '.*');

@@ -25,9 +25,11 @@ Route::group(['prefix' => 'auth'], function () {
         Route::post('/logout', [Controllers\Api\AdminAuthController::class, 'logout']);
     });
     // 一般
-    Route::get('/user', [Controllers\Api\AuthController::class, 'user']);
-    Route::post('/login', [Controllers\Api\AuthController::class, 'login']);
-    Route::post('/logout', [Controllers\Api\AuthController::class, 'logout']);
+    Route::group(['prefix' => 'front'], function () {
+        Route::get('/user', [Controllers\Api\FrontAuthController::class, 'user']);
+        Route::post('/login', [Controllers\Api\FrontAuthController::class, 'login']);
+        Route::post('/logout', [Controllers\Api\FrontAuthController::class, 'logout']);
+    });
 });
 
 // 仕事マスタ
