@@ -53,7 +53,6 @@ class AdminAuthController extends Controller
      */
     public function logout(Request $request){
         $this->guard()->logout();
-        $request->session()->invalidate();
         $request->session()->regenerateToken();
         return response()->json(['message' => '成功'], 200);
     }
