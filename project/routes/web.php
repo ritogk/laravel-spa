@@ -13,6 +13,7 @@ use App\Http\Controllers;
 // ログイン画面
 Route::group(['prefix' => 'login'], function () {
     Route::get('/admin', [Controllers\Web\WebController::class, 'login_admin'])->name('login.admin');
+    Route::get('/front', [Controllers\Web\WebController::class, 'login_front'])->name('login.front');
 });
 
 // 仕事選択画面
