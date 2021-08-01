@@ -79,6 +79,11 @@ Vue.mixin(gv2);
 import { state } from "@front/main/state";
 state.restore()
 
+// ログイン会員情報取得
+window.axios.get('/api/auth/front/user').then(function(response){
+    state.setLoginUser(response.data)
+});
+
 import component from './components/App.vue';
 new Vue({
     el: '#app',

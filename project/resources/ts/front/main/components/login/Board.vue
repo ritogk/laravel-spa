@@ -42,9 +42,8 @@
 
 <script lang="ts">
     import { Vue, Component, Watch } from 'vue-property-decorator';
-    // コンポーネント
-    import VueLoading from 'vue-loading-template';
-    Vue.use(VueLoading, /** options **/)
+    // 状態管理
+    import { state } from "@front/main/state";
 
     @Component
     export default class Login extends Vue {
@@ -63,6 +62,7 @@
                     'remember': this.remeber
                 }
             ).then(response => {
+                state.setLoginUser(response.data.user)
                 window.location.href = '/'
             }).catch(response => {
                 this.message = 'メールアドレス又はパスワードが間違っています。'

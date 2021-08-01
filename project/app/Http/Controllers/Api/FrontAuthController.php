@@ -35,12 +35,6 @@ class FrontAuthController extends Controller
         $requestClass = new LoginRequest();
         $validator = Validator::make($request->all(), $requestClass->rules(), [], $requestClass->attributes());
 
-        // $validator = Validator::make($request->all(), [
-        //     'email' => ['required', 'string'],
-        //     'password' => ['required', 'string'],
-        //     'remember' => ['required', 'boolean'],
-        // ]);
-
         if($validator->fails()){
             return response()->json(['message' => 'バリデーション失敗', 'errors' => $validator->errors()], 400);
         }
@@ -48,7 +42,7 @@ class FrontAuthController extends Controller
         if ($this->attemptLogin($request)) {
             $request->session()->regenerate();
             $this->clearLoginAttempts($request);
-            return response()->json(['message' => '成功'], 200);
+            return response()->json(['message' => '成功', 'user' => $this->user()], 200);
         }
 
         return response()->json(['message' => 'ログイン失敗'], 400);

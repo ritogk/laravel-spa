@@ -3,6 +3,7 @@ import Vuex from 'vuex';
 import Vue from 'vue';
 
 import ICond from "@front/main/models/ICond";
+import IUser from "@root/models/IUser";
 
 // state's interface
 export interface IState {
@@ -19,16 +20,25 @@ const store=new Vuex.Store({})
 class State extends VuexModule implements IState {
     // state
     cond: ICond = dafaultCond;
+    loginUser: IUser = {id: '', name: '',email: '', email_verified_at: '', self_pr: '', tel: '', created_at: '', updated_at: ''};
 
     // getter
     public get getCond(): ICond {
         return this.cond
     }
 
+    public get getLoginUser(): IUser{
+        return this.loginUser
+    }
+
     // mutation
     @Mutation
     public setCond(value: ICond) {
         this.cond = value;
+    }
+    @Mutation
+    public setLoginUser(value: IUser) {
+        this.loginUser = value;
     }
 
     // action

@@ -3,5 +3,8 @@ export default interface IUser {
     name: string
     email: string
     email_verified_at: string
-    password: string
+    self_pr: string
+    tel: string
+    created_at: string
+    updated_at: string
 }
