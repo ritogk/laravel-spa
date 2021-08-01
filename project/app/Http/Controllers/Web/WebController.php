@@ -14,7 +14,7 @@ class WebController extends Controller
      */
     public function index(): View
     {
-        return view('front');
+        return view('front.main');
     }
 
     /**
@@ -22,7 +22,7 @@ class WebController extends Controller
      *
      * @return View
      */
-    public function admin_login(): View
+    public function login_admin(): View
     {
         return view('admin.login');
     }
@@ -34,6 +34,6 @@ class WebController extends Controller
      */
     public function admin(): View
     {
-        return view('admin.admin');
+        return view('admin.main');
     }
 }

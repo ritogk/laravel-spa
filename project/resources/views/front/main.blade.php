@@ -1,17 +1,17 @@
-@extends('layouts.login')
+@extends('layouts.front')
 
 @section('content-header')
     <h3>下記の注意事項をご確認ください。</h3>
 @endsection
 
 @section('content')
-    <login></login>
+    <app></app>
 @endsection
 
 @section('css')
-    <link href="{{ mix('css/admin/login.css') }}" rel="stylesheet">
+    <link href="{{ mix('css/front/main.css') }}" rel="stylesheet">
 @endsection
 
 @section('js')
-    <script src="{{ mix('js/admin/login.js') }}" defer></script>
+    <script src="{{ mix('js/front/main.js') }}" defer></script>
 @endsection

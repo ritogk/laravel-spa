@@ -20,6 +20,9 @@
         "@root/*": [
             "resources/ts/*"
         ],
+        "@admin/*": [
+            "resources/ts/admin/*"
+        ],
       }
     },
     "include": [

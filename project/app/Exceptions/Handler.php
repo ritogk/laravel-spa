@@ -51,7 +51,7 @@ class Handler extends ExceptionHandler
 
         // 管理画面
         if (in_array('admin', $exception->guards())) {
-            return redirect()->guest(route('admin.login'));
+            return redirect()->guest(route('login.admin'));
         }
 
         // 一般画面
