@@ -86,7 +86,7 @@
     import IJob from "@front/main/models/IJob";
     import ICond from "@front/main/models/ICond";
     // 状態管理
-    import { state } from "@front/main/state";
+    import { state } from "@root/front/main/state/job_cond";
 
     @Component({
         components: {

@@ -43,7 +43,7 @@
 <script lang="ts">
     import { Vue, Component, Watch } from 'vue-property-decorator';
     // 状態管理
-    import { state } from "@front/main/state";
+    import { state as stateUser} from "@root/front/main/state/user";
 
     @Component
     export default class Login extends Vue {
@@ -62,13 +62,13 @@
                     'remember': this.remeber
                 }
             ).then(response => {
-                state.setLoginUser(
+                stateUser.setLoginUser(
                     {
                         user: response.data.user,
                         status: true
                     }
                 )
-                window.location.href = '/'
+                this.$router.push({ name: 'category'})
             }).catch(response => {
                 this.message = 'メールアドレス又はパスワードが間違っています。'
             })

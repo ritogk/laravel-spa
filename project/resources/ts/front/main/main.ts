@@ -76,12 +76,13 @@ import gv2 from '@root/mixins/form_validation';
 Vue.mixin(gv2);
 
 // 入力値の復元
-import { state } from "@front/main/state";
-state.restore()
+import { state as statejobCond} from "@front/main/state/job_cond";
+statejobCond.restore()
 
 // ログイン会員情報取得
+import { state as stateUser} from "@front/main/state/user";
 window.axios.get('/api/auth/front/user').then(function(response){
-    state.setLoginUser({
+    stateUser.setLoginUser({
         user: response.data,
         status:true
     })

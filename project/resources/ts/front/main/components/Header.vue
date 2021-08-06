@@ -21,12 +21,12 @@
     // モデル
     import IUser from "@root/models/IUser";
     // 状態管理
-    import { state } from "@front/main/state";
+    import { state as stateUser} from "@root/front/main/state/user";
 
     @Component
     export default class Header extends Vue {
         get loginUser(): IUser{
-            return state.getLoginUser
+            return stateUser.loginUser
         }
 
         // ログイン画面
@@ -37,7 +37,7 @@
         // ログアウト
         logout() {
             window.axios.post('/api/auth/front/logout').then(response => {
-                window.location.href = '/'
+                stateUser.init()
             }).catch(error => {});
         }
 

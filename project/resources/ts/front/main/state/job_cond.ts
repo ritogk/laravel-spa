@@ -3,7 +3,6 @@ import Vuex from 'vuex';
 import Vue from 'vue';
 
 import ICond from "@front/main/models/ICond";
-import IUser from "@root/models/IUser";
 
 // state's interface
 export interface IState {
@@ -22,29 +21,16 @@ class State extends VuexModule implements IState {
 
     // 仕事一覧の抽出条件値
     cond: ICond = dafaultCond;
-    // ログイン会員情報
-    loginUser: IUser = {
-        user:{id: '', name: '',email: '', email_verified_at: '', self_pr: '', tel: '', created_at: '', updated_at: ''},
-        status: false
-    };
 
     // getter
     public get getCond(): ICond {
         return this.cond
     }
 
-    public get getLoginUser(): IUser{
-        return this.loginUser
-    }
-
     // mutation
     @Mutation
     public setCond(value: ICond) {
         this.cond = value;
-    }
-    @Mutation
-    public setLoginUser(value: IUser) {
-        this.loginUser = value;
     }
 
     // action
@@ -61,13 +47,6 @@ class State extends VuexModule implements IState {
         if(cond){
             this.setCond(JSON.parse(cond))
         }
-    }
-    // ログイン会員情報の初期化
-    public initLoginUser() {
-        this.setLoginUser({
-            user:{id: '', name: '',email: '', email_verified_at: '', self_pr: '', tel: '', created_at: '', updated_at: ''},
-            status: false
-        })
     }
 }
 export const state = getModule(State);

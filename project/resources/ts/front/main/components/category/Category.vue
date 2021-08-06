@@ -53,7 +53,7 @@
     import ICond from "@front/main/models/ICond";
     import ICategory from "@front/main/models/ICategory";
     // 状態管理
-    import { state } from "@front/main/state";
+    import { state } from "@root/front/main/state/job_cond";
 
     @Component
     export default class Category extends Vue {
