@@ -13,6 +13,6 @@
     import { Vue, Component, Watch } from 'vue-property-decorator';
 
     @Component
-    export default class Detail extends Vue {
+    export default class Footer extends Vue {
     }
 </script>
