@@ -10,12 +10,6 @@ use App\Http\Controllers;
 |
 */
 
-Route::group(["middleware" => "auth:api"], function () {
-    Route::get('/current_admin_user', function () {
-        return Auth::user();
-    });
-});
-
 // ユーザー認証系
 Route::group(['prefix' => 'auth'], function () {
     // 管理者
