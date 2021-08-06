@@ -5,7 +5,7 @@
                 border-variant="info"
                 header-bg-variant="primary"
                 header-text-variant="white"
-                header="検索"
+                header="ログイン"
                 header-tag="header"
                 class="mb-3"
                 no-body
