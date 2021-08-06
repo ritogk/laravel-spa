@@ -6,7 +6,6 @@
                 <app-list></app-list>
             </b-row>
         </b-container>
-        <app-detail></app-detail>
     </div>
 </template>
 
