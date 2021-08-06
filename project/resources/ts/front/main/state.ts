@@ -19,8 +19,14 @@ const store=new Vuex.Store({})
 @Module({ dynamic: true, store, name: "state", namespaced: true })
 class State extends VuexModule implements IState {
     // state
+
+    // 仕事一覧の抽出条件値
     cond: ICond = dafaultCond;
-    loginUser: IUser = {id: '', name: '',email: '', email_verified_at: '', self_pr: '', tel: '', created_at: '', updated_at: ''};
+    // ログイン会員情報
+    loginUser: IUser = {
+        user:{id: '', name: '',email: '', email_verified_at: '', self_pr: '', tel: '', created_at: '', updated_at: ''},
+        status: false
+    };
 
     // getter
     public get getCond(): ICond {
@@ -43,16 +49,25 @@ class State extends VuexModule implements IState {
 
     // action
     @Action
+    // 仕事一覧の検索
     public search(value: ICond) {
         this.setCond(value)
         localStorage.setItem('cond', JSON.stringify(value));
     }
-    @Action // 入力値復元
+    @Action
+    // 仕事一覧の抽出条件値 入力値復元
     public restore() {
         let cond = localStorage.getItem('cond');
         if(cond){
             this.setCond(JSON.parse(cond))
         }
+    }
+    // ログイン会員情報の初期化
+    public initLoginUser() {
+        this.setLoginUser({
+            user:{id: '', name: '',email: '', email_verified_at: '', self_pr: '', tel: '', created_at: '', updated_at: ''},
+            status: false
+        })
     }
 }
 export const state = getModule(State);

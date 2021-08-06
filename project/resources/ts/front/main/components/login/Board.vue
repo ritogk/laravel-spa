@@ -62,7 +62,12 @@
                     'remember': this.remeber
                 }
             ).then(response => {
-                state.setLoginUser(response.data.user)
+                state.setLoginUser(
+                    {
+                        user: response.data.user,
+                        status: true
+                    }
+                )
                 window.location.href = '/'
             }).catch(response => {
                 this.message = 'メールアドレス又はパスワードが間違っています。'

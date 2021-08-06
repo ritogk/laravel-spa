@@ -81,8 +81,11 @@ state.restore()
 
 // ログイン会員情報取得
 window.axios.get('/api/auth/front/user').then(function(response){
-    state.setLoginUser(response.data)
-});
+    state.setLoginUser({
+        user: response.data,
+        status:true
+    })
+}).catch(error =>{});
 
 import component from './components/App.vue';
 new Vue({
