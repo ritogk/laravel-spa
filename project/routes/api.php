@@ -20,7 +20,7 @@ Route::group(["middleware" => "auth:api"], function () {
 Route::group(['prefix' => 'auth'], function () {
     // 管理者
     Route::group(['prefix' => 'admin'], function () {
-        Route::get('/user', [Controllers\Api\AdminAuthController::class, 'user']);
+        Route::get('/user', [Controllers\Api\AdminAuthController::class, 'user'])->middleware(['auth:admin']);
         Route::post('/login', [Controllers\Api\AdminAuthController::class, 'login']);
         Route::post('/logout', [Controllers\Api\AdminAuthController::class, 'logout']);
     });
