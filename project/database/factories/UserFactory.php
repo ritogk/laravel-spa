@@ -27,6 +27,8 @@ class UserFactory extends Factory
             'name' => $this->faker->name,
             'email' => $this->faker->email,
             'email_verified_at' => null,
+            'self_pr' => $this->faker->realText(1000),
+            'tel' => '090-9999-8888',
             'password' => Hash::make('ranasoft'),
             'remember_token' => null,
         ];

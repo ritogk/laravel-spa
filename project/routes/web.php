@@ -11,17 +11,19 @@ use App\Http\Controllers;
 */
 
 // ログイン画面
-Route::get('/login', [Controllers\Web\WebController::class, 'login'])->name('login');
+Route::group(['prefix' => 'login'], function () {
+    Route::get('/admin', [Controllers\Web\WebController::class, 'login_admin'])->name('login.admin');
+});
 
-// 仕事選択画面
+// 一般画面
 Route::get('/', [Controllers\Web\WebController::class, 'index']);
-// 仕事選択画面spaルーティング用
+// 一般画面spaルーティング用
 Route::get('/spa/{any}', function () {
     return view('front');
 })->where('any', '.*');
 
 // 管理画面側
-Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
+Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function () {
     // 管理画面
     Route::get('/', [Controllers\Web\WebController::class, 'admin'])->name('admin');
     // 管理画面spaルーティング用

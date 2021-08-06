@@ -23,7 +23,7 @@ class DeleteTest extends TestCase
     public function test_200()
     {
         // ログイン
-        $this->post('/api/auth/login', ['email'=>'test@test.co.jp', 'password'=>'test', 'remember'=>true]);
+        $this->post('/api/auth/admin/login', ['email'=>'test@test.co.jp', 'password'=>'test', 'remember'=>true]);
 
         $category = JobCategory::factory()->create();
         $response = $this->delete('/api/job_categories/'. $category['id']);

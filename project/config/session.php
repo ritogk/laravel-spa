@@ -30,10 +30,11 @@ return [
     | to immediately expire on the browser closing, set that option.
     |
     */
-
+    // セッションの期限(分)
     'lifetime' => env('SESSION_LIFETIME', 120),
 
-    'expire_on_close' => false,
+    // true:ブラウザを閉じた時に期限切にする
+    'expire_on_close' => true,
 
     /*
     |--------------------------------------------------------------------------

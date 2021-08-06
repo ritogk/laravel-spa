@@ -24,7 +24,7 @@ class CreateTest extends TestCase
     public function test_200()
     {
         // ログイン
-        $this->post('/api/auth/login', ['email'=>'test@test.co.jp', 'password'=>'test', 'remember'=>true]);
+        $this->post('/api/auth/admin/login', ['email'=>'test@test.co.jp', 'password'=>'test', 'remember'=>true]);
 
         $job_category = JobCategory::factory()->make();
         $file = UploadedFile::fake()->image('dummy.png');

@@ -8,23 +8,23 @@ use \Illuminate\Contracts\View\View as View;
 class WebController extends Controller
 {
     /**
-     * トップ画面
+     * 一般画面
      *
      * @return View
      */
     public function index(): View
     {
-        return view('front');
+        return view('front.main');
     }
 
     /**
-     * ログイン画面
+     * 管理者ログイン画面
      *
      * @return View
      */
-    public function login(): View
+    public function login_admin(): View
     {
-        return view('login');
+        return view('admin.login');
     }
 
     /**
@@ -34,6 +34,6 @@ class WebController extends Controller
      */
     public function admin(): View
     {
-        return view('admin');
+        return view('admin.main');
     }
 }

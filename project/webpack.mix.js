@@ -16,18 +16,20 @@ const mix = require('laravel-mix');
  |　生のjsファイルをバンドルする場合は「mix.babel()」を使う。ESS5記法に変換される。
  |
  */
-mix.ts('resources/ts/front/front.ts', 'public/js')
-    .ts('resources/ts/login/login.ts', 'public/js')
-    .ts('resources/ts/admin/admin.ts', 'public/js')
-    .sass('resources/sass/front.scss', 'public/css')
-    .sass('resources/sass/login.scss', 'public/css')
-    .sass('resources/sass/admin.scss', 'public/css')
+mix.ts('resources/ts/front/main/main.ts', 'public/js/front')
+    .sass('resources/sass/front/main.scss', 'public/css/front')
+    .ts('resources/ts/admin/main/main.ts', 'public/js/admin')
+    .sass('resources/sass/admin/main.scss', 'public/css/admin')
+    .ts('resources/ts/admin/login/login.ts', 'public/js/admin')
+    .sass('resources/sass/admin/login.scss', 'public/css/admin')
     .version();
 
 mix.webpackConfig({
     resolve: {
         alias: {
-            '@root': path.resolve(__dirname, 'resources/ts/')
+            '@root': path.resolve(__dirname, 'resources/ts/'),
+            '@admin': path.resolve(__dirname, 'resources/ts/admin'),
+            '@front': path.resolve(__dirname, 'resources/ts/front'),
         }
     },
     node: {

@@ -14,9 +14,15 @@ class Entry extends Model
     protected $guarded = ['id', 'updated_at', 'created_at', 'deleted_at']; // ブラックリスト
 
     // リレーション
-    public function job()
+    public function jobs()
     {
         return $this->belongsTo('App\Models\Job');
+    }
+
+    // リレーション
+    public function user()
+    {
+        return $this->belongsTo('App\Models\User');
     }
 
     /**

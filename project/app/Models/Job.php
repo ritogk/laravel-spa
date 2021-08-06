@@ -12,7 +12,7 @@ class Job extends Model
     protected $guarded = ['id', 'updated_at', 'created_at', 'deleted_at']; // ブラックリスト
 
     // リレーション
-    public function jobCategories()
+    public function jobCategory()
     {
         return $this->belongsTo('App\Models\JobCategory');
     }

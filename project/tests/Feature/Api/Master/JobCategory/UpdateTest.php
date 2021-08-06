@@ -24,7 +24,7 @@ class UpdateTest extends TestCase
     public function test_200()
     {
         // ログイン
-        $this->post('/api/auth/login', ['email'=>'test@test.co.jp', 'password'=>'test', 'remember'=>true]);
+        $this->post('/api/auth/admin/login', ['email'=>'test@test.co.jp', 'password'=>'test', 'remember'=>true]);
 
         $before_category = JobCategory::factory()->create()->toArray();
 
@@ -32,7 +32,7 @@ class UpdateTest extends TestCase
         $input = $before_category;
         $input['name'] = '変更_name';
         $input['content'] = '変更_content';
-        $input['sort_no'] = 9;
+        $input['sort_no'] = 100;
         $file = UploadedFile::fake()->image('dummy.png');
 
         $response = $this->put('/api/job_categories/'. $before_category['id'],
