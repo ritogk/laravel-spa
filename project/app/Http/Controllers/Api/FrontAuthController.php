@@ -17,7 +17,7 @@ class FrontAuthController extends Controller
     /**
      * ログイン済ユーザー情報 取得
      *
-     * @return \App\Models\User|null
+     * @return \Illuminate\Contracts\Auth\Authenticatable|null
      */
     public function user()
     {
@@ -75,6 +75,7 @@ class FrontAuthController extends Controller
     /**
      * ガード変更
      *
+     * @return \Illuminate\Contracts\Auth\StatefulGuar
      */
     private function guard()
     {
