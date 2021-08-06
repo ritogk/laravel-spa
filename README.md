@@ -7,10 +7,6 @@
 ## URL
 https://portfolio-rito.net/
 
-### テスト用ユーザー
-メールアドレス:test@test.co.jp<br>
-パスワード:test
-
 | ログイン(会員)　|会員登録  |
 | :----: | :----: |
 | <img src="https://user-images.githubusercontent.com/72111956/128485140-f79f1455-1c1d-40f0-815c-1a14431821a2.png">   | <img src="https://user-images.githubusercontent.com/72111956/128484253-74ea0ff4-58dd-4de8-813a-d13bd3c83a74.png">   |
