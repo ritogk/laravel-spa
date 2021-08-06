@@ -115,18 +115,10 @@
     // モデル
     import Item from './models/IItem';
     import Cond from './models/ICond';
+    import User from './models/IUser';
     import Job from '@admin/main/components/master/job/models/IItem'
     import DataTableFileds from '@root/models/data_table/IFileds';
     import DataTablePageOptions from '@root/models/data_table/IPageOptions';
-
-    export interface IUser {
-        id: string
-        name: string
-        email: string
-        self_pr: string
-        tel: string
-        created_at: string
-    }
 
     @Component({
         components: {
@@ -144,7 +136,7 @@
         cond: Cond = {full_name: ''}
         message: string = ""
         jobNms: {[key: string]: string} = {}
-        users: Array<IUser> = []
+        users: Array<User> = []
         // 以降はデータテーブルで使用する値
         fields: Array<DataTableFileds> = [
                         { key: 'job_id', label: '求人名', sortable: true, sortDirection: 'desc' },
@@ -229,8 +221,8 @@
         }
 
         // 会員情報取得
-        user(user_id: string): IUser{
-            const user: IUser|undefined = this.users.find((x) => x.id == user_id)
+        user(user_id: string): User{
+            const user: User|undefined = this.users.find((x) => x.id == user_id)
             if(user == undefined){
                 return {id: '',
                         name: '',
