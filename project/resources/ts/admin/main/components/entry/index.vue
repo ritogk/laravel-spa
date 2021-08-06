@@ -68,23 +68,23 @@
                 </template>
 
                 <template #cell(full_name)="row">
-                    {{ row.item.full_name }}
+                    {{ user(row.item.user_id).name }}
                 </template>
 
                 <template #cell(email)="row">
-                    {{ row.item.email }}
+                    {{ user(row.item.user_id).email }}
                 </template>
 
                 <template #cell(tel)="row">
-                    {{ row.item.tel }}
+                    {{ user(row.item.user_id).tel }}
                 </template>
 
                 <template #cell(self_pr)="row">
-                    {{ row.item.self_pr }}
+                    {{ user(row.item.user_id).self_pr }}
                 </template>
 
                 <template #cell(created_at)="row">
-                    {{ entryDate(row.item.created_at) }}
+                    {{ entryDate(user(row.item.user_id).created_at) }}
                 </template>
             </b-table>
 
@@ -119,6 +119,15 @@
     import DataTableFileds from '@root/models/data_table/IFileds';
     import DataTablePageOptions from '@root/models/data_table/IPageOptions';
 
+    export interface IUser {
+        id: string
+        name: string
+        email: string
+        self_pr: string
+        tel: string
+        created_at: string
+    }
+
     @Component({
         components: {
             'btn-dl': BtnDl,
@@ -135,6 +144,7 @@
         cond: Cond = {full_name: ''}
         message: string = ""
         jobNms: {[key: string]: string} = {}
+        users: Array<IUser> = []
         // 以降はデータテーブルで使用する値
         fields: Array<DataTableFileds> = [
                         { key: 'job_id', label: '求人名', sortable: true, sortDirection: 'desc' },
@@ -167,20 +177,33 @@
                 const cond_restore: Cond = JSON.parse(cond_restore_json)
                 this.cond.full_name = cond_restore.full_name
             }
-            this.getItem();
 
             // 仕事名称取得
-            window.axios.get('/api/jobs'
-                , {
-                    params:{
-                        filters_json:JSON.stringify(''),
-                        fields:['id', 'title']
-                    }
-                }
-            ).then(response => {
-                let keyValues: {[key: string]: string;} = {}
-                response.data.map((x: Job) => keyValues[x.id] = x.title)
-                this.jobNms = keyValues
+            const axiosA = window.axios.get('/api/jobs',
+                                            {
+                                                params:{
+                                                    filters_json:JSON.stringify(''),
+                                                    fields:['id', 'title']
+                                                }
+                                            }
+                                        ).then(response => {
+                                            let keyValues: {[key: string]: string;} = {}
+                                            response.data.map((x: Job) => keyValues[x.id] = x.title)
+                                            this.jobNms = keyValues
+                                        })
+            // 会員一覧取得
+            const axiosB = window.axios.get('/api/users',
+                                            {
+                                                params:{
+                                                    filters_json:JSON.stringify(''),
+                                                    fields:['id', 'name', 'email', 'tel', 'self_pr', 'created_at']
+                                                }
+                                            }
+                                        ).then(response => {
+                                            this.users = response.data
+                                        })
+            Promise.all([axiosA, axiosB]).then((result) => {
+                this.getItem();
             })
         }
 
@@ -203,6 +226,20 @@
                 this.isBusy = false;
                 this.message = erorr;
             });
+        }
+
+        // 会員情報取得
+        user(user_id: string): IUser{
+            const user: IUser|undefined = this.users.find((x) => x.id == user_id)
+            if(user == undefined){
+                return {id: '',
+                        name: '',
+                        email: '',
+                        self_pr: '',
+                        tel: '',
+                        created_at: ''}
+            }
+            return user
         }
 
         entryDate(str: string): string{

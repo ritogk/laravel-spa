@@ -58,3 +58,8 @@ Route::group(['prefix' => 'entries'], function () {
     Route::get('/', [Controllers\Api\Master\EntryController::class, 'index']);
     Route::post('/', [Controllers\Api\Master\EntryController::class, 'create'])->middleware(['auth:user']);
 });
+
+// 会員マスタ
+Route::group(['prefix' => 'users'], function () {
+    Route::get('/', [Controllers\Api\Master\UserController::class, 'index'])->middleware(['auth:admin']);
+});
