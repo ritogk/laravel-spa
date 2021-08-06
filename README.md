@@ -11,19 +11,24 @@ https://portfolio-rito.net/
 メールアドレス:test@test.co.jp<br>
 パスワード:test
 
+| ログイン(会員)　|会員登録  |
+| :----: | :----: |
+| <img src="https://user-images.githubusercontent.com/72111956/128485140-f79f1455-1c1d-40f0-815c-1a14431821a2.png">   | <img src="https://user-images.githubusercontent.com/72111956/128484253-74ea0ff4-58dd-4de8-813a-d13bd3c83a74.png">   |
+<br>
+
 | 職種選択　|  |
 | :----: | :----: |
-| <img src="https://user-images.githubusercontent.com/72111956/120408935-f350e400-c38a-11eb-97aa-748d152cf5ac.png">   |   |
+| <img src="https://user-images.githubusercontent.com/72111956/128484272-acff4141-c1ca-442a-9e7a-cc6bde9c1402.png">   |   |
 <br>
 
 | 仕事一覧　|仕事詳細  |
 | :----: | :----: |
-| <img src="https://user-images.githubusercontent.com/72111956/120408938-f4821100-c38a-11eb-80c1-b0c25ba5081c.png">   | <img src="https://user-images.githubusercontent.com/72111956/120408937-f3e97a80-c38a-11eb-87c1-51816f23ad47.png">   |
+| <img src="https://user-images.githubusercontent.com/72111956/128484261-4b470a56-a841-4821-84ec-223fa16040f3.png">   | <img src="https://user-images.githubusercontent.com/72111956/128484855-6db556c5-9e55-411b-9216-38d152b93f2c.png">   |
 <br>
 
-| ログイン　|管理画面  |
+| ログイン(管理者)　|管理画面  |
 | :----: | :----: |
-| <img src="https://user-images.githubusercontent.com/72111956/120412146-ffd83b00-c390-11eb-8d7d-7d19ccba3fb9.png">   | <img src="https://user-images.githubusercontent.com/72111956/120468483-3dae8100-c3dc-11eb-85fb-c2f95b207100.PNG">   |
+| <img src="https://user-images.githubusercontent.com/72111956/128485143-120a0c14-0239-44b7-acb8-8160f09dc440.png">   | <img src="https://user-images.githubusercontent.com/72111956/120468483-3dae8100-c3dc-11eb-85fb-c2f95b207100.PNG">   |
 <br>
 
 | 選考一覧　|  |
