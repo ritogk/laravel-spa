@@ -5,6 +5,8 @@ namespace Tests\Browser;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
 
+use Illuminate\Support\Facades\Auth;
+
 use App\Models\JobCategory;
 use App\Models\Job;
 use App\Models\Entry;
@@ -28,9 +30,31 @@ class EntryTest extends DuskTestCase
 
             $category = JobCategory::where('name', 'IT')->first();
 
-            // 職種一覧 ITが表示されている。
+            // 会員登録
             $browser->visit('/')
                     ->pause(self::pause_time_1)
+                    ->assertSee('会員登録')
+                    ->clickLink('会員登録')
+                    ->screenshot('register')
+                    ->pause(self::pause_time_2);
+            $name = 'テスト 太郎';
+            $self_pr = '自己PR文章';
+            $tel = '011-1111-1111';
+            $email = substr(str_shuffle('1234567890abcdefghijklmnopqrstuvwxyz'), 0, 8). '@test2.co.jp';
+            $password = 'test2test2';
+            $browser->assertSee('会員登録')
+                    ->type('#name', $name)
+                    ->type('#self_pr', $self_pr)
+                    ->type('#tel', $tel)
+                    ->type('#email', $email)
+                    ->type('#password', $password)
+                    ->type('#password_confirmation', $password)
+                    ->press('会員登録')
+                    ->screenshot('register')
+                    ->pause(self::pause_time_2);
+
+            // 職種一覧 ITが表示されている。
+            $browser->pause(self::pause_time_1)
                     ->screenshot('select_categories')
                     ->assertSee($category->name)
                     ->assertSee($category->content)
@@ -51,11 +75,9 @@ class EntryTest extends DuskTestCase
                         ->screenshot('job_detail');
 
             // 仕事詳細 入力
-            $browser->type('#full_name', '山田 太郎')
-                    ->type('#self_pr', "私は新規開発案件を何度も経験しているため、作るべき物の製作時間を予測する事が得意です。\n例として、建設会社向け基幹システムの新規開発案件では、開発側のスケジュール作成は私の方で行っておりました。\nその経験もあり見積作成も任されておりました。")
-                    ->type('#email', 'test@test.co.jp')
-                    ->type('#tel', '090-9999-8888')
-                    ->screenshot('job_detail_input')
+            $browser->screenshot('job_detail_input')
+                    ->pause(self::pause_time_1)
+                    ->scrollIntoView('#btn_entry')
                     ->press('申し込む')
                     ->pause(self::pause_time_1)
                     ->screenshot('job_detail_input_complete');
@@ -70,15 +92,14 @@ class EntryTest extends DuskTestCase
                     ->pause(self::pause_time_1);
 
             // 管理画面(選考一覧) 申込した仕事が表示される。
-            $entry = Entry::where('job_id', $job->id)->first();
             $browser->clickLink('選考一覧')
                     ->pause(self::pause_time_1)
                     ->screenshot('admin_job_entry_list')
                     ->assertSee($job->title)
-                    ->assertSee($entry->full_name)
-                    ->assertSee($entry->email)
-                    ->assertSee($entry->tel)
-                    ->assertSee(str_replace("\n", " ", $entry->self_pr));
+                    ->assertSee($name)
+                    ->assertSee($email)
+                    ->assertSee($tel)
+                    ->assertSee(str_replace("\n", " ", $self_pr));
         });
     }
 }

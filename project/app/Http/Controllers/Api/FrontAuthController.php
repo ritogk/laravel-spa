@@ -63,8 +63,7 @@ class FrontAuthController extends Controller
     /**
      *
      * @param  Request  $request
-     * @param $credentials
-     * @return mixed
+     * @return bool
      */
     private function attemptLogin(Request $request)
     {
@@ -75,7 +74,6 @@ class FrontAuthController extends Controller
     /**
      * ガード変更
      *
-     * @return \Illuminate\Contracts\Auth\StatefulGuar
      */
     private function guard()
     {

@@ -9,6 +9,7 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Requests\Auth\Admin\LoginRequest;
+use phpDocumentor\Reflection\Types\Boolean;
 
 class AdminAuthController extends Controller
 {
@@ -63,8 +64,7 @@ class AdminAuthController extends Controller
     /**
      *
      * @param  Request  $request
-     * @param $credentials
-     * @return mixed
+     * @return bool
      */
     private function attemptLogin(Request $request)
     {

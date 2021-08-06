@@ -43,7 +43,7 @@
                         </div>
 
                         <div class="py-2">
-                            <b-button block size="lg" variant="primary" class="float-left" @click="job_entry()" v-if="loginUser.status">
+                            <b-button id="btn_entry" block size="lg" variant="primary" class="float-left" @click="job_entry()" v-if="loginUser.status">
                                 申し込む
                             </b-button>
                         </div>

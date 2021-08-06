@@ -4,7 +4,7 @@ namespace Tests\Feature\Web;
 
 use Tests\TestCase;
 
-class LoginShowTest extends TestCase
+class AdminLoginShowTest extends TestCase
 {
     /**
      * 200 test
@@ -14,7 +14,7 @@ class LoginShowTest extends TestCase
     public function test_200()
     {
         // アクセス
-        $response = $this->get('/login');
+        $response = $this->get('/login/admin');
         // チェック
         $response->assertStatus(200);
     }
