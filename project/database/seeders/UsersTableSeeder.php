@@ -21,6 +21,8 @@ class UsersTableSeeder extends Seeder
             'name' => 'root',
             'email' => 'root@rito.co.jp',
             'password' => bcrypt('root'),
+            'self_pr' => '自己PR',
+            'tel' => '010-1111-1111',
             'updated_at' => $now,
             'created_at' => $now
         ]);
@@ -29,10 +31,10 @@ class UsersTableSeeder extends Seeder
             'name' => 'normal',
             'email' => 'normal@normal.co.jp',
             'password' => bcrypt('normal'),
+            'self_pr' => '自己PR',
+            'tel' => '010-1111-1111',
             'updated_at' => $now,
             'created_at' => $now
         ]);
-
-        User::factory()->count(5)->create();
     }
 }
