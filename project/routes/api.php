@@ -56,5 +56,5 @@ Route::group(['prefix' => 'job_categories'], function () {
 // エントリー マスタ
 Route::group(['prefix' => 'entries'], function () {
     Route::get('/', [Controllers\Api\Master\EntryController::class, 'index']);
-    Route::post('/', [Controllers\Api\Master\EntryController::class, 'create']);
+    Route::post('/', [Controllers\Api\Master\EntryController::class, 'create'])->middleware(['auth:user']);
 });
