@@ -25,7 +25,8 @@ project/.vagrant
 project/.phpunit.result.cache
 
 #docker
-docker/db/
+docker/db/data
+docker/db/sql
 project/public/mix-manifest.json
 project/public/css
 project/public/js
