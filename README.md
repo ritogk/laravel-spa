@@ -88,10 +88,11 @@ https://portfolio-rito.net/
 - RDS
 - ElastiCache
 - S3
+- CloudFront
 - Route53
 - ACM
 
-![aws構成図](https://user-images.githubusercontent.com/72111956/120178867-e88c3700-c244-11eb-9410-372e8fc977b9.png)
+![aws構成図](https://user-images.githubusercontent.com/72111956/130063968-4b1f04f2-e952-41b1-8a89-ab0f717e3700.png)
 
 ## 工夫した点
 バックエンドとフロントエンドをapiとvueで切り離した設計<br>
