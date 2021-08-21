@@ -4,38 +4,28 @@ namespace App\UseCases\Master\Job;
 
 use App\Models\Job;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Storage;
 
 class UpdateAction{
     /**
      * __invoke
      *
      * @param Request $request
-     * @param String $id
+     * @param string $id
      * @return void
      */
-    public function __invoke(Request $request, String $id): void
+    public function __invoke(Request $request, string $id): void
     {
-        DB::transaction(function () use($request, $id){
-            if(!empty($request->file)){
-                $path = Storage::putFile('public/images', $request->file, 'public');
-            }else{
-                $path = Job::find($id)->image;
-            }
-
-            $update = [
-                'title' => $request->item['title'],
-                'content' => $request->item['content'],
-                'attention' => $request->item['attention'],
-                'job_category_id' => $request->item['job_category_id'],
-                'price' => $request->item['price'],
-                'welfare' => $request->item['welfare'],
-                'holiday' => $request->item['holiday'],
-                'image' => $path,
-                'sort_no' => $request->item['sort_no'],
-            ];
-            Job::where('id', $id)->update($update);
-        });
+        $update = [
+            'title' => $request->title,
+            'content' => $request->content,
+            'attention' => $request->attention,
+            'job_category_id' => $request->job_category_id,
+            'price' => $request->price,
+            'welfare' => $request->welfare,
+            'holiday' => $request->holiday,
+            'image' => $request->image,
+            'sort_no' => $request->sort_no,
+        ];
+        Job::where('id', $id)->update($update);
     }
 }

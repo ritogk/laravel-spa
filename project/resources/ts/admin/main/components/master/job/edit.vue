@@ -6,7 +6,7 @@
             :errors="errors"
             :item="item"
             :isCreate="false"
-            v-on:submit="edit"
+            v-on:submit="update"
             v-on:back="back"
         ></base-form>
     </div>
@@ -32,7 +32,7 @@
         id!: string
 
         // data
-        item: Item = {id: '', title: '', content: '', attention: false, job_category_id: '', price: null, welfare: '', holiday: '', image: '', sort_no: 1, updated_at: ''}
+        item: Item = {id: '', title: '', content: '', attention: false, job_category_id: '', price: null, welfare: '', holiday: '', image: '', image_url: '', sort_no: 1, updated_at: ''}
         message: string = ''
         errors: BaseFormError = {title: '', content: '', attention: '', job_category_id: '', price: '', welfare: '', holiday: '', image: '', sort_no: ''}
 
@@ -43,12 +43,8 @@
             })
         }
 
-        edit(image_file: any): void{
-            const formData = new FormData()
-            formData.append('file',image_file)
-            formData.append('item', JSON.stringify(this.item))
-
-            window.axios.post('/api/jobs/' + this.id, formData, {
+        update(): void{
+            window.axios.post('/api/jobs/' + this.id, this.item, {
                 headers: {
                     'X-HTTP-Method-Override': 'PUT'
                 }
@@ -60,14 +56,7 @@
                     // エラー初期化
                     this.errors = {title: '', content: '', attention: '', job_category_id: '', price: '', welfare: '', holiday: '', image: '', sort_no: ''}
                     // エラーセット
-                    const request_errors = error.response.data.errors
-                    for (var key in request_errors) {
-                        const error_key = key.replace("item.", "")
-                        this.errors[error_key] = request_errors[key][0]
-                    }
-                    if(request_errors.image){
-                        this.errors.image = request_errors.image;
-                    }
+                    this.errors = error.response.data.errors
                 }else{
                     this.message = error
                 }
