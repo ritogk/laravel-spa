@@ -25,17 +25,16 @@ class JobRequest extends FormRequest
      */
     public function rules() {
         return [
-            'item.title' => 'required|max:50',
-            'item.content' => 'required|max:1000',
-            'item.attention' => 'required',
-            'item.job_category_id' => 'required',
-            'item.price' => 'required',
-            'item.welfare' => 'nullable|max:1000',
-            'item.holiday' => 'nullable|max:1000',
-            'item.image' => 'nullable',
-            'item.sort_no' => 'required|integer|digits_between:1,9',
-            'item.updated_at' => 'date|nullable',
-            'image' => 'nullable',
+            'title' => 'required|max:50',
+            'content' => 'required|max:1000',
+            'attention' => 'required|digits_between:0,1',
+            'job_category_id' => 'required|numeric',
+            'price' => 'required|numeric',
+            'welfare' => 'nullable|max:1000',
+            'holiday' => 'nullable|max:1000',
+            'image' => 'required',
+            'sort_no' => 'required|numeric|digits_between:1,9',
+            'updated_at' => 'date|nullable',
         ];
     }
 
@@ -46,17 +45,16 @@ class JobRequest extends FormRequest
      */
     public function attributes() {
         return [
-            'item.title' => 'タイトル',
-            'item.content' => '内容',
-            'item.attention' => '注目',
-            'item.job_category_id' => 'カテゴリ',
-            'item.price' => '金額',
-            'item.welfare' => '福利厚生',
-            'item.holiday' => '休日',
-            'item.image' => '画像',
-            'item.sort_no' => '並び順',
-            'item.updated_at' => '更新日時',
+            'title' => 'タイトル',
+            'content' => '内容',
+            'attention' => '注目',
+            'job_category_id' => 'カテゴリ',
+            'price' => '金額',
+            'welfare' => '福利厚生',
+            'holiday' => '休日',
             'image' => '画像',
+            'sort_no' => '並び順',
+            'updated_at' => '更新日時',
         ];
     }
 
@@ -83,9 +81,9 @@ class JobRequest extends FormRequest
      */
     protected function failedValidation(Validator $validator) {
         $response = response()->json([
-            'status' => 400,
+            'status' => 422,
             'errors' => $validator->errors(),
-        ], 400);
+        ], 422);
         throw new HttpResponseException($response);
     }
 }

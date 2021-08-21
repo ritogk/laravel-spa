@@ -29,15 +29,12 @@
     })
     export default class Create extends Vue{
         // data
-        item: Item = {id: '', title: '', content: '', attention: false, job_category_id: '', price: null, welfare: '', holiday: '', image: '', sort_no: 1, updated_at: ''}
+        item: Item = {id: '', title: '', content: '', attention: false, job_category_id: '', price: null, welfare: '', holiday: '', image: '', image_url: '', sort_no: 1, updated_at: ''}
         message: string = ''
-        errors: BaseFormError = {title: '', content: '', attention: '', job_category_id: '', price: '', welfare: '', holiday: '', image: '', sort_no: ''}
+        errors: BaseFormError = {title: '', content: '', attention: '', job_category_id: '', price: '', welfare: '', holiday: '', image: '', image_url: '', sort_no: ''}
 
-        create(image_file: any): void{
-            const formData = new FormData()
-            formData.append('file',image_file)
-            formData.append('item', JSON.stringify(this.item))
-            window.axios.post("/api/jobs", formData).then(response => {
+        create(): void{
+            window.axios.post("/api/jobs", this.item).then(response => {
                 this.message = ""
                 this.$router.push({ name: "job_index" })
             }).catch(error => {
@@ -45,14 +42,7 @@
                     // エラー初期化
                     this.errors = {title: '', content: '', attention: '', job_category_id: '', price: '', welfare: '', holiday: '', image: '', sort_no: ''}
                     // エラーセット
-                    const request_errors = error.response.data.errors
-                    for (var key in request_errors) {
-                        const error_key = key.replace("item.", "")
-                        this.errors[error_key] = request_errors[key][0]
-                    }
-                    if(request_errors.image){
-                        this.errors.image = request_errors.image;
-                    }
+                    this.errors = error.response.data.errors
                 }else{
                     this.message = error
                 }

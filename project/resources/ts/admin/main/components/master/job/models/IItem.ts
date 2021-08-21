@@ -8,6 +8,7 @@ export default interface IItem {
     welfare:string
     holiday:string
     image:string
+    image_url:string
     sort_no:number
     updated_at:string
 }

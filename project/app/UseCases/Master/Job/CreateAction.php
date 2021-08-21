@@ -16,22 +16,16 @@ class CreateAction{
     public function __invoke(Request $request): void
     {
         DB::transaction(function () use($request){
-            if(!empty($request->file)){
-                $path = Storage::putFile('public/images', $request->file, 'public');
-            }else{
-                $path = '';
-            }
-
             $create = [
-                'title' => $request->item['title'],
-                'content' => $request->item['content'],
-                'attention' => $request->item['attention'],
-                'job_category_id' => $request->item['job_category_id'],
-                'price' => $request->item['price'],
-                'welfare' => $request->item['welfare'],
-                'holiday' => $request->item['holiday'],
-                'image' => $path,
-                'sort_no' => $request->item['sort_no'],
+                'title' => $request->title,
+                'content' => $request->content,
+                'attention' => $request->attention,
+                'job_category_id' => $request->job_category_id,
+                'price' => $request->price,
+                'welfare' => $request->welfare,
+                'holiday' => $request->holiday,
+                'image' => $request->image,
+                'sort_no' => $request->sort_no,
             ];
             Job::create($create);
         });

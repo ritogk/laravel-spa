@@ -31,7 +31,7 @@ Route::group(['prefix' => 'auth'], function () {
 Route::group(['prefix' => 'jobs'], function () {
     Route::get('/', [Controllers\Api\Master\JobController::class, 'index']);
     Route::get('/{id}', [Controllers\Api\Master\JobController::class, 'find']);
-    Route::post('/', [Controllers\Api\Master\JobController::class, 'create'])->middleware(['auth:admin', 'job.save.request']);
+    Route::post('/', [Controllers\Api\Master\JobController::class, 'create'])->middleware(['auth:admin']);
     Route::put('/{id}', [Controllers\Api\Master\JobController::class, 'update'])->middleware(['auth:admin', 'job.save.request']);
     Route::delete('/{id}', [Controllers\Api\Master\JobController::class, 'destroy'])->middleware(['auth:admin']);
     Route::get('/files/excel', [Controllers\Api\Master\JobController::class, 'excel'])->middleware(['auth:admin']);
@@ -56,4 +56,9 @@ Route::group(['prefix' => 'entries'], function () {
 // 会員マスタ
 Route::group(['prefix' => 'users'], function () {
     Route::get('/', [Controllers\Api\Master\UserController::class, 'index'])->middleware(['auth:admin']);
+});
+
+// ファイル操作系
+Route::group(['prefix' => 'files'], function () {
+    Route::post('/', [Controllers\Api\FileController::class, 'upload'])->middleware(['auth:admin']);
 });
