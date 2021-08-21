@@ -201,11 +201,17 @@
         getItem(): void{
             // 条件保存
             localStorage.setItem('entry_conds',JSON.stringify(this.cond))
+
+            // 抽出条件
+            let filter:any  = []
+            if(this.cond.full_name != ''){
+                filter.push(['full_name', 'LIKE', '%' + this.cond.full_name + '%'])
+            }
             // 一覧読込
             window.axios.get("/api/entries", {
                 params:{
-                    filters_json:JSON.stringify({full_name: this.cond.full_name}),
-                    fields:['*']
+                    filter:JSON.stringify([]),
+                    fields:JSON.stringify(['*'])
                 }
             }).then(response => {
                 this.items = response.data;

@@ -8,19 +8,14 @@ class ListAction{
     /**
      * __invoke
      *
-     * @param string $filters_json
-     * @param array $fileds
+     * @param string $filter
+     * @param string $fileds
      * @return array
      */
-    public function __invoke(string $filters_json, array $fileds): array
+    public function __invoke(string $filter, string $fileds): array
     {
-        $filters = json_decode($filters_json, true);
-        $wheres = [];
-        if(isset($filters['full_name']) && $filters['full_name'] != '') {
-            $wheres[] = ['full_name', 'LIKE', '%'. $filters['full_name']. '%'];
-        }
-        return Entry::where($wheres)
-                    ->select($fileds)
+        return Entry::where(json_decode($filter, true))
+                    ->select(json_decode($fileds, true))
                     ->orderBy('created_at')
                     ->get()
                     ->toArray();
