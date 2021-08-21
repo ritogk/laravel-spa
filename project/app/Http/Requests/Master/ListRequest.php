@@ -24,8 +24,8 @@ class ListRequest extends FormRequest
      */
     public function rules() {
         return [
-            'filter' => ['nullable', 'string'],
-            'fields' => ['nullable', 'string'],
+            'filter' => ['required', 'string'],
+            'fields' => ['required', 'string'],
         ];
     }
 
@@ -36,8 +36,8 @@ class ListRequest extends FormRequest
      */
     public function attributes() {
         return [
-            'filter' => '抽出値 例:[["カラム", "判定記号", "値"]]) なし:[]',
-            'fields' => 'フィールド値 例:["name", "image"] 全取得[*]',
+            'filter' => '「抽出値 例:[["カラム", "判定記号", "値"]]) なし:[]」',
+            'fields' => '「フィールド値 例:["name", "image"] 全取得[*]」',
         ];
     }
 
