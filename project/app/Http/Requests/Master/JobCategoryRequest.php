@@ -25,12 +25,12 @@ class JobCategoryRequest extends FormRequest
      */
     public function rules() {
         return [
-            'item.name' => 'required|max:25',
-            'item.content' => 'required|max:1000',
-            'item.image' => 'nullable',
-            'item.sort_no' => 'required|integer|digits_between:1,9',
-            'item.updated_at' => 'date|nullable',
+            'name' => 'required|max:25',
+            'content' => 'required|max:1000',
             'image' => 'nullable',
+            'sort_no' => 'required|integer|digits_between:1,9',
+            'updated_at' => 'date|nullable',
+            'image' => 'required',
         ];
     }
 
@@ -41,11 +41,11 @@ class JobCategoryRequest extends FormRequest
      */
     public function attributes() {
         return [
-            'item.name' => '名称',
-            'item.content' => '内容',
-            'item.image' => '画像',
-            'item.sort_no' => '並び順',
-            'item.updated_at' => '更新日',
+            'name' => '名称',
+            'content' => '内容',
+            'image' => '画像',
+            'sort_no' => '並び順',
+            'updated_at' => '更新日',
             'image' => '画像',
         ];
     }

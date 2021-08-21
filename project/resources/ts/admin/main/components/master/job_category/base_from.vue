@@ -55,8 +55,8 @@
                     </b-form-group>
                 </b-col>
                 <b-col lg="11" class="my-1 offset-1">
-                    <div v-if="image_path">
-                        <b-img fluid-grow :src="`${image_path}`" alt="Left image"></b-img>
+                    <div v-if="item.image_url">
+                        <b-img fluid-grow :src="item.image_url" alt="Left image"></b-img>
                     </div>
                 </b-col>
 
@@ -77,7 +77,7 @@
                 </b-col>
             </b-row>
             <template #footer>
-            <b-button variant="success" @click="$emit('submit', image_file)">登録</b-button>
+            <b-button variant="success" @click="$emit('submit')">登録</b-button>
             <b-button variant="secondary" @click="$emit('back')">戻る</b-button>
             </template>
         </b-card>
@@ -111,17 +111,13 @@
         @Prop({required: true })
         isCreate!: boolean;
 
-        image_path: string = '';
-        image_file: any = '';
-
-        @Watch('item.image', { immediate: true })
-        onChangeImage(){
-            this.image_path = this.item.image;
-        }
-
         uploadFile(event: any): void{
-            this.image_path = URL.createObjectURL(event.currentTarget.files[0])
-            this.image_file = event.currentTarget.files[0];
+            const formData = new FormData()
+            formData.append('file', event.currentTarget.files[0])
+            window.axios.post("/api/files", formData).then(response => {
+                this.item.image = response.data.storage_path
+                this.item.image_url = response.data.url
+            });
         }
   }
 </script>

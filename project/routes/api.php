@@ -41,7 +41,7 @@ Route::group(['prefix' => 'jobs'], function () {
 Route::group(['prefix' => 'job_categories'], function () {
     Route::get('/', [Controllers\Api\Master\JobCategoryController::class, 'index']);
     Route::get('/{id}', [Controllers\Api\Master\JobCategoryController::class, 'find']);
-    Route::post('/', [Controllers\Api\Master\JobCategoryController::class, 'create'])->middleware(['auth:admin', 'job.category.save.request']);
+    Route::post('/', [Controllers\Api\Master\JobCategoryController::class, 'create'])->middleware(['auth:admin']);
     Route::put('/{id}', [Controllers\Api\Master\JobCategoryController::class, 'update'])->middleware(['auth:admin', 'job.category.save.request']);
     Route::delete('/{id}', [Controllers\Api\Master\JobCategoryController::class, 'destroy'])->middleware(['auth:admin']);
     Route::get('/files/excel', [Controllers\Api\Master\JobCategoryController::class, 'excel'])->middleware(['auth:admin']);
