@@ -66,8 +66,12 @@
             window.axios.get('/api/job_categories'
                 , {
                     params:{
-                        filters_json:JSON.stringify(''),
-                        fields:['id', 'name', 'content', 'image', 'sort_no']
+                        filter:
+                            JSON.stringify([]),
+                        fields:
+                            JSON.stringify(
+                                ['id', 'name', 'content', 'image', 'sort_no']
+                            )
                     }
                 }
             ).then(response => {

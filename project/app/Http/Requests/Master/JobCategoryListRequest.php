@@ -24,8 +24,8 @@ class JobCategoryListRequest extends FormRequest
      */
     public function rules() {
         return [
-            'filters_json' => ['required', 'string'],
-            'fields.*' => ['required', 'string'],
+            'filter' => ['nullable', 'string'],
+            'fields' => ['nullable', 'string'],
         ];
     }
 
@@ -36,8 +36,8 @@ class JobCategoryListRequest extends FormRequest
      */
     public function attributes() {
         return [
-            'filters.*' => '抽出値',
-            'fields.*' => 'フィールド値',
+            'filter' => '抽出値 例:[["カラム", "判定記号", "値"]]) なし:[]',
+            'fields' => 'フィールド値 例:["name", "image"] 全取得[*]',
         ];
     }
 

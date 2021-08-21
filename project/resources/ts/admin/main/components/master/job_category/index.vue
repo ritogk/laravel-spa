@@ -175,12 +175,13 @@
             // 一覧読込
             window.axios.get("/api/job_categories", {
                 params:{
-                    filters_json:JSON.stringify({name: this.cond.name,}),
-                    fields:['*']
+                    filter:
+                        JSON.stringify([['name', 'LIKE', '%' + this.cond.name + '%']]),
+                    fields:
+                        JSON.stringify(
+                            ['*']
+                        )
                 }
-                // params: {
-                //     name: this.cond.name,
-                // }
             }).then(response => {
                 this.items = response.data;
                 this.totalRows = this.items.length

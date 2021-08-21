@@ -9,25 +9,19 @@ class ListAction{
     /**
      * __invoke
      *
-     * @param string $filters_json
-     * @param array $fileds
+     * @param string $filter
+     * @param string $fileds
      * @return array
      */
-    public function __invoke(string $filters_json, array $fileds): array
+    public function __invoke(string $filter, string $fileds): array
     {
-        $filters = json_decode($filters_json, true);
-        $wheres = [];
-        if(isset($filters['name']) && $filters['name'] != '') {
-            $wheres[] = ['name', 'LIKE', '%'. $filters['name']. '%'];
-        }
-
-        $items = JobCategory::where($wheres)
-                                ->select($fileds)
+        $items = JobCategory::where(json_decode($filter, true))
+                                ->select(json_decode($fileds, true))
                                 ->orderBy('sort_no')
                                 ->get()
                                 ->toArray();
         // storageパス変換
-        if(count($items) > 1 && array_key_exists('image', $items[0])){
+        if(count($items) >= 1 && array_key_exists('image', $items[0])){
             foreach ($items as &$item) {
                 $item['image_url'] = Storage::url($item['image']);
             }
