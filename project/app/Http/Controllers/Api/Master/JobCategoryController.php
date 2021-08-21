@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api\Master;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Master\JobCategoryListRequest;
+use App\Http\Requests\Master\ListRequest;
 use App\Http\Requests\Master\JobCategoryRequest;
 
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
@@ -21,11 +21,11 @@ class JobCategoryController extends Controller
     /**
      * 職種 一覧取得
      *
-     * @param  JobCategoryListRequest $request
+     * @param  ListRequest $request
      * @param  ListAction $action
      * @return array
      */
-    public function index(JobCategoryListRequest $request, ListAction $action): array
+    public function index(ListRequest $request, ListAction $action): array
     {
         return $action($request->filter, $request->fields);
     }
