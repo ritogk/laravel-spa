@@ -126,7 +126,7 @@
 
         items: Array<JobCategry> = []
         message: string = ''
-        selected: JobCategry = {id: '', name: '', content: '', image: '', sort_no: 1, updated_at: ''}
+        selected: JobCategry = {id: '', name: '', content: '', image: '', image_url: '', sort_no: 1, updated_at: ''}
         // 以降はデータテーブルで使用する値
         fields: Array<DataTableFileds> = [
                         { key: 'name', label: '名称', sortable: true, sortDirection: 'desc' },
@@ -170,7 +170,7 @@
 
         delValue(){
             this.localValue = '';
-            this.selected = {id: '', name: '', content: '', image: '', sort_no: 1, updated_at: ''}
+            this.selected = {id: '', name: '', content: '', image: '', image_url: '', sort_no: 1, updated_at: ''}
         }
 
         submit(){
