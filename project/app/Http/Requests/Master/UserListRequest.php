@@ -3,6 +3,8 @@
 namespace App\Http\Requests\Master;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Http\Exceptions\HttpResponseException;
 
 class UserListRequest extends FormRequest
 {
@@ -37,5 +39,18 @@ class UserListRequest extends FormRequest
             'filters.*' => '抽出値',
             'fields.*' => 'フィールド値',
         ];
+    }
+
+    /**
+     * バリデーションエラー後の処理を変える場合はここに処理を記述する
+     *
+     * @return array
+     */
+    protected function failedValidation(Validator $validator) {
+        $response = response()->json([
+            'status' => 422,
+            'errors' => $validator->errors(),
+        ], 422);
+        throw new HttpResponseException($response);
     }
 }

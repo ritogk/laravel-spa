@@ -3,6 +3,8 @@
 namespace App\Http\Requests\Auth\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Http\Exceptions\HttpResponseException;
 
 class LoginRequest extends FormRequest
 {
@@ -39,5 +41,18 @@ class LoginRequest extends FormRequest
             'password' => 'パスワード',
             'remember' => 'ログイン状態を保存',
         ];
+    }
+
+    /**
+     * バリデーションエラー後の処理を変える場合はここに処理を記述する
+     *
+     * @return array
+     */
+    protected function failedValidation(Validator $validator) {
+        $response = response()->json([
+            'status' => 422,
+            'errors' => $validator->errors(),
+        ], 422);
+        throw new HttpResponseException($response);
     }
 }

@@ -16,7 +16,7 @@ class AdminAuthController extends Controller
     use AuthenticatesUsers;
 
     /**
-     * ログイン済ユーザー情報 取得
+     * 管理者 取得
      *
      * @return \App\Models\User|null
      */
@@ -26,20 +26,13 @@ class AdminAuthController extends Controller
     }
 
     /**
-     * ログイン
+     * 管理者 ログイン
      *
-     * @param  Request $request
+     * @param  LoginRequest $request
      * @return JsonResponse
      */
-    public function login(Request $request)
+    public function login(LoginRequest $request)
     {
-        $requestClass = new LoginRequest();
-        $validator = Validator::make($request->all(), $requestClass->rules(), [], $requestClass->attributes());
-
-        if($validator->fails()){
-            return response()->json(['message' => 'バリデーション失敗', 'errors' => $validator->errors()], 400);
-        }
-
         if ($this->attemptLogin($request)) {
             $request->session()->regenerate();
             $this->clearLoginAttempts($request);
@@ -50,7 +43,7 @@ class AdminAuthController extends Controller
     }
 
     /**
-     * ログアウト
+     * 管理者 ログアウト
      *
      * @param  Request $request
      * @return JsonResponse

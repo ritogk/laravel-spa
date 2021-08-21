@@ -3,6 +3,8 @@
 namespace App\Http\Requests\Auth\Front;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Http\Exceptions\HttpResponseException;
 
 class RegisterRequest extends FormRequest
 {
@@ -25,6 +27,7 @@ class RegisterRequest extends FormRequest
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'password_confirmation' => ['required', 'string', 'min:8'],
             'self_pr' => ['required', 'max:1000'],
             'tel' => ['required', 'regex:/^[0-9]{2,4}-[0-9]{2,4}-[0-9]{3,4}$/u'],
         ];
@@ -43,5 +46,18 @@ class RegisterRequest extends FormRequest
             'self_pr' => '自己PR',
             'tel' => '電話番号',
         ];
+    }
+
+    /**
+     * バリデーションエラー後の処理を変える場合はここに処理を記述する
+     *
+     * @return array
+     */
+    protected function failedValidation(Validator $validator) {
+        $response = response()->json([
+            'status' => 422,
+            'errors' => $validator->errors(),
+        ], 422);
+        throw new HttpResponseException($response);
     }
 }

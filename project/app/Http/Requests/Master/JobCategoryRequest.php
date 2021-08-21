@@ -58,7 +58,6 @@ class JobCategoryRequest extends FormRequest
     public function withValidator($validator) {
         /* ここにバリデーションを書く */
         $validator->after(function ($validator) {
-            \Log::debug($this->input('*'));
             if(!empty($this->input('id'))
                     && JobCategory::find($this->input('id'))->updated_at > $this->input('updated_at')){
                 $validator->errors()->add('updated_at', 'すでに変更されたデータの可能性があります。最新の状態で再度実行してください。');
@@ -74,9 +73,9 @@ class JobCategoryRequest extends FormRequest
      */
     protected function failedValidation(Validator $validator) {
         $response = response()->json([
-            'status' => 400,
+            'status' => 422,
             'errors' => $validator->errors(),
-        ], 400);
+        ], 422);
         throw new HttpResponseException($response);
     }
 }

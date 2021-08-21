@@ -11,7 +11,7 @@ use App\UseCases\Master\User\ListAction;
 class UserController extends Controller
 {
     /**
-     * 一覧取得
+     * 会員 一覧取得
      *
      * @param  UserListRequest $request
      * @param  ListAction $action

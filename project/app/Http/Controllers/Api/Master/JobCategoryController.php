@@ -19,7 +19,7 @@ use App\UseCases\Master\JobCategory\ExportAction;
 class JobCategoryController extends Controller
 {
     /**
-     * 一覧取得
+     * 職種 一覧取得
      *
      * @param  JobCategoryListRequest $request
      * @param  ListAction $action
@@ -31,7 +31,7 @@ class JobCategoryController extends Controller
     }
 
     /**
-     * 登録
+     * 職種 登録
      *
      * @param JobCategoryRequest $request
      * @param CreateAction $action
@@ -43,7 +43,7 @@ class JobCategoryController extends Controller
     }
 
     /**
-     * 更新
+     * 職種 更新
      *
      * @param  JobCategoryRequest $request
      * @param string $id
@@ -56,7 +56,7 @@ class JobCategoryController extends Controller
     }
 
     /**
-     * 削除
+     * 職種 削除
      *
      * @param string $id
      * @param DeleteAction $action
@@ -68,7 +68,7 @@ class JobCategoryController extends Controller
     }
 
     /**
-     * 一件取得
+     * 職種 一件取得
      *
      * @param string $id
      * @param  FindAction $action
@@ -80,7 +80,7 @@ class JobCategoryController extends Controller
     }
 
     /**
-     * excel取得
+     * 職種 excel取得
      *
      * @param ExportAction $action
      * @return BinaryFileResponse

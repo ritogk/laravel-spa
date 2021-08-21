@@ -15,7 +15,7 @@ class FrontAuthController extends Controller
     use AuthenticatesUsers;
 
     /**
-     * ログイン済ユーザー情報 取得
+     * 会員 取得
      *
      * @return \Illuminate\Contracts\Auth\Authenticatable|null
      */
@@ -25,20 +25,13 @@ class FrontAuthController extends Controller
     }
 
     /**
-     * ログイン
+     * 会員 ログイン
      *
-     * @param  Request $request
+     * @param  LoginRequest $request
      * @return JsonResponse
      */
-    public function login(Request $request)
+    public function login(LoginRequest $request)
     {
-        $requestClass = new LoginRequest();
-        $validator = Validator::make($request->all(), $requestClass->rules(), [], $requestClass->attributes());
-
-        if($validator->fails()){
-            return response()->json(['message' => 'バリデーション失敗', 'errors' => $validator->errors()], 400);
-        }
-
         if ($this->attemptLogin($request)) {
             $request->session()->regenerate();
             $this->clearLoginAttempts($request);
@@ -49,7 +42,7 @@ class FrontAuthController extends Controller
     }
 
     /**
-     * ログアウト
+     * 会員 ログアウト
      *
      * @param  Request $request
      * @return JsonResponse

@@ -13,7 +13,7 @@ use App\UseCases\Master\Entry\CreateAction;
 class EntryController extends Controller
 {
     /**
-     * 一覧取得
+     * 求人申込 一覧取得
      *
      * @param  EntryListRequest $request
      * @param  ListAction $action
@@ -25,7 +25,7 @@ class EntryController extends Controller
     }
 
     /**
-     * 登録
+     * 求人申込 登録
      *
      * @param EntryRequest $request
      * @param CreateAction $action

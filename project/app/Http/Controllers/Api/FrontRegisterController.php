@@ -18,20 +18,13 @@ class FrontRegisterController extends Controller
     use RegistersUsers;
 
     /**
-     * Handle a registration request for the application.
+     * 会員 登録
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\RegisterRequest  $request
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\JsonResponse
      */
-    public function register(Request $request)
+    public function register(RegisterRequest $request)
     {
-        $requestClass = new RegisterRequest();
-        $validator = Validator::make($request->all(), $requestClass->rules(), [], $requestClass->attributes());
-
-        if($validator->fails()){
-            return response()->json(['message' => 'バリデーション失敗', 'errors' => $validator->errors()], 400);
-        }
-
         event(new Registered($user = $this->create($request->all())));
         $this->guard()->login($user);
         return response()->json(['message' => '成功'], 200);

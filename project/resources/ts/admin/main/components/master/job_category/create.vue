@@ -40,7 +40,7 @@
                 this.message = ""
                 this.$router.push({ name: "job_category_index" })
             }).catch(error => {
-                if (error.response.status == 400) {
+                if (error.response.status == 422) {
                     // エラー初期化
                     this.errors = { name: '', content: '', image: '', sort_no: ''}
                     // エラーセット
