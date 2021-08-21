@@ -25,6 +25,7 @@ class JobCategoryRequest extends FormRequest
      */
     public function rules() {
         return [
+            'id' => 'nullable',
             'name' => 'required|max:25',
             'content' => 'required|max:1000',
             'image' => 'nullable',
@@ -41,6 +42,7 @@ class JobCategoryRequest extends FormRequest
      */
     public function attributes() {
         return [
+            'id' => 'id',
             'name' => '名称',
             'content' => '内容',
             'image' => '画像',
