@@ -17,7 +17,10 @@ class FindAction{
         $item = JobCategory::where('id', $id)
                         ->first()
                         ->toArray();
-        $item['image'] = Storage::url($item['image']);
+        // ファイルのurlをセット
+        if(!empty($item) && array_key_exists('image', $item)){
+            $item['image_url'] = Storage::url($item['image']);
+        }
 
         return $item;
     }
