@@ -171,14 +171,12 @@
             }
 
             // 仕事名称取得
-            const axiosA = window.axios.get('/api/jobs',
-                                            {
-                                                params:{
-                                                    filters_json:JSON.stringify(''),
-                                                    fields:['id', 'title']
-                                                }
+            const axiosA = window.axios.get('/api/jobs',{
+                                            params:{
+                                                filter:JSON.stringify([]),
+                                                fields:JSON.stringify(['id','title',])
                                             }
-                                        ).then(response => {
+                                        }).then(response => {
                                             let keyValues: {[key: string]: string;} = {}
                                             response.data.map((x: Job) => keyValues[x.id] = x.title)
                                             this.jobNms = keyValues

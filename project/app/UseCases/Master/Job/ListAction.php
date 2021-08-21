@@ -9,23 +9,14 @@ class ListAction{
     /**
      * __invoke
      *
-     * @param string $filters_json
-     * @param array $fileds
+     * @param string $filter
+     * @param string $fileds
      * @return array
      */
-    public function __invoke(string $filters_json, array $fileds): array
+    public function __invoke(string $filter, string $fileds): array
     {
-        $filters = json_decode($filters_json, true);
-        $wheres = [];
-        if(isset($filters['title']) && $filters['title'] != '') {
-            $wheres[] = ['title', 'LIKE', '%'. $filters['title']. '%'];
-        }
-        if(isset($filters['job_category_id']) && $filters['job_category_id'] != '') {
-            $wheres[] = ['job_category_id', '=', $filters['job_category_id']];
-        }
-
-        $items = Job::where($wheres)
-                    ->select($fileds)
+        $items = Job::where(json_decode($filter, true))
+                    ->select(json_decode($fileds, true))
                     ->orderBy('sort_no')
                     ->get()
                     ->toArray();

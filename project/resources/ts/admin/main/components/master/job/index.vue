@@ -221,15 +221,19 @@
         getItem(): void{
             // 条件保存
             localStorage.setItem('job_conds',JSON.stringify(this.cond))
+
+            // 抽出条件
+            let filter:any  = []
+            if(this.cond.title != ''){
+                filter.push(['title', 'LIKE', '%' + this.cond.title + '%'])
+            }
+            if(this.cond.job_category != ''){
+                filter.push(['job_category_id', '=', this.cond.job_category])
+            }
             window.axios.get("/api/jobs", {
                 params:{
-                    filters_json:JSON.stringify(
-                        {
-                            title: this.cond.title,
-                            job_category_id: this.cond.job_category,
-                        }
-                    ),
-                    fields:['*']
+                    filter:JSON.stringify(filter),
+                    fields:JSON.stringify(['*'])
                 }
             }).then(response => {
                 this.items = response.data;
