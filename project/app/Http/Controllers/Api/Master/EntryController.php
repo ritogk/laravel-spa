@@ -33,6 +33,6 @@ class EntryController extends Controller
      */
     public function create(EntryRequest $request, CreateAction $action)
     {
-        $action($request->all());
+        $action($request);
     }
 }

@@ -3,6 +3,7 @@
 namespace App\UseCases\Master\Entry;
 
 use App\Models\Entry;
+use Illuminate\Http\Request;
 
 class CreateAction{
     /**
@@ -11,8 +12,12 @@ class CreateAction{
      * @param array $entry
      * @return void
      */
-    public function __invoke(array $entry): void
+    public function __invoke(Request $request): void
     {
-        Entry::create($entry);
+        $create = [
+            'job_id' => $request->job_id,
+            'user_id' => $request->user_id,
+        ];
+        Entry::create($create);
     }
 }
