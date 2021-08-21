@@ -47,7 +47,7 @@
                 :id="`job-${job.id}`"
             >
                 <div class="trim">
-                    <b-card-img :src="job.image" alt="Image" class="trim_img">
+                    <b-card-img :src="job.image_url" alt="Image" class="trim_img">
                     </b-card-img>
                 </div>
                 <div class="p-2">

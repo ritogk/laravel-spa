@@ -18,7 +18,7 @@
         >
             <b-card-group deck>
                 <b-card
-                :img-src="convert_job.image"
+                :img-src="convert_job.image_url"
                 img-alt="Card image"
                 img-top>
                     <b-card-text>

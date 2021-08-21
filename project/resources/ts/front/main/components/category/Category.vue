@@ -23,7 +23,7 @@
                 v-show="!loading"
             >
                 <b-card
-                    :img-src='category.image'
+                    :img-src='category.image_url'
                     img-alt="Image"
                     img-top
                     img-height="200px"
