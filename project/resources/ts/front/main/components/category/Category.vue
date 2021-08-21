@@ -63,18 +63,12 @@
         // 初期化
         mounted(){
             this.loading = true
-            window.axios.get('/api/job_categories'
-                , {
-                    params:{
-                        filter:
-                            JSON.stringify([]),
-                        fields:
-                            JSON.stringify(
-                                ['id', 'name', 'content', 'image', 'sort_no']
-                            )
-                    }
+            window.axios.get('/api/job_categories',{
+                params:{
+                    filter:JSON.stringify([]),
+                    fields:JSON.stringify(['id', 'name', 'content', 'image', 'sort_no'])
                 }
-            ).then(response => {
+            }).then(response => {
                 this.categories = response.data
                 this.loading = false
             })

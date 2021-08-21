@@ -195,18 +195,12 @@
             this.getItem();
 
             // 職種マスタ名称取得
-            window.axios.get('/api/job_categories'
-                , {
-                    params:{
-                        filter:
-                            JSON.stringify([]),
-                        fields:
-                            JSON.stringify(
-                                ['id', 'name']
-                            )
-                    }
+            window.axios.get('/api/job_categories',{
+                params:{
+                    filter:JSON.stringify([]),
+                    fields:JSON.stringify(['id', 'name'])
                 }
-            ).then(response => {
+            }).then(response => {
                 let keyValues: {[key: string]: string;} = {}
                 response.data.map((x: JobCategory) => keyValues[x.id] = x.name)
                 this.jobCategoryNms = keyValues

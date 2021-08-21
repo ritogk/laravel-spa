@@ -150,18 +150,12 @@
         // 初期化
         mounted(){
             this.isBusy = true;
-            window.axios.get('/api/job_categories'
-                , {
-                    params:{
-                        filter:
-                            JSON.stringify([]),
-                        fields:
-                            JSON.stringify(
-                                ['*']
-                            )
-                    }
+            window.axios.get('/api/job_categories',{
+                params:{
+                    filter:JSON.stringify([]),
+                    fields:JSON.stringify(['*'])
                 }
-            ).then(response => {
+            }).then(response => {
                 this.items = response.data;
                 this.totalRows = this.items.length
                 this.isBusy = false;
