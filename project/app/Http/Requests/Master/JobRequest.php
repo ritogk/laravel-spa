@@ -25,6 +25,7 @@ class JobRequest extends FormRequest
      */
     public function rules() {
         return [
+            'id' => 'nullable',
             'title' => 'required|max:50',
             'content' => 'required|max:1000',
             'attention' => 'required|digits_between:0,1',
@@ -45,6 +46,7 @@ class JobRequest extends FormRequest
      */
     public function attributes() {
         return [
+            'id' => 'id',
             'title' => 'タイトル',
             'content' => '内容',
             'attention' => '注目',

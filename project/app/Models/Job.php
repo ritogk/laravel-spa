@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use DateTimeInterface;
 
 class Job extends Model
 {
@@ -22,4 +23,16 @@ class Job extends Model
     {
         return $this->hasMany('App\Models\Entry');
     }
+
+    /**
+    * 日時を日本時間に変換する
+    * laravel7からtoArray, toJson内の日時がUTC固定になったので
+    *
+    * @param  \DateTimeInterface  $date
+    * @return string
+    */
+   protected function serializeDate(DateTimeInterface $date)
+   {
+       return $date->format('Y-m-d H:i:s');
+   }
 }

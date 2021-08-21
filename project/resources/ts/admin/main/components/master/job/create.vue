@@ -29,7 +29,7 @@
     })
     export default class Create extends Vue{
         // data
-        item: Item = {id: '', title: '', content: '', attention: false, job_category_id: '', price: null, welfare: '', holiday: '', image: '', image_url: '', sort_no: 1, updated_at: ''}
+        item: Item = {id: '', title: '', content: '', attention: 0, job_category_id: '', price: null, welfare: '', holiday: '', image: '', image_url: '', sort_no: 1, updated_at: ''}
         message: string = ''
         errors: BaseFormError = {title: '', content: '', attention: '', job_category_id: '', price: '', welfare: '', holiday: '', image: '', image_url: '', sort_no: ''}
 
