@@ -195,14 +195,12 @@
             this.getItem();
 
             // 職種マスタ名称取得
-            window.axios.get('/api/job_categories'
-                , {
-                    params:{
-                        filters_json:JSON.stringify(''),
-                        fields:['id', 'name']
-                    }
+            window.axios.get('/api/job_categories',{
+                params:{
+                    filter:JSON.stringify([]),
+                    fields:JSON.stringify(['id', 'name'])
                 }
-            ).then(response => {
+            }).then(response => {
                 let keyValues: {[key: string]: string;} = {}
                 response.data.map((x: JobCategory) => keyValues[x.id] = x.name)
                 this.jobCategoryNms = keyValues
@@ -217,15 +215,19 @@
         getItem(): void{
             // 条件保存
             localStorage.setItem('job_conds',JSON.stringify(this.cond))
+
+            // 抽出条件
+            let filter:any  = []
+            if(this.cond.title != ''){
+                filter.push(['title', 'LIKE', '%' + this.cond.title + '%'])
+            }
+            if(this.cond.job_category != ''){
+                filter.push(['job_category_id', '=', this.cond.job_category])
+            }
             window.axios.get("/api/jobs", {
                 params:{
-                    filters_json:JSON.stringify(
-                        {
-                            title: this.cond.title,
-                            job_category_id: this.cond.job_category,
-                        }
-                    ),
-                    fields:['*']
+                    filter:JSON.stringify(filter),
+                    fields:JSON.stringify(['*'])
                 }
             }).then(response => {
                 this.items = response.data;

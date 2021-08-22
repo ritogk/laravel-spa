@@ -30,3 +30,6 @@ docker/db/sql
 project/public/mix-manifest.json
 project/public/css
 project/public/js
+project/.scribe
+project/resources/docs
+project/public/docs

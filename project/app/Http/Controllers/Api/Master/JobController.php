@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api\Master;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Master\JobListRequest;
+use App\Http\Requests\Master\ListRequest;
 use App\Http\Requests\Master\JobRequest;
 
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
@@ -20,31 +20,31 @@ use App\UseCases\Master\Job\ExportAction;
 class JobController extends Controller
 {
     /**
-     * 一覧取得
+     * 仕事 一覧取得
      *
-     * @param  JobListRequest $request
+     * @param  ListRequest $request
      * @param  ListAction $action
      * @return array
      */
-    public function index(JobListRequest $request, ListAction $action): array
+    public function index(ListRequest $request, ListAction $action): array
     {
-        return $action($request->filters_json, $request->fields);
+        return $action($request->filter, $request->fields);
     }
 
     /**
-     * 登録
+     * 仕事 登録
      *
      * @param JobRequest $request
      * @param CreateAction $action
-     * @return void
+     * @return array
      */
-    public function create(JobRequest $request, CreateAction $action)
+    public function create(JobRequest $request, CreateAction $action): array
     {
-        $action($request);
+        return $action($request);
     }
 
     /**
-     * 更新
+     * 仕事 更新
      *
      * @param  JobRequest $request
      * @param string $id
@@ -57,7 +57,7 @@ class JobController extends Controller
     }
 
     /**
-     * 削除
+     * 仕事 削除
      *
      * @param string $id
      * @param DeleteAction $action
@@ -69,7 +69,7 @@ class JobController extends Controller
     }
 
     /**
-     * 一件取得
+     * 仕事 一件取得
      *
      * @param string $id
      * @param  FindAction $action
@@ -81,7 +81,7 @@ class JobController extends Controller
     }
 
     /**
-     * excel取得
+     * 仕事 excel取得
      *
      * @param ExportAction $action
      * @return BinaryFileResponse

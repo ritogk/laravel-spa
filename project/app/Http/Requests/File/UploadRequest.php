@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Requests\Auth\Front;
+namespace App\Http\Requests\File;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class RegisterRequest extends FormRequest
+class UploadRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,12 +24,7 @@ class RegisterRequest extends FormRequest
      */
     public function rules() {
         return [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'password_confirmation' => ['required', 'string', 'min:8'],
-            'self_pr' => ['required', 'max:1000'],
-            'tel' => ['required', 'regex:/^[0-9]{2,4}-[0-9]{2,4}-[0-9]{3,4}$/u'],
+            'file' => 'required|file|mimes:jpeg,png,jpg',
         ];
     }
 
@@ -40,16 +35,13 @@ class RegisterRequest extends FormRequest
      */
     public function attributes() {
         return [
-            'name' => '氏名',
-            'email' => 'メールアドレス',
-            'password' => 'パスワード',
-            'self_pr' => '自己PR',
-            'tel' => '電話番号',
+            'file' => 'ファイル',
         ];
     }
 
     /**
      * バリデーションエラー後の処理を変える場合はここに処理を記述する
+     * デフォルトはリダイレクト
      *
      * @return array
      */

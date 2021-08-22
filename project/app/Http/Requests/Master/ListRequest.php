@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Requests\Auth\Front;
+namespace App\Http\Requests\Master;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class RegisterRequest extends FormRequest
+class ListRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,12 +24,8 @@ class RegisterRequest extends FormRequest
      */
     public function rules() {
         return [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'password_confirmation' => ['required', 'string', 'min:8'],
-            'self_pr' => ['required', 'max:1000'],
-            'tel' => ['required', 'regex:/^[0-9]{2,4}-[0-9]{2,4}-[0-9]{3,4}$/u'],
+            'filter' => ['required', 'string'],
+            'fields' => ['required', 'string'],
         ];
     }
 
@@ -40,11 +36,8 @@ class RegisterRequest extends FormRequest
      */
     public function attributes() {
         return [
-            'name' => '氏名',
-            'email' => 'メールアドレス',
-            'password' => 'パスワード',
-            'self_pr' => '自己PR',
-            'tel' => '電話番号',
+            'filter' => '「抽出値 例:[["カラム", "判定記号", "値"]]) なし:[]」',
+            'fields' => '「フィールド値 例:["name", "image"] 全取得[*]」',
         ];
     }
 

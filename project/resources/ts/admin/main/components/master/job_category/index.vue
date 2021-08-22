@@ -172,15 +172,22 @@
         getItem(): void{
             // // 条件保存
             localStorage.setItem('job_category_conds',JSON.stringify(this.cond))
+
+            // 抽出条件
+            let filter:any  = []
+            if(this.cond.name != ''){
+                filter.push(['name', 'LIKE', '%' + this.cond.name + '%'])
+            }
             // 一覧読込
             window.axios.get("/api/job_categories", {
                 params:{
-                    filters_json:JSON.stringify({name: this.cond.name,}),
-                    fields:['*']
+                    filter:
+                        JSON.stringify(filter),
+                    fields:
+                        JSON.stringify(
+                            ['*']
+                        )
                 }
-                // params: {
-                //     name: this.cond.name,
-                // }
             }).then(response => {
                 this.items = response.data;
                 this.totalRows = this.items.length

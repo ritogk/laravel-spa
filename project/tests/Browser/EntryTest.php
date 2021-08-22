@@ -93,7 +93,7 @@ class EntryTest extends DuskTestCase
 
             // 管理画面(選考一覧) 申込した仕事が表示される。
             $browser->clickLink('選考一覧')
-                    ->pause(self::pause_time_1)
+                    ->pause(self::pause_time_2)
                     ->screenshot('admin_job_entry_list')
                     ->assertSee($job->title)
                     ->assertSee($name)

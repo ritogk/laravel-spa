@@ -47,7 +47,7 @@
                 :id="`job-${job.id}`"
             >
                 <div class="trim">
-                    <b-card-img :src="job.image" alt="Image" class="trim_img">
+                    <b-card-img :src="job.image_url" alt="Image" class="trim_img">
                     </b-card-img>
                 </div>
                 <div class="p-2">
@@ -130,23 +130,21 @@
 
         mounted(): void{
             this.loading = true
-            window.axios.get('/api/jobs',
-                {
-                    params:{
-                        filters_json:JSON.stringify(''),
-                        fields:['id',
-                                'title',
-                                'content',
-                                'attention',
-                                'job_category_id',
-                                'price',
-                                'welfare',
-                                'holiday',
-                                'image',
-                                'sort_no']
-                    }
+            window.axios.get('/api/jobs',{
+                params:{
+                    filter:JSON.stringify([]),
+                    fields:JSON.stringify(['id',
+                                        'title',
+                                        'content',
+                                        'attention',
+                                        'job_category_id',
+                                        'price',
+                                        'welfare',
+                                        'holiday',
+                                        'image',
+                                        'sort_no'])
                 }
-            ).then(response => {
+            }).then(response => {
                 this.allJobs = response.data
                 this.loading = false
             })

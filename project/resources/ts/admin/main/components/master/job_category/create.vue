@@ -29,29 +29,19 @@
     })
     export default class Create extends Vue{
         // data
-        item: Item = {id: '', name: '', content: '', image: '', sort_no: 1, updated_at: ''}
+        item: Item = {id: '', name: '', content: '', image: '', image_url: '', sort_no: 1, updated_at: ''}
         message: string = ''
         errors: BaseFormError = { name: '', content: '', image: '', sort_no: ''}
         create(image_file: any): void{
-            const formData = new FormData()
-            formData.append('file',image_file)
-            formData.append('item', JSON.stringify(this.item))
-            window.axios.post('/api/job_categories',formData).then(response =>{
+            window.axios.post('/api/job_categories', this.item).then(response =>{
                 this.message = ""
                 this.$router.push({ name: "job_category_index" })
             }).catch(error => {
-                if (error.response.status == 400) {
+                if (error.response.status == 422) {
                     // エラー初期化
                     this.errors = { name: '', content: '', image: '', sort_no: ''}
                     // エラーセット
-                    const request_errors = error.response.data.errors
-                    for (var key in request_errors) {
-                        const error_key = key.replace("item.", "")
-                        this.errors[error_key] = request_errors[key][0]
-                    }
-                    if(request_errors.image){
-                        this.errors.image = request_errors.image;
-                    }
+                    this.errors = error.response.data.errors
                 }else{
                     this.message = error
                 }

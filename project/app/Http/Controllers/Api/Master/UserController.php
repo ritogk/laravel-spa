@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api\Master;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Master\UserListRequest;
+use App\Http\Requests\Master\ListRequest;
 
 // usecase
 use App\UseCases\Master\User\ListAction;
@@ -11,14 +11,14 @@ use App\UseCases\Master\User\ListAction;
 class UserController extends Controller
 {
     /**
-     * 一覧取得
+     * 会員 一覧取得
      *
-     * @param  UserListRequest $request
+     * @param  ListRequest $request
      * @param  ListAction $action
      * @return array
      */
-    public function index(UserListRequest $request, ListAction $action): array
+    public function index(ListRequest $request, ListAction $action): array
     {
-        return $action($request->filters_json, $request->fields);
+        return $action($request->filter, $request->fields);
     }
 }

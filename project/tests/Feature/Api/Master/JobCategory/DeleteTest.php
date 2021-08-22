@@ -29,6 +29,5 @@ class DeleteTest extends TestCase
         $response = $this->delete('/api/job_categories/'. $category['id']);
 
         $this->assertTrue(JobCategory::where('id', $category['id'])->doesntExist ());
-
     }
 }

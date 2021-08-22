@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api\Master;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Master\JobCategoryListRequest;
+use App\Http\Requests\Master\ListRequest;
 use App\Http\Requests\Master\JobCategoryRequest;
 
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
@@ -19,31 +19,31 @@ use App\UseCases\Master\JobCategory\ExportAction;
 class JobCategoryController extends Controller
 {
     /**
-     * 一覧取得
+     * 職種 一覧取得
      *
-     * @param  JobCategoryListRequest $request
+     * @param  ListRequest $request
      * @param  ListAction $action
      * @return array
      */
-    public function index(JobCategoryListRequest $request, ListAction $action): array
+    public function index(ListRequest $request, ListAction $action): array
     {
-        return $action($request->filters_json, $request->fields);
+        return $action($request->filter, $request->fields);
     }
 
     /**
-     * 登録
+     * 職種 登録
      *
      * @param JobCategoryRequest $request
      * @param CreateAction $action
-     * @return void
+     * @return array
      */
-    public function create(JobCategoryRequest $request, CreateAction $action)
+    public function create(JobCategoryRequest $request, CreateAction $action): array
     {
-        $action($request);
+        return $action($request);
     }
 
     /**
-     * 更新
+     * 職種 更新
      *
      * @param  JobCategoryRequest $request
      * @param string $id
@@ -56,7 +56,7 @@ class JobCategoryController extends Controller
     }
 
     /**
-     * 削除
+     * 職種 削除
      *
      * @param string $id
      * @param DeleteAction $action
@@ -68,7 +68,7 @@ class JobCategoryController extends Controller
     }
 
     /**
-     * 一件取得
+     * 職種 一件取得
      *
      * @param string $id
      * @param  FindAction $action
@@ -80,7 +80,7 @@ class JobCategoryController extends Controller
     }
 
     /**
-     * excel取得
+     * 職種 excel取得
      *
      * @param ExportAction $action
      * @return BinaryFileResponse

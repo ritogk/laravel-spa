@@ -14,11 +14,14 @@ class FindAction{
      */
     public function __invoke(string $id): array
     {
-        $job = Job::where('id', $id)
-                    ->select('id', 'title', 'content', 'attention', 'job_category_id', 'price', 'image', 'sort_no', 'welfare', 'holiday')
+        $item = Job::where('id', $id)
+                    ->select('id', 'title', 'content', 'attention', 'job_category_id', 'price', 'image', 'sort_no', 'welfare', 'holiday', 'updated_at')
                     ->first()
                     ->toArray();
-        $job['image'] = Storage::url($job['image']);
-        return $job;
+        // ファイルのurlをセット
+        if(!empty($item) && array_key_exists('image', $item)){
+            $item['image_url'] = Storage::url($item['image']);
+        }
+        return $item;
     }
 }

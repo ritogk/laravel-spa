@@ -23,7 +23,7 @@
                 v-show="!loading"
             >
                 <b-card
-                    :img-src='category.image'
+                    :img-src='category.image_url'
                     img-alt="Image"
                     img-top
                     img-height="200px"
@@ -63,14 +63,12 @@
         // 初期化
         mounted(){
             this.loading = true
-            window.axios.get('/api/job_categories'
-                , {
-                    params:{
-                        filters_json:JSON.stringify(''),
-                        fields:['id', 'name', 'content', 'image', 'sort_no']
-                    }
+            window.axios.get('/api/job_categories',{
+                params:{
+                    filter:JSON.stringify([]),
+                    fields:JSON.stringify(['id', 'name', 'content', 'image', 'sort_no'])
                 }
-            ).then(response => {
+            }).then(response => {
                 this.categories = response.data
                 this.loading = false
             })

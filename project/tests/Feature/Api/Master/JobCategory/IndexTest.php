@@ -24,18 +24,16 @@ class IndexTest extends TestCase
     public function test_200()
     {
         $query = [
-            "filters_json" => json_encode(''),
-            "fields" => ['*'],
+            "filter" => json_encode([]),
+            "fields" => json_encode(['*']),
         ];
 
         $before_jobcategories = JobCategory::all();
 
         // 登録データ1
         $job_category1 = JobCategory::factory()->create();
-        $job_category1->image = Storage::url($job_category1->image);
         // 登録データ2
         $job_category2 = JobCategory::factory()->create();
-        $job_category2->image = Storage::url($job_category2->image);
 
         $response = $this->call('GET', '/api/job_categories', $query, $this->prepareCookiesForRequest());
 

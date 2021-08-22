@@ -33,13 +33,12 @@ class UpdateTest extends TestCase
         $input['name'] = '変更_name';
         $input['content'] = '変更_content';
         $input['sort_no'] = 100;
-        $file = UploadedFile::fake()->image('dummy.png');
+        $input['image'] = 'public/images/aaaabbbccc';
 
-        $response = $this->put('/api/job_categories/'. $before_category['id'],
-                                ['file' => $file, 'item' => json_encode($input)]);
+        $response = $this->put('/api/job_categories/'. $before_category['id'], $input);
 
         $after_category = JobCategory::where('id', $before_category['id'])
-                                        ->first();
+                                    ->first();
         // id以外が変更されている
         $this->assertEquals($after_category->id, $before_category['id']);
         $this->assertNotEquals($after_category->name, $before_category['name']);

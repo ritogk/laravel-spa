@@ -25,12 +25,12 @@ class JobCategoryRequest extends FormRequest
      */
     public function rules() {
         return [
-            'item.name' => 'required|max:25',
-            'item.content' => 'required|max:1000',
-            'item.image' => 'nullable',
-            'item.sort_no' => 'required|integer|digits_between:1,9',
-            'item.updated_at' => 'date|nullable',
-            'image' => 'nullable',
+            'id' => 'nullable',
+            'name' => 'required|max:25',
+            'content' => 'required|max:1000',
+            'image' => 'required',
+            'sort_no' => 'required|integer|digits_between:1,9',
+            'updated_at' => 'date|nullable',
         ];
     }
 
@@ -41,12 +41,12 @@ class JobCategoryRequest extends FormRequest
      */
     public function attributes() {
         return [
-            'item.name' => '名称',
-            'item.content' => '内容',
-            'item.image' => '画像',
-            'item.sort_no' => '並び順',
-            'item.updated_at' => '更新日',
+            'id' => 'id',
+            'name' => '名称',
+            'content' => '内容',
             'image' => '画像',
+            'sort_no' => '並び順',
+            'updated_at' => '更新日',
         ];
     }
 
@@ -58,7 +58,6 @@ class JobCategoryRequest extends FormRequest
     public function withValidator($validator) {
         /* ここにバリデーションを書く */
         $validator->after(function ($validator) {
-            \Log::debug($this->input('*'));
             if(!empty($this->input('id'))
                     && JobCategory::find($this->input('id'))->updated_at > $this->input('updated_at')){
                 $validator->errors()->add('updated_at', 'すでに変更されたデータの可能性があります。最新の状態で再度実行してください。');
@@ -74,9 +73,9 @@ class JobCategoryRequest extends FormRequest
      */
     protected function failedValidation(Validator $validator) {
         $response = response()->json([
-            'status' => 400,
+            'status' => 422,
             'errors' => $validator->errors(),
-        ], 400);
+        ], 422);
         throw new HttpResponseException($response);
     }
 }

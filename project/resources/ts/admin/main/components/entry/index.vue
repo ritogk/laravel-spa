@@ -171,27 +171,23 @@
             }
 
             // 仕事名称取得
-            const axiosA = window.axios.get('/api/jobs',
-                                            {
-                                                params:{
-                                                    filters_json:JSON.stringify(''),
-                                                    fields:['id', 'title']
-                                                }
+            const axiosA = window.axios.get('/api/jobs',{
+                                            params:{
+                                                filter:JSON.stringify([]),
+                                                fields:JSON.stringify(['id','title',])
                                             }
-                                        ).then(response => {
+                                        }).then(response => {
                                             let keyValues: {[key: string]: string;} = {}
                                             response.data.map((x: Job) => keyValues[x.id] = x.title)
                                             this.jobNms = keyValues
                                         })
             // 会員一覧取得
-            const axiosB = window.axios.get('/api/users',
-                                            {
-                                                params:{
-                                                    filters_json:JSON.stringify(''),
-                                                    fields:['id', 'name', 'email', 'tel', 'self_pr', 'created_at']
-                                                }
+            const axiosB = window.axios.get('/api/users',{
+                                            params:{
+                                                filter:JSON.stringify([]),
+                                                fields:JSON.stringify(['id', 'name', 'email', 'tel', 'self_pr', 'created_at'])
                                             }
-                                        ).then(response => {
+                                        }).then(response => {
                                             this.users = response.data
                                         })
             Promise.all([axiosA, axiosB]).then((result) => {
@@ -203,11 +199,17 @@
         getItem(): void{
             // 条件保存
             localStorage.setItem('entry_conds',JSON.stringify(this.cond))
+
+            // 抽出条件
+            let filter:any  = []
+            if(this.cond.full_name != ''){
+                filter.push(['full_name', 'LIKE', '%' + this.cond.full_name + '%'])
+            }
             // 一覧読込
             window.axios.get("/api/entries", {
                 params:{
-                    filters_json:JSON.stringify({full_name: this.cond.full_name}),
-                    fields:['*']
+                    filter:JSON.stringify([]),
+                    fields:JSON.stringify(['*'])
                 }
             }).then(response => {
                 this.items = response.data;

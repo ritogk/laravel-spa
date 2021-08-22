@@ -24,8 +24,8 @@ class JobCategoryFactory extends Factory
         return [
             'name' => $this->faker->name,
             'content' => $this->faker->realText(1000),
-            'image' => 'test',
-            'sort_no' => $this->faker->numberBetween(0,10),
+            'image' => 'public/images/ZpZCGmtbTC',
+            'sort_no' => $this->faker->numberBetween(1,10),
         ];
     }
 }
