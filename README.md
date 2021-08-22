@@ -122,7 +122,7 @@ $ sudo docker-compose up -d
 $ sudo cp project/.env.base project/.env
 $ sudo docker-compose exec -T db mysql -uroot -proot -e'create database laravel'
 $ sudo docker-compose exec -T php composer install
-$ sudo docker-compose exec -T php npm install
+$ sudo docker-compose exec -T php npm ci
 $ sudo docker-compose exec -T php npm run prod
 $ sudo docker-compose exec -T php php artisan migrate:refresh --seed
 $ sudo docker-compose exec -T php php artisan key:generate
