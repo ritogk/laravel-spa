@@ -38,7 +38,7 @@ jobs:
           cp project/.env.testing project/.env
           docker-compose exec -T php composer install
           docker-compose exec -T php composer install
-          docker-compose exec -T php npm install
+          docker-compose exec -T php npm ci
           docker-compose exec -T php npm run prod
           docker-compose exec -T php php artisan migrate:refresh --seed
           docker-compose exec -T php php artisan key:generate
