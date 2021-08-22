@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Auth\Events\Registered;
 
 use App\Http\Requests\Auth\Front\RegisterRequest;
+use Illuminate\Http\JsonResponse;
 
 class FrontRegisterController extends Controller
 {
@@ -20,8 +21,8 @@ class FrontRegisterController extends Controller
     /**
      * 会員 登録
      *
-     * @param  \Illuminate\Http\RegisterRequest  $request
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\JsonResponse
+     * @param  RegisterRequest  $request
+     * @return JsonResponse
      */
     public function register(RegisterRequest $request)
     {

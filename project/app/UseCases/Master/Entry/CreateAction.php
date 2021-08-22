@@ -9,7 +9,7 @@ class CreateAction{
     /**
      * __invoke
      *
-     * @param array $entry
+     * @param Request $request
      * @return array
      */
     public function __invoke(Request $request): array

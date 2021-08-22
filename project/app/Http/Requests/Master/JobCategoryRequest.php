@@ -28,10 +28,9 @@ class JobCategoryRequest extends FormRequest
             'id' => 'nullable',
             'name' => 'required|max:25',
             'content' => 'required|max:1000',
-            'image' => 'nullable',
+            'image' => 'required',
             'sort_no' => 'required|integer|digits_between:1,9',
             'updated_at' => 'date|nullable',
-            'image' => 'required',
         ];
     }
 
@@ -48,7 +47,6 @@ class JobCategoryRequest extends FormRequest
             'image' => '画像',
             'sort_no' => '並び順',
             'updated_at' => '更新日',
-            'image' => '画像',
         ];
     }
 

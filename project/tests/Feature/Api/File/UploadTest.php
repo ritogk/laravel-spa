@@ -1,13 +1,15 @@
 <?php
 
-namespace Tests\Feature\Api\Master\JobCategory;
+namespace Tests\Feature\Api\File;
 
 use Tests\TestCase;
 use App\Models\JobCategory;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Http\UploadedFile;
 
-class CreateTest extends TestCase
+use Illuminate\Support\Facades\Storage;
+
+class UploadTest extends TestCase
 {
     use DatabaseTransactions;
 
@@ -26,9 +28,12 @@ class CreateTest extends TestCase
         // ログイン
         $this->post('/api/auth/admin/login', ['email'=>'test@test.co.jp', 'password'=>'test', 'remember'=>true]);
 
-        $job_category = JobCategory::factory()->make();
+        // ダミー画像作成
+        $file = UploadedFile::fake()->image('dummy.png');
 
-        $this->post('/api/job_categories', $job_category->toArray())
-            ->assertJson($job_category->toArray());
+        // 登録
+        $response = $this->post('/api/files', ['file' => $file,]);
+
+        Storage::assertExists(json_decode($response->content())->storage_path);
     }
 }
