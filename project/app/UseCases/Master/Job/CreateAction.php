@@ -9,9 +9,9 @@ class CreateAction{
      * __invoke
      *
      * @param Request $request
-     * @return void
+     * @return array
      */
-    public function __invoke(Request $request): void
+    public function __invoke(Request $request): array
     {
         $create = [
             'title' => $request->title,
@@ -24,6 +24,6 @@ class CreateAction{
             'image' => $request->image,
             'sort_no' => $request->sort_no,
         ];
-        Job::create($create);
+        return Job::create($create)->toArray();
     }
 }

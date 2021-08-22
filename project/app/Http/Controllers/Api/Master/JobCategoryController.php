@@ -35,11 +35,11 @@ class JobCategoryController extends Controller
      *
      * @param JobCategoryRequest $request
      * @param CreateAction $action
-     * @return void
+     * @return array
      */
-    public function create(JobCategoryRequest $request, CreateAction $action)
+    public function create(JobCategoryRequest $request, CreateAction $action): array
     {
-        $action($request);
+        return $action($request);
     }
 
     /**

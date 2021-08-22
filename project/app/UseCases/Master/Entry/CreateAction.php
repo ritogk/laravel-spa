@@ -10,14 +10,14 @@ class CreateAction{
      * __invoke
      *
      * @param array $entry
-     * @return void
+     * @return array
      */
-    public function __invoke(Request $request): void
+    public function __invoke(Request $request): array
     {
         $create = [
             'job_id' => $request->job_id,
             'user_id' => $request->user_id,
         ];
-        Entry::create($create);
+        return Entry::create($create)->toArray();
     }
 }

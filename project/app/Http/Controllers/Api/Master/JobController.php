@@ -36,11 +36,11 @@ class JobController extends Controller
      *
      * @param JobRequest $request
      * @param CreateAction $action
-     * @return void
+     * @return array
      */
-    public function create(JobRequest $request, CreateAction $action)
+    public function create(JobRequest $request, CreateAction $action): array
     {
-        $action($request);
+        return $action($request);
     }
 
     /**

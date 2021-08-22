@@ -28,7 +28,7 @@ class JobRequest extends FormRequest
             'id' => 'nullable',
             'title' => 'required|max:50',
             'content' => 'required|max:1000',
-            'attention' => 'required|digits_between:0,1',
+            'attention' => 'required|integer|min:0|max:1',
             'job_category_id' => 'required|numeric',
             'price' => 'required|numeric',
             'welfare' => 'nullable|max:1000',
