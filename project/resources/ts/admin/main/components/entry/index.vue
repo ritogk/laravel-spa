@@ -182,14 +182,12 @@
                                             this.jobNms = keyValues
                                         })
             // 会員一覧取得
-            const axiosB = window.axios.get('/api/users',
-                                            {
-                                                params:{
-                                                    filters_json:JSON.stringify(''),
-                                                    fields:['id', 'name', 'email', 'tel', 'self_pr', 'created_at']
-                                                }
+            const axiosB = window.axios.get('/api/users',{
+                                            params:{
+                                                filter:JSON.stringify([]),
+                                                fields:JSON.stringify(['id', 'name', 'email', 'tel', 'self_pr', 'created_at'])
                                             }
-                                        ).then(response => {
+                                        }).then(response => {
                                             this.users = response.data
                                         })
             Promise.all([axiosA, axiosB]).then((result) => {
