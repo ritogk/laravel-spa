@@ -1,30 +1,23 @@
 <?php
+namespace App\UseCases\Auth\Front;
 
-namespace App\Http\Controllers\Api;
-
-use App\Http\Controllers\Controller;
-use App\Models\User;
-use Illuminate\Foundation\Auth\RegistersUsers;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Http\Request;
 use Illuminate\Auth\Events\Registered;
-
-use App\Http\Requests\Auth\Front\RegisterRequest;
+use Illuminate\Http\Request;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Support\Facades\Auth;
 
-class FrontRegisterController extends Controller
-{
+class RegisterAction{
     use RegistersUsers;
 
     /**
-     * 会員 登録
+     * __invoke
      *
-     * @param  RegisterRequest  $request
      * @return JsonResponse
      */
-    public function register(RegisterRequest $request)
+    public function __invoke(Request $request): JsonResponse
     {
         event(new Registered($user = $this->create($request->all())));
         $this->guard()->login($user);
@@ -35,9 +28,9 @@ class FrontRegisterController extends Controller
      * Create a new user instance after a valid registration.
      *
      * @param  array  $data
-     * @return \App\Models\User
+     * @return User
      */
-    protected function create(array $data)
+    protected function create(array $data): User
     {
         return User::create([
             'name' => $data['name'],

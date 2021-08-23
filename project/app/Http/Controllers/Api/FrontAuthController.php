@@ -6,10 +6,12 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use App\Http\Requests\Auth\Front\LoginRequest;
+use App\Http\Requests\Auth\Front\RegisterRequest;
 
 use App\UseCases\Auth\Front\LoginAction;
 use App\UseCases\Auth\Front\LogoutAction;
 use App\UseCases\Auth\Front\UserAction;
+use App\UseCases\Auth\Front\RegisterAction;
 
 class FrontAuthController extends Controller
 {
@@ -23,6 +25,18 @@ class FrontAuthController extends Controller
    {
        return $action();
    }
+
+   /**
+     * 会員 登録
+     *
+     * @param  RegisterRequest  $request
+     * @param  RegisterAction $action
+     * @return JsonResponse
+     */
+    public function register(RegisterRequest $request, RegisterAction $action)
+    {
+        return $action($request);
+    }
 
    /**
     * 会員 ログイン
@@ -47,4 +61,6 @@ class FrontAuthController extends Controller
    {
        return $action($request);
    }
+
+
 }
