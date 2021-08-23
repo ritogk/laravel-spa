@@ -5,71 +5,63 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Foundation\Auth\AuthenticatesUsers;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Validator;
 use App\Http\Requests\Auth\Front\LoginRequest;
+use App\Http\Requests\Auth\Front\RegisterRequest;
+
+// usecase
+use App\UseCases\Auth\Front\LoginAction;
+use App\UseCases\Auth\Front\LogoutAction;
+use App\UseCases\Auth\Front\UserAction;
+use App\UseCases\Auth\Front\RegisterAction;
 
 class FrontAuthController extends Controller
 {
-    use AuthenticatesUsers;
+   /**
+    * 会員 取得
+    *
+    * @param  UserAction $action
+    * @return \App\Models\User|null
+    */
+   public function user(UserAction $action)
+   {
+       return $action();
+   }
 
-    /**
-     * 会員 取得
+   /**
+     * 会員 登録
      *
-     * @return \Illuminate\Contracts\Auth\Authenticatable|null
-     */
-    public function user()
-    {
-        return $this->guard()->user();
-    }
-
-    /**
-     * 会員 ログイン
-     *
-     * @param  LoginRequest $request
+     * @param  RegisterRequest  $request
+     * @param  RegisterAction $action
      * @return JsonResponse
      */
-    public function login(LoginRequest $request)
+    public function register(RegisterRequest $request, RegisterAction $action)
     {
-        if ($this->attemptLogin($request)) {
-            $request->session()->regenerate();
-            $this->clearLoginAttempts($request);
-            return response()->json(['message' => '成功', 'user' => $this->user()], 200);
-        }
-
-        return response()->json(['message' => 'ログイン失敗'], 400);
+        return $action($request);
     }
 
-    /**
-     * 会員 ログアウト
-     *
-     * @param  Request $request
-     * @return JsonResponse
-     */
-    public function logout(Request $request){
-        $this->guard()->logout();
-        $request->session()->regenerateToken();
-        return response()->json(['message' => '成功'], 200);
-    }
+   /**
+    * 会員 ログイン
+    *
+    * @param  LoginRequest $request
+    * @param  LoginAction $action
+    * @return JsonResponse
+    */
+   public function login(LoginRequest $request, LoginAction $action): JsonResponse
+   {
+       return $action($request);
+   }
 
-    /**
-     *
-     * @param  Request  $request
-     * @return bool
-     */
-    private function attemptLogin(Request $request)
-    {
-        return $this->guard()->attempt($this->credentials($request)
-                                        , $request->remember);
-    }
+   /**
+    * 会員 ログアウト
+    *
+    * @param  Request $request
+    * @param  LogoutAction $action
+    * @return JsonResponse
+    */
+   public function logout(Request $request, LogoutAction $action): JsonResponse
+   {
+       return $action($request);
+   }
 
-    /**
-     * ガード変更
-     *
-     */
-    private function guard()
-    {
-        return Auth::guard('user');
-    }
+
 }
