@@ -5,72 +5,46 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Foundation\Auth\AuthenticatesUsers;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Validator;
 use App\Http\Requests\Auth\Admin\LoginRequest;
-use phpDocumentor\Reflection\Types\Boolean;
+
+use App\UseCases\Auth\Admin\LoginAction;
+use App\UseCases\Auth\Admin\LogoutAction;
+use App\UseCases\Auth\Admin\UserAction;
 
 class AdminAuthController extends Controller
 {
-    use AuthenticatesUsers;
-
     /**
      * 管理者 取得
      *
+     * @param  UserAction $action
      * @return \App\Models\User|null
      */
-    public function user()
+    public function user(UserAction $action)
     {
-        return $this->guard()->user();
+        return $action();
     }
 
     /**
      * 管理者 ログイン
      *
      * @param  LoginRequest $request
+     * @param  LoginAction $action
      * @return JsonResponse
      */
-    public function login(LoginRequest $request)
+    public function login(LoginRequest $request, LoginAction $action): JsonResponse
     {
-        if ($this->attemptLogin($request)) {
-            $request->session()->regenerate();
-            $this->clearLoginAttempts($request);
-            return response()->json(['message' => '成功'], 200);
-        }
-
-        return response()->json(['message' => 'ログイン失敗'], 400);
+        return $action($request);
     }
 
     /**
      * 管理者 ログアウト
      *
      * @param  Request $request
+     * @param  LogoutAction $action
      * @return JsonResponse
      */
-    public function logout(Request $request){
-        $this->guard()->logout();
-        $request->session()->regenerateToken();
-        return response()->json(['message' => '成功'], 200);
-    }
-
-    /**
-     *
-     * @param  Request  $request
-     * @return bool
-     */
-    private function attemptLogin(Request $request)
+    public function logout(Request $request, LogoutAction $action): JsonResponse
     {
-        return $this->guard()->attempt($this->credentials($request)
-                                        , $request->remember);
-    }
-
-    /**
-     * ガード変更
-     *
-     */
-    private function guard()
-    {
-        return Auth::guard('admin');
+        return $action($request);
     }
 }
