@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\Auth\Front\LoginRequest;
 use App\Http\Requests\Auth\Front\RegisterRequest;
 
+// usecase
 use App\UseCases\Auth\Front\LoginAction;
 use App\UseCases\Auth\Front\LogoutAction;
 use App\UseCases\Auth\Front\UserAction;
