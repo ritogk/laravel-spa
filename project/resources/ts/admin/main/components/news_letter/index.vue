@@ -208,7 +208,7 @@
 
         // 新規
         create(): void {
-            this.$router.push({ name: "job_create"});
+            this.$router.push({ name: "news_letter_create"});
         }
 
         // 削除

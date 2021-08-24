@@ -15,6 +15,7 @@ import job_category_edit from "./components/master/job_category/edit.vue";
 import job_category_create from "./components/master/job_category/create.vue";
 // メルマガ配信
 import news_letter_index from "./components/news_letter/index.vue";
+import news_letter_create from "./components/news_letter/create.vue";
 // not found
 import page_not_found from "./components/utility/page_not_found.vue";
 
@@ -94,12 +95,25 @@ const router = new VueRouter({
                 }
             }
         },
-        // メルマガ配信 一覧
+        // メルマガ配信
         {
             path: "/spa/news_letter_index",
             name: "news_letter_index",
             component: news_letter_index,
             props: true
+        },
+        {
+            path: "/spa/news_letter_create",
+            name: "news_letter_create",
+            component: news_letter_create,
+            props: true,
+            beforeEnter: function (to, from, next) {
+                if (from.path !== "/spa/news_letter_index") {
+                    next('/spa/news_letter_index')
+                } else {
+                    next()
+                }
+            }
         },
         // not found
         {
