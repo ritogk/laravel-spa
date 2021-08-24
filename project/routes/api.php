@@ -58,6 +58,11 @@ Route::group(['prefix' => 'users'], function () {
     Route::get('/', [Controllers\Api\Master\UserController::class, 'index'])->middleware(['auth:admin']);
 });
 
+// メルマガマスタ
+Route::group(['prefix' => 'news_letter'], function () {
+    Route::get('/', [Controllers\Api\Master\NewsLetterController::class, 'index']);
+});
+
 // ファイル操作系
 Route::group(['prefix' => 'files'], function () {
     Route::post('/', [Controllers\Api\FileController::class, 'upload'])->middleware(['auth:admin']);
