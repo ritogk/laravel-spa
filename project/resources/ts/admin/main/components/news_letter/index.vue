@@ -68,10 +68,6 @@
                     {{ row.item.subject }}
                 </template>
 
-                <template #cell(message)="row">
-                    {{ row.item.message }}
-                </template>
-
                 <template #cell(updated_at)="row">
                     {{ row.item.updated_at }}
                 </template>
@@ -139,7 +135,6 @@
         // 以降はデータテーブルで使用する値
         fields: Array<DataTableFileds> = [
                         { key: 'subject', label: '件名', sortable: true, sortDirection: 'desc' },
-                        { key: 'message', label: 'メッセージ'},
                         { key: 'updated_at', label: '更新日時'},
                         { key: 'send', label: '送信'},
                         { key: 'actions', label: 'Actions' }
