@@ -78,7 +78,7 @@
 
                 <template #cell(send)="row">
                     <div>
-                        <b-button v-show="!row.item.send" @click="edit(row.item, row.index)" class="mr-1 btn-primary">
+                        <b-button v-show="!row.item.send" @click="send(row.item)" class="mr-1 btn-primary">
                             送信
                         </b-button>
                         <span v-show="row.item.send">送信済</span>
@@ -204,6 +204,17 @@
         // 新規
         create(): void {
             this.$router.push({ name: "news_letter_create"});
+        }
+
+        // 送信
+        send(item: Item): void {
+            if(!confirm(`全会員に「${item.subject}」の配信を行います。\nよろしいですか？`)) return
+            window.axios.post("/api/news_letters/" + item.id + "/send").then(response => {
+                this.message = ""
+                this.getItem()
+            }).catch(error => {
+                this.message = error
+            });
         }
 
         // 削除
