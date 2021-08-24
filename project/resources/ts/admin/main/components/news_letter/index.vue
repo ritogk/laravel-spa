@@ -210,7 +210,7 @@
         destory(item: Item): void {
             this.$bvModal.msgBoxConfirm(window.format.sprintf('%1$s を削除します。よろしいですか?', item.subject)).then(result => {
                 if(result){
-                    window.axios.delete("/api/jobs/" + item.id).then(response => {
+                    window.axios.delete("/api/news_letters/" + item.id).then(response => {
                         this.getItem();
                         this.message = "";
                     }).catch(error => {
