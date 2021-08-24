@@ -59,7 +59,7 @@ Route::group(['prefix' => 'users'], function () {
 });
 
 // メルマガマスタ
-Route::group(['prefix' => 'news_letter'], function () {
+Route::group(['prefix' => 'news_letters'], function () {
     Route::get('/', [Controllers\Api\Master\NewsLetterController::class, 'index']);
 });
 
