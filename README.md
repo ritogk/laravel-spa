@@ -91,6 +91,8 @@ https://portfolio-rito.net/
 - CloudFront
 - Route53
 - ACM
+- SQS
+- SES
 
 ![aws構成図](https://user-images.githubusercontent.com/72111956/130063968-4b1f04f2-e952-41b1-8a89-ab0f717e3700.png)
 
