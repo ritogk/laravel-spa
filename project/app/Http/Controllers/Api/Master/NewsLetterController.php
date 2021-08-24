@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\Master;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Master\ListRequest;
 use App\Http\Requests\Master\NewsLetterRequest;
+use Illuminate\Http\Request;
 
 // usecase
 use App\UseCases\Master\NewsLetter\ListAction;
@@ -12,6 +13,7 @@ use App\UseCases\Master\NewsLetter\CreateAction;
 use App\UseCases\Master\NewsLetter\UpdateAction;
 use App\UseCases\Master\NewsLetter\DeleteAction;
 use App\UseCases\Master\NewsLetter\FindAction;
+use App\UseCases\Master\NewsLetter\SendAction;
 
 class NewsLetterController extends Controller
 {
@@ -72,6 +74,19 @@ class NewsLetterController extends Controller
      * @return array
      */
     public function find(String $id, FindAction $action): array
+    {
+        return $action($id);
+    }
+
+    /**
+     * メルマガ 送信
+     *
+     * @param  Request $request
+     * @param  string $id
+     * @param  SendAction $action
+     * @return array
+     */
+    public function send(Request $request, string $id, SendAction $action): array
     {
         return $action($id);
     }
