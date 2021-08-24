@@ -203,7 +203,7 @@
 
         // 編集
         edit(item: Item, index: number): void{
-            this.$router.push({ name: "job_edit" , params: {id : item.id.toString()}});
+            this.$router.push({ name: "news_letter_edit" , params: {id : item.id.toString()}});
         }
 
         // 新規
