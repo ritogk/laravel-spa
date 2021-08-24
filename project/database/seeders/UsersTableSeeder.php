@@ -36,5 +36,15 @@ class UsersTableSeeder extends Seeder
             'updated_at' => $now,
             'created_at' => $now
         ]);
+
+        DB::table('users')->insert([
+            'name' => 'おれ',
+            'email' => 'homing0321r4cfw@yahoo.co.jp',
+            'password' => bcrypt('normal'),
+            'self_pr' => '自己PR',
+            'tel' => '010-1111-1111',
+            'updated_at' => $now,
+            'created_at' => $now
+        ]);
     }
 }
