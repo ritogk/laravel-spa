@@ -6,7 +6,7 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 
-class MailTableSeeder extends Seeder
+class NewsLetterTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -16,6 +16,6 @@ class MailTableSeeder extends Seeder
     public function run()
     {
         $now = Carbon::now();
-        DB::table('mails')->insert(['subject' => 'テストタイトル', 'message' => 'テストテストテストテストテストテストテスト', 'updated_at' => $now, 'created_at' => $now]);
+        DB::table('news_letters')->insert(['subject' => 'テストタイトル', 'message' => 'テストテストテストテストテストテストテスト', 'updated_at' => $now, 'created_at' => $now]);
     }
 }
