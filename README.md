@@ -32,6 +32,11 @@ https://portfolio-rito.net/
 | <img src="https://user-images.githubusercontent.com/72111956/120408952-f77d0180-c38a-11eb-933e-57bd51f473cb.png">   |   |
 <br>
 
+| メルマガ配信　|  |
+| :----: | :----: |
+| <img src="https://user-images.githubusercontent.com/72111956/130606373-bc742ed1-71d4-4886-95d7-2d3ad82c9921.png">   |   |
+<br>
+
 | 職種マスタ(一覧)　|職種マスタ(新規)  |
 | :----: | :----: |
 | <img src="https://user-images.githubusercontent.com/72111956/120468478-3c7d5400-c3dc-11eb-9c07-8234287aff5c.PNG">   | <img src="https://user-images.githubusercontent.com/72111956/120468492-4010db00-c3dc-11eb-9903-a13d70a2b7b5.PNG">   |
