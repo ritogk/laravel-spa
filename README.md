@@ -99,7 +99,7 @@ https://portfolio-rito.net/
 - SQS
 - SES
 
-![aws構成図](https://user-images.githubusercontent.com/72111956/130063968-4b1f04f2-e952-41b1-8a89-ab0f717e3700.png)
+![aws構成図](https://user-images.githubusercontent.com/72111956/130606812-6b3fc365-8e19-44bf-897a-d06a5b8b7ec7.png)
 
 ## 工夫した点
 バックエンドとフロントエンドをapiとvueで切り離した設計<br>
