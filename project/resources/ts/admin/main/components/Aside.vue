@@ -16,8 +16,15 @@
                 <!-- 選考一覧 -->
                 <li class="nav-item">
                     <router-link :to="{ name: 'entry_index', params: { isInit: true }}" class="nav-link">
-                    <i class="nav-icon fas fa-network-wired"></i>
-                    <p>選考一覧</p>
+                        <i class="nav-icon fas fa-network-wired"></i>
+                        <p>選考一覧</p>
+                    </router-link>
+                </li>
+                <!-- メルマガ配信 -->
+                <li class="nav-item">
+                    <router-link :to="{ name: 'news_letter_index', params: { isInit: true }}" class="nav-link">
+                        <i class="nav-icon far fa-envelope"></i>
+                        <p>メルマガ配信</p>
                     </router-link>
                 </li>
                 <!-- マスタ -->
