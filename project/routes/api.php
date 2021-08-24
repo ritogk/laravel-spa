@@ -58,6 +58,16 @@ Route::group(['prefix' => 'users'], function () {
     Route::get('/', [Controllers\Api\Master\UserController::class, 'index'])->middleware(['auth:admin']);
 });
 
+// メルマガマスタ
+Route::group(['prefix' => 'news_letters'], function () {
+    Route::get('/', [Controllers\Api\Master\NewsLetterController::class, 'index']);
+    Route::get('/{id}', [Controllers\Api\Master\NewsLetterController::class, 'find']);
+    Route::post('/', [Controllers\Api\Master\NewsLetterController::class, 'create'])->middleware(['auth:admin']);
+    Route::put('/{id}', [Controllers\Api\Master\NewsLetterController::class, 'update'])->middleware(['auth:admin']);
+    Route::delete('/{id}', [Controllers\Api\Master\NewsLetterController::class, 'destroy'])->middleware(['auth:admin']);
+    Route::post('/{id}/send', [Controllers\Api\Master\NewsLetterController::class, 'send'])->middleware(['auth:admin']);
+});
+
 // ファイル操作系
 Route::group(['prefix' => 'files'], function () {
     Route::post('/', [Controllers\Api\FileController::class, 'upload'])->middleware(['auth:admin']);

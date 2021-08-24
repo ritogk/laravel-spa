@@ -13,7 +13,10 @@ import job_create from "./components/master/job/create.vue";
 import job_category_index from "./components/master/job_category/index.vue";
 import job_category_edit from "./components/master/job_category/edit.vue";
 import job_category_create from "./components/master/job_category/create.vue";
-
+// メルマガ配信
+import news_letter_index from "./components/news_letter/index.vue";
+import news_letter_create from "./components/news_letter/create.vue";
+import news_letter_edit from "./components/news_letter/edit.vue";
 // not found
 import page_not_found from "./components/utility/page_not_found.vue";
 
@@ -88,6 +91,39 @@ const router = new VueRouter({
             beforeEnter: function (to, from, next) {
                 if (from.path !== "/spa/job_category_index") {
                     next('/spa/job_category_index')
+                } else {
+                    next()
+                }
+            }
+        },
+        // メルマガ配信
+        {
+            path: "/spa/news_letter_index",
+            name: "news_letter_index",
+            component: news_letter_index,
+            props: true
+        },
+        {
+            path: "/spa/news_letter_edit",
+            name: "news_letter_edit",
+            component: news_letter_edit,
+            props: true,
+            beforeEnter: function (to, from, next) {
+                if (from.path !== "/spa/news_letter_index") {
+                    next('/spa/news_letter_index')
+                } else {
+                    next()
+                }
+            }
+        },
+        {
+            path: "/spa/news_letter_create",
+            name: "news_letter_create",
+            component: news_letter_create,
+            props: true,
+            beforeEnter: function (to, from, next) {
+                if (from.path !== "/spa/news_letter_index") {
+                    next('/spa/news_letter_index')
                 } else {
                     next()
                 }
