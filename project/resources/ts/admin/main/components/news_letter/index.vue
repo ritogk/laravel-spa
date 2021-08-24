@@ -20,11 +20,6 @@
             <template #footer>
                 <b-button variant="primary" @click="getItem()">検索</b-button>
                 <b-button variant="primary" @click="create()">新規作成</b-button>
-                <btn-dl :dlUrl="dlMasterUrl">
-                    <template v-slot:name>
-                        <span>マスタ出力</span>
-                    </template>
-                </btn-dl>
             </template>
         </b-card>
 
