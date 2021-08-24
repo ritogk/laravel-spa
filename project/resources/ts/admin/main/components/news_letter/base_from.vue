@@ -31,8 +31,8 @@
                     <b-form-textarea
                     id="message"
                     v-model="item.message"
-                    rows="3"
-                    max-rows="4"
+                    rows="30"
+                    max-rows="30"
                     :state="input_state(errors.message)">
                     </b-form-textarea>
                 </b-form-group>
