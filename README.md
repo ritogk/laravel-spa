@@ -5,7 +5,8 @@
 求人の追加、求人への応募が行えます。
 
 ## URL
-https://portfolio-rito.net/
+https://portfolio-rito.net/<br>
+※現在停止しています。
 
 | ログイン(会員)　|会員登録  |
 | :----: | :----: |
