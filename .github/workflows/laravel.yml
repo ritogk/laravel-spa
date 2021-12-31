@@ -27,7 +27,7 @@ jobs:
       - name: create table
         run: |
           sleep 20
-          docker-compose exec -T db mysql -uroot -proot -e'create database laravel_test'
+          docker-compose exec -T db mysql -uroot -proot -e'create database laravel'
       - name: image seeder download
         run: |
           wget https://github.com/homing-job/laravel-spa/files/6542800/seeder_images.zip

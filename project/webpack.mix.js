@@ -22,8 +22,10 @@ mix.ts('resources/ts/front/main/main.ts', 'public/js/front')
     .sass('resources/sass/admin/main.scss', 'public/css/admin')
     .ts('resources/ts/admin/login/login.ts', 'public/js/admin')
     .sass('resources/sass/admin/login.scss', 'public/css/admin')
+    .vue()
     .version();
 
+const  path  =  require('path');
 mix.webpackConfig({
     resolve: {
         alias: {
@@ -31,8 +33,5 @@ mix.webpackConfig({
             '@admin': path.resolve(__dirname, 'resources/ts/admin'),
             '@front': path.resolve(__dirname, 'resources/ts/front'),
         }
-    },
-    node: {
-        fs: 'empty',
     },
 });
