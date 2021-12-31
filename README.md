@@ -125,6 +125,14 @@ $ git remote add origin https://github.com/homing-job/laravel-spa.git
 $ git pull origin dev
 ```
 
+#### wslホストの設定
+```
+vim /etc/docker/daemon.json
+  {
+      "dns": ["8.8.8.8"]
+  }
+```
+
 #### docker
 ```
 $ sudo docker-compose up -d
