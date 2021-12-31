@@ -87,7 +87,6 @@
 <script lang="ts">
     import { Vue, Component, Model, Watch, Prop } from 'vue-property-decorator';
     // コンポーネント
-    import BaseForm from './base_from.vue';
     import MsgDanger from '@admin/main/components/utility/msg_danger.vue';
     // モデル
     import Item from './models/Item';
@@ -95,7 +94,6 @@
 
     @Component({
         components: {
-            'base-form': BaseForm,
             'msg-danger': MsgDanger,
         }
     })

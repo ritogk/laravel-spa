@@ -161,7 +161,6 @@
 <script lang="ts">
     import { Vue, Component, Model, Watch, Prop } from 'vue-property-decorator';
     // コンポーネント
-    import BaseForm from './base_from.vue';
     import MsgDanger from '@admin/main/components/utility/msg_danger.vue';
     import BtnModalJobCategory from '@admin/main/components/utility/modal_job_category.vue'
     // モデル
@@ -170,7 +169,6 @@
 
     @Component({
         components: {
-            'base-form': BaseForm,
             'btn-model-job-category': BtnModalJobCategory,
             'msg-danger': MsgDanger,
         }
