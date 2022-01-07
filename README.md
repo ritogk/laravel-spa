@@ -118,6 +118,8 @@ ci/cdでテスト、デプロイを自動化<br>
 #### wsl
 ```
 git clone git@github.com:ritogk/laravel-spa.git
+cd laravel-spa
+code .
 ```
 
 #### windowsホスト
