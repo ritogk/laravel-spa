@@ -14,7 +14,7 @@ vim
 RUN apt-get update \
     && docker-php-ext-install pdo_mysql
 
-RUN apt-get install -y zlib1g-dev libzip-dev libpng-dev \
+RUN apt-get install -y zlib1g-dev libzip-dev libpng-dev wget\
     && docker-php-ext-install -j$(nproc) gd zip
 
 RUN apt install -y nodejs npm \
