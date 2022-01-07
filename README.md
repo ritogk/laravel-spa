@@ -133,14 +133,6 @@ chmod +x setup.sh
 ./setup.sh
 ```
 
-#### wslホストの設定(不要かも?)
-```
-vim /etc/docker/daemon.json
-  {
-      "dns": ["8.8.8.8"]
-  }
-```
-
 
 
 ## 職務経歴書
