@@ -114,18 +114,26 @@ ci/cdでテスト、デプロイを自動化<br>
 高可用でスケール可能なaws構成<br>
 
 ## 開発環境構築
-### 初期セットアップ
 
-#### git
+#### wsl
 ```
-$ mkdir laravel-spa
-$ cd laravel-spa
-$ git init
-$ git remote add origin https://github.com/homing-job/laravel-spa.git
-$ git pull origin dev
+git clone git@github.com:ritogk/laravel-spa.git
 ```
 
-#### wslホストの設定
+#### windowsホスト
+```
+vscodeからRemoteContainer経由でコンテナを起動
+※エラーが出たらwsl側からdocker-compose downして再度繋ぎ直す。
+```
+
+#### phpコンテナ
+```
+cd project
+chmod +x setup.sh
+./setup.sh
+```
+
+#### wslホストの設定(不要かも?)
 ```
 vim /etc/docker/daemon.json
   {
@@ -133,27 +141,7 @@ vim /etc/docker/daemon.json
   }
 ```
 
-#### docker
-```
-$ sudo docker-compose up -d
-$ sudo cp project/.env.base project/.env
-$ sudo docker-compose exec -T db mysql -uroot -proot -e'create database laravel'
-$ sudo docker-compose exec -T php composer install
-$ sudo docker-compose exec -T php npm ci
-$ sudo docker-compose exec -T php npm run prod
-$ sudo docker-compose exec -T php php artisan migrate:refresh --seed
-$ sudo docker-compose exec -T php php artisan key:generate
-$ sudo docker-compose exec -T php chmod -R 777 storage
-$ sudo docker-compose exec -T php chmod -R 777 bootstrap/cache
-$ sudo docker-compose exec -T php php artisan storage:link
-```
 
-#### seeder用の画像DL
-```
-$ wget https://github.com/homing-job/laravel-spa/files/6542800/seeder_images.zip
-$ unzip seeder_images.zip -d project/storage/app/public/images
-$ rm -f seeder_images.zip
-```
 
 ## 職務経歴書
 https://github.com/homing-job/laravel-spa/blob/main/resume.md
