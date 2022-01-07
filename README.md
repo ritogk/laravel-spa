@@ -125,12 +125,11 @@ code .
 #### windowsホスト
 ```
 vscodeからRemoteContainer経由でコンテナを起動
-※エラーが出たらwsl側からdocker-compose downして再度繋ぎ直す。
+※なぜかエラーが出る。wsl側からdocker-compose downして再度繋ぎ直すとなぜか動く。
 ```
 
 #### phpコンテナ
 ```
-cd project
 chmod +x setup.sh
 ./setup.sh
 ```
