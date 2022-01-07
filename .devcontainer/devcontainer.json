@@ -22,7 +22,18 @@
 	// Add the IDs of extensions you want installed when the container is created.
 	"extensions": [
 		"bmewburn.vscode-intelephense-client",
-		"felixfbecker.php-debug"
+		"felixfbecker.php-debug",
+		"neilbrayfield.php-docblocker",
+		"mikestead.dotenv",
+		"m7md3omer.laravel-relationship-snippets",
+		"onecentlin.laravel5-snippets",
+		"dbaeumer.vscode-eslint",
+		"shufo.vscode-blade-formatter",
+		"onecentlin.laravel-extension-pack",
+		"amiralizadeh9480.laravel-extra-intellisense",
+		"codingyu.laravel-goto-view",
+		"stef-k.laravel-goto-controller",
+		"octref.vetur"
 	]
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	// "forwardPorts": [],
