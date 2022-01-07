@@ -14,7 +14,7 @@
 	"service": "php",
 	// The optional 'workspaceFolder' property is the path VS Code should open by default when
 	// connected. This is typically a file mount in .devcontainer/docker-compose.yml
-	"workspaceFolder": "/workspace",
+	"workspaceFolder": "/workspace/project",
 	// Set *default* container specific settings.json values on container create.
 	"settings": {
 		"editor.formatOnSave": true,
