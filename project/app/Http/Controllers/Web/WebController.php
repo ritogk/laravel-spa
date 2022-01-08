@@ -4,8 +4,6 @@ namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
 use \Illuminate\Contracts\View\View as View;
-use App\OpenAPI\Model\Sex;
-use App\OpenAPI\Model\GetHealthResponse;
 
 class WebController extends Controller
 {
@@ -16,16 +14,6 @@ class WebController extends Controller
      */
     public function index(): View
     {
-        $container = null;
-        $container['status'] = 1;
-        $container['bb'] = 1;
-        $container['cc'] = 1;
-        $a = new GetHealthResponse($container);
-        $b = json_encode($a);
-        \Log::debug($a);
-        \Log::debug(Sex::WOMAN);
-        \Log::debug(Sex::MAN);
-
         return view('front.main');
     }
 
