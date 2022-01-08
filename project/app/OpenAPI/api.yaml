@@ -1,0 +1,92 @@
+openapi: 3.0.0
+info:
+  title: OpenAPI Tutorial
+  description: OpenAPI Tutorial by halhorn
+  version: 0.0.0
+servers:
+  - url: https://example.com/api/v0
+    description: プロダクション API
+  - url: http://{host}:{port}/api/v0
+    description: 開発用
+    variables:
+      host:
+        default: localhost
+      port:
+        default: '10080'
+paths:
+  /health:
+    get:
+      operationId: openapitutorial.controller.health.call
+      summary: サーバーの状態を返します
+      description: サーバーの状態を返します。
+      responses:
+        '200':
+          description: サーバーは正常に動作しています
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/get_health_response'
+  /sex:
+    get:
+      operationId: sex
+      summary: sex
+      description: サーバーの状態を返します。
+      responses:
+        '200':
+          description: サーバーは正常に動作しています
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    memerId:
+                      type: integer
+                      description: 会員id
+                    sex:
+                      $ref: '#/components/schemas/sex'
+  /hoge:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/hoge'
+      responses:
+        "200":
+          description: ok
+
+components:
+  schemas:
+    get_health_response:
+      description: サーバーの状態のレスポンス
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+            - ok
+        memerId:
+          type: integer
+          description: 会員id
+        hospitalId:
+          type: integer
+          description: 病院id
+      required:
+        - status
+    hoge:
+      description: サーバーの状態のレスポンス
+      type: object
+      properties:
+        foo:
+          type: string
+        bar:
+          type: integer
+    sex:
+      description: |
+        man: 男
+        woman: 女
+      enum: [1, 2]
+      x-enum-varnames: [MAN, WOMAN]
+      
