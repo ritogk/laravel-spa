@@ -138,7 +138,7 @@ chmod +x setup.sh
 #### 開発 便利コマンド～
 ```
 ■モデル系を変更したら実行。コード補完してくれるファイルを自動生成してくれる。
-php artisan ide-helper:generate
+php artisan ide-helper:model
 ```
 
 
