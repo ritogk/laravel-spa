@@ -135,6 +135,13 @@ chmod +x setup.sh
 ```
 
 
+#### 開発 便利コマンド～
+```
+■モデル系を変更したら実行。コード補完してくれるファイルを自動生成してくれる。
+php artisan ide-helper:generate
+```
+
+
 
 ## 職務経歴書
 https://github.com/homing-job/laravel-spa/blob/main/resume.md
