@@ -1,4 +1,5 @@
 {
+    "editor.snippetSuggestions": "top", // Emmetのスニペット候補を優先表示
     "sqltools.connections": [
         {
             "mysqlOptions": {

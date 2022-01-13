@@ -3,19 +3,22 @@
     "editor.codeActionsOnSave": {
         "source.fixAll.eslint": true
     },
-    "sqltools.connections": [
-        {
-            "mysqlOptions": {
-                "authProtocol": "default"
-            },
-            "previewLimit": 50,
-            "server": "localhost",
-            "port": 53306,
-            "driver": "MySQL",
-            "name": "portfolio_db",
-            "database": "laravel",
-            "username": "root",
-            "password": "root"
-        }
-    ]
+    "php.validate.executablePath": "/usr/local/bin/php",
+    // VSCode 標準の PHP サポートを無効
+    "php.suggest.basic": false,
+    // "sqltools.connections": [
+    //     {
+    //         "mysqlOptions": {
+    //             "authProtocol": "default"
+    //         },
+    //         "previewLimit": 50,
+    //         "server": "localhost",
+    //         "port": 53306,
+    //         "driver": "MySQL",
+    //         "name": "portfolio_db",
+    //         "database": "laravel",
+    //         "username": "root",
+    //         "password": "root"
+    //     }
+    // ]
 }
