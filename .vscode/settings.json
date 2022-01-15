@@ -1,5 +1,11 @@
 {
-    "editor.snippetSuggestions": "top", // Emmetのスニペット候補を優先表示
+    // ESLintに対応しているファイルは保存時にESLintによるフォーマットを行う
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": true
+    },
+    "php.validate.executablePath": "/usr/local/bin/php",
+    // VSCode 標準の PHP サポートを無効
+    "php.suggest.basic": false,
     "sqltools.connections": [
         {
             "mysqlOptions": {
