@@ -1,4 +1,4 @@
-# laravel + spa + awsのポートフォリオ
+# (旧)laravel + spa + awsのポートフォリオ
 
 ## 概要
 求人検索サービスです。<br>
